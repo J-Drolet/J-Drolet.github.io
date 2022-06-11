@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Revision Plan</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:15" dir="auto">
+		<a id="user-content-revision-plan" class="anchor" href="#revision-plan" aria-hidden="true"></a>Revision Plan</h1>
+		<h2 data-sourcepos="2:1-2:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="3:1-3:202" dir="auto">Milestone 3 provided us with plentiful of valuable criticism which we turned into an actionable revision plan. Our review plan further includes how we plan on processing feedback from Milestone 1 and 2.</p>
+		<p data-sourcepos="5:1-5:403" dir="auto">Our colleagues have communicated with us the ways in which our AD fails to properly inform the readers. Our mission is to showcase that Gradle meets its functional and non-functional requirements. The functional requirements emphasized in our AD are partially detailed in the <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Important%20Scenarios.md">important scenarios</a> section.</p>
+		<p data-sourcepos="7:1-7:310" dir="auto">This document highlights the important feedback and the actions taken to address the criticism. We also provide justifications for our actions which should prove to be insightful to readers. The justifications will detail our reasoning behind the actions taken, such as the tradeoffs we had to consider, etc...</p>
+		<h2 data-sourcepos="9:1-9:20" dir="auto">
+		<a id="user-content-table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"></a>Table of contents</h2>
+		<table data-sourcepos="10:1-17:38" dir="auto">
+		<thead>
+		<tr data-sourcepos="10:1-10:11">
+		<th data-sourcepos="10:2-10:10">Section</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="12:1-12:33">
+		<td data-sourcepos="12:2-12:32"><a href="#context-view">Context View</a></td>
+		</tr>
+		<tr data-sourcepos="13:1-13:33">
+		<td data-sourcepos="13:2-13:32"><a href="#stakeholders">Stakeholders</a></td>
+		</tr>
+		<tr data-sourcepos="14:1-14:171">
+		<td data-sourcepos="14:2-14:170">
+		<a href="#functional-view">Functional View</a><br>* <a href="#component-diagram-and-element-catalogue">Component Diagram and Element Catalogue</a><br>* <a href="#sequence-diagram">Sequence Diagram</a>
+		</td>
+		</tr>
+		<tr data-sourcepos="15:1-15:141">
+		<td data-sourcepos="15:2-15:140">
+		<a href="#information-view">Information View</a><br>* <a href="#metadata-model">Metadata Model</a><br>* <a href="#dynamic-information-model">Dynamic Information Model</a>
+		</td>
+		</tr>
+		<tr data-sourcepos="16:1-16:46">
+		<td data-sourcepos="16:2-16:45"><a href="#general-ad-feedback">General AD Feedback</a></td>
+		</tr>
+		<tr data-sourcepos="17:1-17:38">
+		<td data-sourcepos="17:2-17:37"><a href="#self-assessment">Self-Assessment</a></td>
+		</tr>
+		</tbody>
+		</table>
+		<h1 data-sourcepos="19:1-19:14" dir="auto">
+		<a id="user-content-context-view" class="anchor" href="#context-view" aria-hidden="true"></a>Context View</h1>
+		<h3 data-sourcepos="20:1-20:6" dir="auto">
+		<a id="user-content-anchor-1" class="anchor" href="#anchor-1" aria-hidden="true"></a>1.</h3>
+		<h4 data-sourcepos="21:1-21:14" dir="auto">
+		<a id="user-content-criticism" class="anchor" href="#criticism" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="22:1-22:81" dir="auto">What’s the difference between “Dependency Repository” and “Repository”?</p>
+		<h4 data-sourcepos="23:1-23:13" dir="auto">
+		<a id="user-content-decision" class="anchor" href="#decision" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="24:1-24:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="25:1-25:31" dir="auto">
+		<a id="user-content-justification-for-decision" class="anchor" href="#justification-for-decision" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="26:1-26:276" dir="auto">We were too specific in our initial context view. We wanted to differentiate between the repositories which contain plugins and which contain source code dependencies. However, we now recognize that the distrinction is not necessary, especially not within in the context view.</p>
+		<h4 data-sourcepos="27:1-27:12" dir="auto">
+		<a id="user-content-changes" class="anchor" href="#changes" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="28:1-28:85" dir="auto">We will merge the two terms into a singular external element called “Repository”.</p>
+		<hr data-sourcepos="30:1-30:3">
+		<h3 data-sourcepos="31:1-31:6" dir="auto">
+		<a id="user-content-anchor-2" class="anchor" href="#anchor-2" aria-hidden="true"></a>2.</h3>
+		<h4 data-sourcepos="32:1-32:14" dir="auto">
+		<a id="user-content-criticism-1" class="anchor" href="#criticism-1" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="33:1-33:83" dir="auto">Varying fonts and small label margins make the diagram harder to read and "crowded"</p>
+		<h4 data-sourcepos="34:1-34:13" dir="auto">
+		<a id="user-content-decision-1" class="anchor" href="#decision-1" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="35:1-35:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="36:1-36:31" dir="auto">
+		<a id="user-content-justification-for-decision-1" class="anchor" href="#justification-for-decision-1" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="37:1-37:203" dir="auto">In retrospect, we recognize that the varying font sizes clutter the diagram. We used varying font sizes to highlight elements of varying importance, however we believe that readibility is more important.</p>
+		<h4 data-sourcepos="39:1-39:12" dir="auto">
+		<a id="user-content-changes-1" class="anchor" href="#changes-1" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="40:1-40:86" dir="auto">We will pick a uniform font size for our models (except for the main element: Gradle).</p>
+		<hr data-sourcepos="42:1-42:3">
+		<h3 data-sourcepos="43:1-43:6" dir="auto">
+		<a id="user-content-anchor-3" class="anchor" href="#anchor-3" aria-hidden="true"></a>3.</h3>
+		<h4 data-sourcepos="44:1-44:14" dir="auto">
+		<a id="user-content-criticism-2" class="anchor" href="#criticism-2" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="45:1-45:155" dir="auto">View lacks depth and refinement: the information is hard to parse for a reader unfamiliar with the system, and entities should be described more thoroughly</p>
+		<h4 data-sourcepos="46:1-46:13" dir="auto">
+		<a id="user-content-decision-2" class="anchor" href="#decision-2" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="47:1-47:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="48:1-48:31" dir="auto">
+		<a id="user-content-justification-for-decision-2" class="anchor" href="#justification-for-decision-2" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="50:1-50:238" dir="auto">Gradle is an extremely complex system, we initially dove too deep in the code and drew a blurry line between software implementation and software architecture. We believe that a healthy level of abstraction should be present in our views.</p>
+		<h4 data-sourcepos="52:1-52:12" dir="auto">
+		<a id="user-content-changes-2" class="anchor" href="#changes-2" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="54:1-54:148" dir="auto">We will add a glossary of terms and abstract some of the more unclear aspects of Gradle. We will put useful, yet unecessary detail into an appendix.</p>
+		<hr data-sourcepos="56:1-56:3">
+		<h1 data-sourcepos="57:1-57:14" dir="auto">
+		<a id="user-content-stakeholders" class="anchor" href="#stakeholders" aria-hidden="true"></a>Stakeholders</h1>
+		<h3 data-sourcepos="59:1-59:6" dir="auto">
+		<a id="user-content-anchor-4" class="anchor" href="#anchor-4" aria-hidden="true"></a>4.</h3>
+		<h4 data-sourcepos="60:1-60:14" dir="auto">
+		<a id="user-content-criticism-3" class="anchor" href="#criticism-3" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="61:1-61:59" dir="auto">Some groups of stakeholders can have varying power/interest</p>
+		<h4 data-sourcepos="62:1-62:13" dir="auto">
+		<a id="user-content-decision-3" class="anchor" href="#decision-3" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="63:1-63:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="64:1-64:31" dir="auto">
+		<a id="user-content-justification-for-decision-3" class="anchor" href="#justification-for-decision-3" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="65:1-65:160" dir="auto">We think that most stakeholders have similar power/interest, we do agree that some stakeholders (notably project developers) should have varying power/interest.</p>
+		<h4 data-sourcepos="67:1-67:12" dir="auto">
+		<a id="user-content-changes-3" class="anchor" href="#changes-3" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="68:1-68:131" dir="auto">We will modify the power/interest of some stakeholders in our stakeholder such that the "range" of power/interest is more detailed.</p>
+		<hr data-sourcepos="70:1-70:3">
+		<h3 data-sourcepos="71:1-71:6" dir="auto">
+		<a id="user-content-anchor-5" class="anchor" href="#anchor-5" aria-hidden="true"></a>5.</h3>
+		<h4 data-sourcepos="72:1-72:14" dir="auto">
+		<a id="user-content-criticism-4" class="anchor" href="#criticism-4" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="73:1-73:49" dir="auto">Stakeholders somewhat user- and developer-focused</p>
+		<h4 data-sourcepos="74:1-74:13" dir="auto">
+		<a id="user-content-decision-4" class="anchor" href="#decision-4" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="75:1-75:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="76:1-76:31" dir="auto">
+		<a id="user-content-justification-for-decision-4" class="anchor" href="#justification-for-decision-4" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="77:1-77:215" dir="auto">Gradle as a software is very much a user- and developer-focused tool. Users/Developers are our highest priority stakeholders  Therefore, we believe that the focus on our highest priority stakeholders is appropriate.</p>
+		<h4 data-sourcepos="79:1-79:12" dir="auto">
+		<a id="user-content-changes-4" class="anchor" href="#changes-4" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="80:1-80:3" dir="auto">N/A</p>
+		<hr data-sourcepos="82:1-82:3">
+		<h3 data-sourcepos="83:1-83:6" dir="auto">
+		<a id="user-content-anchor-6" class="anchor" href="#anchor-6" aria-hidden="true"></a>6.</h3>
+		<h4 data-sourcepos="84:1-84:14" dir="auto">
+		<a id="user-content-criticism-5" class="anchor" href="#criticism-5" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="85:1-85:105" dir="auto">Why do Android developers have higher power than other project developers or development tool developers?</p>
+		<h4 data-sourcepos="86:1-86:13" dir="auto">
+		<a id="user-content-decision-5" class="anchor" href="#decision-5" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="87:1-87:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="88:1-88:31" dir="auto">
+		<a id="user-content-justification-for-decision-5" class="anchor" href="#justification-for-decision-5" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="89:1-89:346" dir="auto">We added this as we felt that their connection with Google and their ecosystem made Android developers more important. However, we now see how specifying Android Developers leads to confusion. Especially since we <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Stakeholders.md#note">do not specify Google as a stakeholder</a>.</p>
+		<h4 data-sourcepos="90:1-90:12" dir="auto">
+		<a id="user-content-changes-5" class="anchor" href="#changes-5" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="91:1-91:74" dir="auto">We will remove Android Developers since they belong to Project Developers.</p>
+		<hr data-sourcepos="93:1-93:3">
+		<h3 data-sourcepos="94:1-94:6" dir="auto">
+		<a id="user-content-anchor-7" class="anchor" href="#anchor-7" aria-hidden="true"></a>7.</h3>
+		<h4 data-sourcepos="95:1-95:14" dir="auto">
+		<a id="user-content-criticism-6" class="anchor" href="#criticism-6" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="96:1-96:43" dir="auto">List of stakeholders could be better sorted</p>
+		<h4 data-sourcepos="97:1-97:13" dir="auto">
+		<a id="user-content-decision-6" class="anchor" href="#decision-6" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="98:1-98:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="99:1-99:31" dir="auto">
+		<a id="user-content-justification-for-decision-6" class="anchor" href="#justification-for-decision-6" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="100:1-100:138" dir="auto">We agree that a sorting the list of stakeholders by priority is good and does not have any downside (compared to our current arrangement).</p>
+		<h4 data-sourcepos="102:1-102:12" dir="auto">
+		<a id="user-content-changes-6" class="anchor" href="#changes-6" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="103:1-103:155" dir="auto">The stakeholders will be sorted in descending order by priority (highest priority on top). Priority is subjectively derived from the power/interest metric.</p>
+		<hr data-sourcepos="105:1-105:3">
+		<h1 data-sourcepos="106:1-106:17" dir="auto">
+		<a id="user-content-functional-view" class="anchor" href="#functional-view" aria-hidden="true"></a>Functional View</h1>
+		<h3 data-sourcepos="108:1-108:6" dir="auto">
+		<a id="user-content-anchor-8" class="anchor" href="#anchor-8" aria-hidden="true"></a>8.</h3>
+		<h4 data-sourcepos="109:1-109:14" dir="auto">
+		<a id="user-content-criticism-7" class="anchor" href="#criticism-7" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="110:1-110:33" dir="auto">No architectural style or pattern</p>
+		<h4 data-sourcepos="111:1-111:13" dir="auto">
+		<a id="user-content-decision-7" class="anchor" href="#decision-7" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="112:1-112:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="113:1-113:31" dir="auto">
+		<a id="user-content-justification-for-decision-7" class="anchor" href="#justification-for-decision-7" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="114:1-114:83" dir="auto">We completely forgot to mention architectural styles and software design patterns.</p>
+		<h4 data-sourcepos="116:1-116:12" dir="auto">
+		<a id="user-content-changes-7" class="anchor" href="#changes-7" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="117:1-117:236" dir="auto">We will add information in the appendix relating to the microkernel architeral style Gradle is based on, we will also add an entry comparing Tasks to the command design pattern. We will reference the appendix from the appropriate views.</p>
+		<hr data-sourcepos="119:1-119:3">
+		<h2 data-sourcepos="120:1-120:42" dir="auto">
+		<a id="user-content-component-diagram-and-element-catalogue" class="anchor" href="#component-diagram-and-element-catalogue" aria-hidden="true"></a>Component Diagram and Element Catalogue</h2>
+		<h3 data-sourcepos="122:1-122:6" dir="auto">
+		<a id="user-content-anchor-9" class="anchor" href="#anchor-9" aria-hidden="true"></a>9.</h3>
+		<h4 data-sourcepos="123:1-123:14" dir="auto">
+		<a id="user-content-criticism-8" class="anchor" href="#criticism-8" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="124:1-124:182" dir="auto">There is something off-putting about Task providing an executeTask() interface. A Task sounds like a form of Command pattern; is there some sort of Processor somewhere to execute it?</p>
+		<h4 data-sourcepos="125:1-125:13" dir="auto">
+		<a id="user-content-decision-8" class="anchor" href="#decision-8" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="126:1-126:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="127:1-127:31" dir="auto">
+		<a id="user-content-justification-for-decision-8" class="anchor" href="#justification-for-decision-8" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="128:1-128:194" dir="auto">Tasks can be seen as containers for Actions, actions themselves can be executed. We believe that the ExecuterSystem currently is currently too abstract which might be the cause of the confusion.</p>
+		<h4 data-sourcepos="130:1-130:12" dir="auto">
+		<a id="user-content-changes-8" class="anchor" href="#changes-8" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="131:1-131:256" dir="auto">We will address this when we rewrite our functional view. We believe our current functional view is lacking and confusing. Our new view should clearly distinguish between the initialization system and the execution system (responsible for executing tasks).</p>
+		<hr data-sourcepos="133:1-133:3">
+		<h3 data-sourcepos="134:1-134:7" dir="auto">
+		<a id="user-content-anchor-10" class="anchor" href="#anchor-10" aria-hidden="true"></a>10.</h3>
+		<h4 data-sourcepos="135:1-135:14" dir="auto">
+		<a id="user-content-criticism-9" class="anchor" href="#criticism-9" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="136:1-136:275" dir="auto">It is also a little confusing to have object names for interfaces(e.g., ActionBuilder.) If the object is not important enough to be a component, perhaps it should be abstracted as a function (e.g., "buildAction")? If it is important, perhaps it can be modeled as a connector?</p>
+		<h4 data-sourcepos="137:1-137:13" dir="auto">
+		<a id="user-content-decision-9" class="anchor" href="#decision-9" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="138:1-138:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="139:1-139:31" dir="auto">
+		<a id="user-content-justification-for-decision-9" class="anchor" href="#justification-for-decision-9" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="140:1-140:257" dir="auto">The criticism is correct in that the way we named interfaces added unnecessary complexity. We tried to be too specific in our original views, we believe that we should allow abstractions and put less emphasis on the Gradle's current software implementation.</p>
+		<h4 data-sourcepos="141:1-141:12" dir="auto">
+		<a id="user-content-changes-9" class="anchor" href="#changes-9" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="142:1-142:117" dir="auto">Interfaces will be renamed and absracted using "method names". We will also reorganize the views to be more readable.</p>
+		<hr data-sourcepos="144:1-144:3">
+		<h3 data-sourcepos="145:1-145:7" dir="auto">
+		<a id="user-content-anchor-11" class="anchor" href="#anchor-11" aria-hidden="true"></a>11.</h3>
+		<h4 data-sourcepos="146:1-146:14" dir="auto">
+		<a id="user-content-criticism-10" class="anchor" href="#criticism-10" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="147:1-147:424" dir="auto">There is an inconsistency in the notation of the interfaces, with the “()” at the end of some interfaces being used to reference an actual method in the code. This is never explained in the view. I would either include a definition in the diagram (i.e., through a legend) or remove the “()” and reference the method (including the class/code line it comes from) in the element catalogue description of the interface.</p>
+		<h4 data-sourcepos="148:1-148:13" dir="auto">
+		<a id="user-content-decision-10" class="anchor" href="#decision-10" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="149:1-149:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="150:1-150:31" dir="auto">
+		<a id="user-content-justification-for-decision-10" class="anchor" href="#justification-for-decision-10" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="151:1-151:149" dir="auto">We ignored the implications of using parenthesis ("method calls") in only some of our interfaces, we agree that this can be misleading and confusing.</p>
+		<h4 data-sourcepos="153:1-153:12" dir="auto">
+		<a id="user-content-changes-10" class="anchor" href="#changes-10" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="154:1-154:80" dir="auto">We will ensure that our interface names are consistent when rewriting our views.</p>
+		<hr data-sourcepos="156:1-156:3">
+		<h3 data-sourcepos="157:1-157:7" dir="auto">
+		<a id="user-content-anchor-12" class="anchor" href="#anchor-12" aria-hidden="true"></a>12.</h3>
+		<h4 data-sourcepos="158:1-158:14" dir="auto">
+		<a id="user-content-criticism-11" class="anchor" href="#criticism-11" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="159:1-159:122" dir="auto">The main(args) provided interface is not in the element catalogue. I am not sure what this interface does, or who uses it?</p>
+		<h4 data-sourcepos="160:1-160:13" dir="auto">
+		<a id="user-content-decision-11" class="anchor" href="#decision-11" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="161:1-161:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="162:1-162:31" dir="auto">
+		<a id="user-content-justification-for-decision-11" class="anchor" href="#justification-for-decision-11" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="163:1-163:224" dir="auto">Since our AD focuses on the developer stakeholders, we believe that main(args) is commonly used to denote a program's entry point. We will not address this, we believe the use of main(args) is appropriate and not misleading.</p>
+		<h4 data-sourcepos="164:1-164:12" dir="auto">
+		<a id="user-content-changes-11" class="anchor" href="#changes-11" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="165:1-165:3" dir="auto">N/A</p>
+		<hr data-sourcepos="167:1-167:3">
+		<h3 data-sourcepos="168:1-168:7" dir="auto">
+		<a id="user-content-anchor-13" class="anchor" href="#anchor-13" aria-hidden="true"></a>13.</h3>
+		<h4 data-sourcepos="169:1-169:14" dir="auto">
+		<a id="user-content-criticism-12" class="anchor" href="#criticism-12" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="170:1-170:304" dir="auto">What is the role of the Daemon Server? I am unsure if the Daemon Server is an external element? When discussing the DaemonClient element you mention that it sends messages to the server, but there is no interface provided by the client to access the server nor an external element present in the diagram.</p>
+		<h4 data-sourcepos="171:1-171:13" dir="auto">
+		<a id="user-content-decision-12" class="anchor" href="#decision-12" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="172:1-172:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="173:1-173:31" dir="auto">
+		<a id="user-content-justification-for-decision-12" class="anchor" href="#justification-for-decision-12" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="174:1-174:169" dir="auto">The daemon is used to ensure Gradle meets its performance quality property. We believe our current explanations are insuffcient for such a crucial architectural element.</p>
+		<h4 data-sourcepos="175:1-175:12" dir="auto">
+		<a id="user-content-changes-12" class="anchor" href="#changes-12" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="176:1-176:136" dir="auto">when applying the Performance perspective on our views, more notably the functional view, we will make sure to better detail the Daemon.</p>
+		<hr data-sourcepos="178:1-178:3">
+		<h3 data-sourcepos="179:1-179:7" dir="auto">
+		<a id="user-content-anchor-14" class="anchor" href="#anchor-14" aria-hidden="true"></a>14.</h3>
+		<h4 data-sourcepos="180:1-180:14" dir="auto">
+		<a id="user-content-criticism-13" class="anchor" href="#criticism-13" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="181:1-181:499" dir="auto">The subsystem of plugins seems incomplete. For example, in the element catalogue, you say “The JavaPlugin applies the BasePlugin” which seems as though there should be an interface linking JavaPlugin and BasePlugin or two distinct interfaces provided to the project aside from the provided PluginManager. Specifically, the PluginManager does not appear to accommodate this behaviour, as it only keeps track of plugins applied. Overall, more clarity is needed on the interactions between plugins.</p>
+		<h4 data-sourcepos="182:1-182:13" dir="auto">
+		<a id="user-content-decision-13" class="anchor" href="#decision-13" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="183:1-183:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="184:1-184:31" dir="auto">
+		<a id="user-content-justification-for-decision-13" class="anchor" href="#justification-for-decision-13" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="185:1-185:210" dir="auto">We attempted to give example of plugins (BasePlugin, JavaPlugin, ...) by showing plugin as a subsytem in our functional view. We recognize that this is confusing since it not an appropriate way to model things.</p>
+		<h4 data-sourcepos="187:1-187:12" dir="auto">
+		<a id="user-content-changes-13" class="anchor" href="#changes-13" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="188:1-188:243" dir="auto">The plugin interface will be renamed to be more explicit in the functionality a Plugin provides to the Project. We will model Plugin as a component rather than a subsytem, therefore we will remove the examples/implementations from our diagram.</p>
+		<hr data-sourcepos="190:1-190:3">
+		<h3 data-sourcepos="191:1-191:7" dir="auto">
+		<a id="user-content-anchor-15" class="anchor" href="#anchor-15" aria-hidden="true"></a>15.</h3>
+		<h4 data-sourcepos="192:1-192:14" dir="auto">
+		<a id="user-content-criticism-14" class="anchor" href="#criticism-14" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="193:1-193:270" dir="auto">In the element catalogue, specifically in the ExecuterSystem, you mention something called a context. It is brought up at other times, and it is mentioned in the sequence diagram. However, I do not understand what a context is, a clearer definition needs to be provided.</p>
+		<h4 data-sourcepos="194:1-194:13" dir="auto">
+		<a id="user-content-decision-14" class="anchor" href="#decision-14" aria-hidden="true"></a>Decision</h4>
+		<h4 data-sourcepos="196:1-196:31" dir="auto">
+		<a id="user-content-justification-for-decision-14" class="anchor" href="#justification-for-decision-14" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="198:1-198:340" dir="auto">The ExecuterSystem was originally used to combine the initialization step of Gradle's build lifecycle and the execution step. In retrospect, we recognize that this is very confusing and unecessary. The "context" is not architecturally significant. We were simply answering our critics questions relating to Gradle's software implementation.</p>
+		<h4 data-sourcepos="200:1-200:12" dir="auto">
+		<a id="user-content-changes-14" class="anchor" href="#changes-14" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="202:1-202:183" dir="auto">We will split the ExecuterSystem in two, the part responsible for the initialization of Gradle (Initializer) and the part responsible for the execution of tasks (Execution subsystem).</p>
+		<p data-sourcepos="204:1-204:189" dir="auto">We will also model the components responsible for Gradle's initialization, configuration and execution in seperate models as subsystems. This will allow for clearer and more concise views.</p>
+		<p data-sourcepos="206:1-206:261" dir="auto">We do not believe that detailing the components belonging to the execution subsystem is important (such as the TaskTree or ActionExecutor). Therefore we will provide an explanation of the execution system's responsibilities without detailing its inner workings.</p>
+		<hr data-sourcepos="208:1-208:3">
+		<h3 data-sourcepos="209:1-209:7" dir="auto">
+		<a id="user-content-anchor-16" class="anchor" href="#anchor-16" aria-hidden="true"></a>16.</h3>
+		<h4 data-sourcepos="210:1-210:14" dir="auto">
+		<a id="user-content-criticism-15" class="anchor" href="#criticism-15" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="211:1-211:150" dir="auto">In the discussion, you mention plugin component will add tasks to the task component. However, there is no interface provided to perform this process.</p>
+		<h4 data-sourcepos="212:1-212:13" dir="auto">
+		<a id="user-content-decision-15" class="anchor" href="#decision-15" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="213:1-213:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="214:1-214:31" dir="auto">
+		<a id="user-content-justification-for-decision-15" class="anchor" href="#justification-for-decision-15" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="215:1-215:83" dir="auto">The project does not add tasks to the Task component. It adds tasks to the project.</p>
+		<h4 data-sourcepos="216:1-216:12" dir="auto">
+		<a id="user-content-changes-15" class="anchor" href="#changes-15" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="217:1-217:78" dir="auto">Renaming the interface between Plugin and Project will hopefully clarify this.</p>
+		<hr data-sourcepos="219:1-219:3">
+		<h3 data-sourcepos="220:1-220:7" dir="auto">
+		<a id="user-content-anchor-17" class="anchor" href="#anchor-17" aria-hidden="true"></a>17.</h3>
+		<h4 data-sourcepos="221:1-221:14" dir="auto">
+		<a id="user-content-criticism-16" class="anchor" href="#criticism-16" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="222:1-222:249" dir="auto">In the Component Diagram, both ActionManager and Daemon used BuildActionExecutor interface provided by ExecuterSystem. In the discussion, you mention Daemon is a safe way to execute the thread. However, this is not included in the element catalogue.</p>
+		<h4 data-sourcepos="223:1-223:13" dir="auto">
+		<a id="user-content-decision-16" class="anchor" href="#decision-16" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="224:1-224:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="225:1-225:31" dir="auto">
+		<a id="user-content-justification-for-decision-16" class="anchor" href="#justification-for-decision-16" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="226:1-226:66" dir="auto">We recognize that we did not properly detail the Daemon in our AD.</p>
+		<h4 data-sourcepos="228:1-228:12" dir="auto">
+		<a id="user-content-changes-16" class="anchor" href="#changes-16" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="229:1-229:76" dir="auto">We will better detail the Daemon in our functional view's element catalogue.</p>
+		<hr data-sourcepos="231:1-231:3">
+		<h3 data-sourcepos="232:1-232:7" dir="auto">
+		<a id="user-content-anchor-18" class="anchor" href="#anchor-18" aria-hidden="true"></a>18.</h3>
+		<h4 data-sourcepos="233:1-233:14" dir="auto">
+		<a id="user-content-criticism-17" class="anchor" href="#criticism-17" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="234:1-234:68" dir="auto">Skips over potentially relevant details, e.g., Ivy (add reference?)</p>
+		<h4 data-sourcepos="235:1-235:13" dir="auto">
+		<a id="user-content-decision-17" class="anchor" href="#decision-17" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="236:1-236:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="237:1-237:31" dir="auto">
+		<a id="user-content-justification-for-decision-17" class="anchor" href="#justification-for-decision-17" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="239:1-239:197" dir="auto">We feel that going into deeper detail about the types of artifacts accepted is not relevant to the architecture of our system so we opt to just remove references to the types of accepted artifacts.</p>
+		<h4 data-sourcepos="241:1-241:12" dir="auto">
+		<a id="user-content-changes-17" class="anchor" href="#changes-17" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="243:1-243:90" dir="auto">We will modify our context view by encapsulating all types of repositories under "Source".</p>
+		<hr data-sourcepos="245:1-245:3">
+		<h2 data-sourcepos="246:1-246:19" dir="auto">
+		<a id="user-content-sequence-diagram" class="anchor" href="#sequence-diagram" aria-hidden="true"></a>Sequence Diagram</h2>
+		<h3 data-sourcepos="248:1-248:7" dir="auto">
+		<a id="user-content-anchor-19" class="anchor" href="#anchor-19" aria-hidden="true"></a>19.</h3>
+		<h4 data-sourcepos="249:1-249:14" dir="auto">
+		<a id="user-content-criticism-18" class="anchor" href="#criticism-18" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="250:1-250:403" dir="auto">There is no justification for why this sequence diagram is included in the functional view. What does it add to the view? What does it enlighten about the system? Why did you choose to show this sequence diagram and not others? It is important to tie back to a defined scope (functional capabilities) to justify why you are limiting to this sequence diagram. Why not show different versions of building?</p>
+		<h4 data-sourcepos="251:1-251:13" dir="auto">
+		<a id="user-content-decision-18" class="anchor" href="#decision-18" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="252:1-252:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="253:1-253:31" dir="auto">
+		<a id="user-content-justification-for-decision-18" class="anchor" href="#justification-for-decision-18" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="255:1-255:117" dir="auto">We recognize that we did not properly explain why we chose our sequence diagram and that our choice was questionable.</p>
+		<h4 data-sourcepos="257:1-257:12" dir="auto">
+		<a id="user-content-changes-18" class="anchor" href="#changes-18" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="259:1-259:186" dir="auto">We will add more insightful sequence diagram(s). We will reconsider whether the current diagram is still needed once we have reworked our functional view. We will remove it if it is not.</p>
+		<hr data-sourcepos="261:1-261:3">
+		<h3 data-sourcepos="262:1-262:7" dir="auto">
+		<a id="user-content-anchor-20" class="anchor" href="#anchor-20" aria-hidden="true"></a>20.</h3>
+		<h4 data-sourcepos="263:1-263:14" dir="auto">
+		<a id="user-content-criticism-19" class="anchor" href="#criticism-19" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="264:1-264:316" dir="auto">There are no callbacks in the sequence diagram. We recommend that callbacks should be included to describe where the method ends (or if any information is returned or not). If no callbacks are included, a short justification in the description of the diagram would help justify this decision and avoid any confusion.</p>
+		<h4 data-sourcepos="265:1-265:13" dir="auto">
+		<a id="user-content-decision-19" class="anchor" href="#decision-19" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="267:1-267:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="269:1-269:31" dir="auto">
+		<a id="user-content-justification-for-decision-19" class="anchor" href="#justification-for-decision-19" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="271:1-271:164" dir="auto">We will continue to model callbacks only when necessary. We believe our sequence diagram does not have to showcase "void" or architecturally insignifcant callbacks.</p>
+		<h4 data-sourcepos="273:1-273:12" dir="auto">
+		<a id="user-content-changes-19" class="anchor" href="#changes-19" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="275:1-275:3" dir="auto">N/A</p>
+		<hr data-sourcepos="277:1-277:3">
+		<h3 data-sourcepos="278:1-278:7" dir="auto">
+		<a id="user-content-anchor-21" class="anchor" href="#anchor-21" aria-hidden="true"></a>21.</h3>
+		<h4 data-sourcepos="279:1-279:14" dir="auto">
+		<a id="user-content-criticism-20" class="anchor" href="#criticism-20" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="280:1-280:256" dir="auto">There are no clear links between the interfaces and the methods on the calls (arrows). Upon questioning, we determined that they are abstractions of a series of methods in the code, which are a part of the interface. It would be nice if this was clarified.</p>
+		<h4 data-sourcepos="281:1-281:13" dir="auto">
+		<a id="user-content-decision-20" class="anchor" href="#decision-20" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="283:1-283:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="285:1-285:31" dir="auto">
+		<a id="user-content-justification-for-decision-20" class="anchor" href="#justification-for-decision-20" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="287:1-287:183" dir="auto">We believe that this confusion comes from using Java-like interface names in the component diagram (e.g "PluginManager" but we use a "managePlugins()" method in the sequence diagram).</p>
+		<h4 data-sourcepos="289:1-289:12" dir="auto">
+		<a id="user-content-changes-20" class="anchor" href="#changes-20" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="291:1-291:88" dir="auto">We believe that after reworking our component diagram, the method names will be clearer.</p>
+		<hr data-sourcepos="293:1-293:3">
+		<h3 data-sourcepos="294:1-294:7" dir="auto">
+		<a id="user-content-anchor-22" class="anchor" href="#anchor-22" aria-hidden="true"></a>22.</h3>
+		<h4 data-sourcepos="295:1-295:14" dir="auto">
+		<a id="user-content-criticism-21" class="anchor" href="#criticism-21" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="296:1-296:375" dir="auto">In the description of the sequence diagram, you mention that the sequence diagram is: “a build action on a Gradle Project”. At the start of the view, you refer to a “build task”. Are a build action and a build task the same thing? Clearer language/consistency would be appreciated. This also loops back into the definitions of Task &amp; Action (see global points below.)</p>
+		<h4 data-sourcepos="297:1-297:13" dir="auto">
+		<a id="user-content-decision-21" class="anchor" href="#decision-21" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="298:1-298:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="299:1-299:31" dir="auto">
+		<a id="user-content-justification-for-decision-21" class="anchor" href="#justification-for-decision-21" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="300:1-300:165" dir="auto">We recognize that we did not differentiate between a Task, Build, and an Action. Since all three are "conceptually interconnected", we find the confusion reasonable.</p>
+		<h4 data-sourcepos="301:1-301:12" dir="auto">
+		<a id="user-content-changes-21" class="anchor" href="#changes-21" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="302:1-302:57" dir="auto">We will include a glossary to define commonly used terms.</p>
+		<hr data-sourcepos="304:1-304:3">
+		<h3 data-sourcepos="305:1-305:7" dir="auto">
+		<a id="user-content-anchor-23" class="anchor" href="#anchor-23" aria-hidden="true"></a>23.</h3>
+		<h4 data-sourcepos="306:1-306:14" dir="auto">
+		<a id="user-content-criticism-22" class="anchor" href="#criticism-22" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="307:1-307:148" dir="auto">What triggers the start of the sequence diagram? In other words, who sends the launch(args) call? Is it a user or is it triggered by a system event?</p>
+		<h4 data-sourcepos="308:1-308:13" dir="auto">
+		<a id="user-content-decision-22" class="anchor" href="#decision-22" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="309:1-309:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="310:1-310:31" dir="auto">
+		<a id="user-content-justification-for-decision-22" class="anchor" href="#justification-for-decision-22" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="311:1-311:192" dir="auto">We believe that this is already shown in the context view (the developers use Gradle). We do not believe that showing that "IDE" or "CLI" can be the entry points is architecturally signifcant.</p>
+		<h4 data-sourcepos="313:1-313:12" dir="auto">
+		<a id="user-content-changes-22" class="anchor" href="#changes-22" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="315:1-315:3" dir="auto">N/A</p>
+		<hr data-sourcepos="317:1-317:3">
+		<h1 data-sourcepos="318:1-318:18" dir="auto">
+		<a id="user-content-information-view" class="anchor" href="#information-view" aria-hidden="true"></a>Information View</h1>
+		<h3 data-sourcepos="320:1-320:7" dir="auto">
+		<a id="user-content-anchor-24" class="anchor" href="#anchor-24" aria-hidden="true"></a>24.</h3>
+		<h4 data-sourcepos="321:1-321:14" dir="auto">
+		<a id="user-content-criticism-23" class="anchor" href="#criticism-23" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="322:1-322:299" dir="auto">The Introduction of the Information view mentions Gradle being concerned with some source files. While we understood from the presentation that this notably includes the build.gradle file, there was initially some confusion as to which files were being referenced; this could be clarified in the AD.</p>
+		<h4 data-sourcepos="323:1-323:13" dir="auto">
+		<a id="user-content-decision-23" class="anchor" href="#decision-23" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="324:1-324:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="325:1-325:31" dir="auto">
+		<a id="user-content-justification-for-decision-23" class="anchor" href="#justification-for-decision-23" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="326:1-326:134" dir="auto">We recognize that our information view is confusing, the mapping between configuration objects and files should be clear and explicit.</p>
+		<h4 data-sourcepos="327:1-327:12" dir="auto">
+		<a id="user-content-changes-23" class="anchor" href="#changes-23" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="328:1-328:187" dir="auto">We will rewrite the information view to describe Gradle's elements which relate to its configurability rather than presenting a nebulous view of all the information that Gradle processes.</p>
+		<hr data-sourcepos="330:1-330:3">
+		<h3 data-sourcepos="331:1-331:7" dir="auto">
+		<a id="user-content-anchor-25" class="anchor" href="#anchor-25" aria-hidden="true"></a>25.</h3>
+		<h4 data-sourcepos="332:1-332:14" dir="auto">
+		<a id="user-content-criticism-24" class="anchor" href="#criticism-24" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="333:1-333:65" dir="auto">View lacks introduction/orientation to understand what's going on</p>
+		<h4 data-sourcepos="334:1-334:13" dir="auto">
+		<a id="user-content-decision-24" class="anchor" href="#decision-24" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="335:1-335:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="336:1-336:31" dir="auto">
+		<a id="user-content-justification-for-decision-24" class="anchor" href="#justification-for-decision-24" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="338:1-338:54" dir="auto">We recognize our AD lacks refinement and organization.</p>
+		<h4 data-sourcepos="340:1-340:12" dir="auto">
+		<a id="user-content-changes-24" class="anchor" href="#changes-24" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="341:1-341:100" dir="auto">We will completely reorganize our AD and add introductions, context and orientation where necessary.</p>
+		<hr data-sourcepos="343:1-343:3">
+		<h2 data-sourcepos="344:1-344:17" dir="auto">
+		<a id="user-content-metadata-model" class="anchor" href="#metadata-model" aria-hidden="true"></a>Metadata Model</h2>
+		<h3 data-sourcepos="346:1-346:7" dir="auto">
+		<a id="user-content-anchor-26" class="anchor" href="#anchor-26" aria-hidden="true"></a>26.</h3>
+		<h4 data-sourcepos="347:1-347:14" dir="auto">
+		<a id="user-content-criticism-25" class="anchor" href="#criticism-25" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="348:1-348:233" dir="auto">Why is ArtifactRepository's cardinality one to many? This suggests that an External Source (which we understand is a library dependency such as Apache Commons Math) can be managed by multiple ArtifactRepository objects. Is this true?</p>
+		<h4 data-sourcepos="349:1-349:13" dir="auto">
+		<a id="user-content-decision-25" class="anchor" href="#decision-25" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="350:1-350:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="351:1-351:31" dir="auto">
+		<a id="user-content-justification-for-decision-25" class="anchor" href="#justification-for-decision-25" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="352:1-352:142" dir="auto">The metadata model was not insightful with regards to how Gradle meets its functional requirements or achieves its desired quality properties.</p>
+		<h4 data-sourcepos="354:1-354:12" dir="auto">
+		<a id="user-content-changes-25" class="anchor" href="#changes-25" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="355:1-355:77" dir="auto">We will no longer be using a metadata model. This will no longer be an issue.</p>
+		<hr data-sourcepos="357:1-357:3">
+		<h3 data-sourcepos="358:1-358:7" dir="auto">
+		<a id="user-content-anchor-27" class="anchor" href="#anchor-27" aria-hidden="true"></a>27.</h3>
+		<h4 data-sourcepos="359:1-359:14" dir="auto">
+		<a id="user-content-criticism-26" class="anchor" href="#criticism-26" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="360:1-360:247" dir="auto">The nature of the association between PublishedArtifact and File, ie that the latter is a persistent representation of the former, could be specified; otherwise it might be interpreted as PublishedArtifact using data contained in File in some way.</p>
+		<h4 data-sourcepos="361:1-361:13" dir="auto">
+		<a id="user-content-decision-26" class="anchor" href="#decision-26" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="362:1-362:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="363:1-363:31" dir="auto">
+		<a id="user-content-justification-for-decision-26" class="anchor" href="#justification-for-decision-26" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="364:1-364:134" dir="auto">We will completely rewrite our information view to focus on Gradle's configuration. A PublishedArtifact is not a configuration object.</p>
+		<h4 data-sourcepos="366:1-366:12" dir="auto">
+		<a id="user-content-changes-26" class="anchor" href="#changes-26" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="367:1-367:59" dir="auto">Published artifact will no longer be addressed in the view.</p>
+		<hr data-sourcepos="369:1-369:3">
+		<h3 data-sourcepos="370:1-370:7" dir="auto">
+		<a id="user-content-anchor-28" class="anchor" href="#anchor-28" aria-hidden="true"></a>28.</h3>
+		<h4 data-sourcepos="371:1-371:14" dir="auto">
+		<a id="user-content-criticism-27" class="anchor" href="#criticism-27" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="372:1-372:364" dir="auto">Somewhat related to the term Source code, but perhaps Task could be added to the diagram. It is not necessarily that obvious that Tasks are defined in the build.gradle (also, perhaps this association could be added in the dynamic info model.) (Also also, since tasks can alternatively be defined in plugins, perhaps it is worth adding Plugin to the model as well.)</p>
+		<h4 data-sourcepos="373:1-373:13" dir="auto">
+		<a id="user-content-decision-27" class="anchor" href="#decision-27" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="374:1-374:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="375:1-375:31" dir="auto">
+		<a id="user-content-justification-for-decision-27" class="anchor" href="#justification-for-decision-27" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="376:1-376:100" dir="auto">We recognize that our view overlooked the location and strucutre of the data defining task behavior.</p>
+		<h4 data-sourcepos="377:1-377:12" dir="auto">
+		<a id="user-content-changes-27" class="anchor" href="#changes-27" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="378:1-378:128" dir="auto">We will write a new view that shows how tasks can be defined in the build.gradle file or applied added to a project via plugins.</p>
+		<hr data-sourcepos="380:1-380:3">
+		<h2 data-sourcepos="381:1-381:28" dir="auto">
+		<a id="user-content-dynamic-information-model" class="anchor" href="#dynamic-information-model" aria-hidden="true"></a>Dynamic Information Model</h2>
+		<h3 data-sourcepos="383:1-383:7" dir="auto">
+		<a id="user-content-anchor-29" class="anchor" href="#anchor-29" aria-hidden="true"></a>29.</h3>
+		<h4 data-sourcepos="384:1-384:14" dir="auto">
+		<a id="user-content-criticism-28" class="anchor" href="#criticism-28" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="385:1-385:201" dir="auto">This may be a problem on Gradle's side, but what's the point of making Services singletons if they are accessed via a ServiceRegistry? It may be worth checking whether Services are actually singletons.</p>
+		<h4 data-sourcepos="386:1-386:13" dir="auto">
+		<a id="user-content-decision-28" class="anchor" href="#decision-28" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="387:1-387:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="388:1-388:31" dir="auto">
+		<a id="user-content-justification-for-decision-28" class="anchor" href="#justification-for-decision-28" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="389:1-389:93" dir="auto">In restrospect, we believe that the ServiceRegistry is an insignificant implemenation detail.</p>
+		<h4 data-sourcepos="391:1-391:12" dir="auto">
+		<a id="user-content-changes-28" class="anchor" href="#changes-28" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="392:1-392:62" dir="auto">The ServiceRegistry will be removed from the information view.</p>
+		<hr data-sourcepos="394:1-394:3">
+		<h3 data-sourcepos="395:1-395:7" dir="auto">
+		<a id="user-content-anchor-30" class="anchor" href="#anchor-30" aria-hidden="true"></a>30.</h3>
+		<h4 data-sourcepos="396:1-396:14" dir="auto">
+		<a id="user-content-criticism-29" class="anchor" href="#criticism-29" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="397:1-397:156" dir="auto">At face value, a Service sounds like a functionality provider, a black box that takes input and emits output; how does it contribute to an information view?</p>
+		<h4 data-sourcepos="398:1-398:13" dir="auto">
+		<a id="user-content-decision-29" class="anchor" href="#decision-29" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="399:1-399:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="400:1-400:31" dir="auto">
+		<a id="user-content-justification-for-decision-29" class="anchor" href="#justification-for-decision-29" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="401:1-401:93" dir="auto">In restrospect, we believe that the ServiceRegistry is an insignificant implemenation detail.</p>
+		<h4 data-sourcepos="402:1-402:12" dir="auto">
+		<a id="user-content-changes-29" class="anchor" href="#changes-29" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="403:1-403:62" dir="auto">The ServiceRegistry will be removed from the information view.</p>
+		<hr data-sourcepos="405:1-405:3">
+		<h3 data-sourcepos="406:1-406:7" dir="auto">
+		<a id="user-content-anchor-31" class="anchor" href="#anchor-31" aria-hidden="true"></a>31.</h3>
+		<h4 data-sourcepos="407:1-407:14" dir="auto">
+		<a id="user-content-criticism-30" class="anchor" href="#criticism-30" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="408:1-408:117" dir="auto">What do Services do? We understand they may cover a wide range of functionality, but a few examples could be helpful.</p>
+		<h4 data-sourcepos="409:1-409:13" dir="auto">
+		<a id="user-content-decision-30" class="anchor" href="#decision-30" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="410:1-410:17" dir="auto">Partially address</p>
+		<h4 data-sourcepos="411:1-411:31" dir="auto">
+		<a id="user-content-justification-for-decision-30" class="anchor" href="#justification-for-decision-30" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="412:1-412:93" dir="auto">In restrospect, we believe that the ServiceRegistry is an insignificant implemenation detail.</p>
+		<h4 data-sourcepos="413:1-413:12" dir="auto">
+		<a id="user-content-changes-30" class="anchor" href="#changes-30" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="415:1-415:62" dir="auto">The ServiceRegistry will be removed from the information view.</p>
+		<hr data-sourcepos="417:1-417:3">
+		<h3 data-sourcepos="418:1-418:7" dir="auto">
+		<a id="user-content-anchor-32" class="anchor" href="#anchor-32" aria-hidden="true"></a>32.</h3>
+		<h4 data-sourcepos="419:1-419:14" dir="auto">
+		<a id="user-content-criticism-31" class="anchor" href="#criticism-31" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="420:1-420:189" dir="auto">This may or may not be relevant, but perhaps fields could be added to some of the components? It may help communicate the data contained in, and purpose of, components like Task and Plugin.</p>
+		<h4 data-sourcepos="421:1-421:13" dir="auto">
+		<a id="user-content-decision-31" class="anchor" href="#decision-31" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="422:1-422:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="423:1-423:31" dir="auto">
+		<a id="user-content-justification-for-decision-31" class="anchor" href="#justification-for-decision-31" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="424:1-424:227" dir="auto">The information stored in these components are wrapped in many layers of abstractions and we believe that adding fields will either confuse the reader or give an incorrect understanding of what is contained in these components.</p>
+		<h4 data-sourcepos="425:1-425:12" dir="auto">
+		<a id="user-content-changes-31" class="anchor" href="#changes-31" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="427:1-427:3" dir="auto">N/A</p>
+		<hr data-sourcepos="429:1-429:3">
+		<h3 data-sourcepos="430:1-430:7" dir="auto">
+		<a id="user-content-anchor-33" class="anchor" href="#anchor-33" aria-hidden="true"></a>33.</h3>
+		<h4 data-sourcepos="431:1-431:14" dir="auto">
+		<a id="user-content-criticism-32" class="anchor" href="#criticism-32" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="432:1-432:239" dir="auto">If the Base plugin is always loaded, perhaps the Plugin cardinality is incorrect. Task also appears to be missing a cardinality (to the external observer it is not obvious whether a PublishedArtifact can be associated with multiple Tasks.)</p>
+		<h4 data-sourcepos="433:1-433:13" dir="auto">
+		<a id="user-content-decision-32" class="anchor" href="#decision-32" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="434:1-434:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="435:1-435:31" dir="auto">
+		<a id="user-content-justification-for-decision-32" class="anchor" href="#justification-for-decision-32" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="436:1-436:166" dir="auto">The assumption that the Base plugin is always loaded is incorrect. We also scoped out PublishedArtifact from our views and thus the criticism is no longer applicable.</p>
+		<h4 data-sourcepos="437:1-437:12" dir="auto">
+		<a id="user-content-changes-32" class="anchor" href="#changes-32" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="439:1-439:3" dir="auto">N/A</p>
+		<hr data-sourcepos="441:1-441:3">
+		<h1 data-sourcepos="442:1-442:21" dir="auto">
+		<a id="user-content-general-ad-feedback" class="anchor" href="#general-ad-feedback" aria-hidden="true"></a>General AD Feedback</h1>
+		<h3 data-sourcepos="444:1-444:7" dir="auto">
+		<a id="user-content-anchor-34" class="anchor" href="#anchor-34" aria-hidden="true"></a>34.</h3>
+		<h4 data-sourcepos="445:1-445:14" dir="auto">
+		<a id="user-content-criticism-33" class="anchor" href="#criticism-33" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="446:1-446:196" dir="auto">A glossary would be useful. Several terms caused confusion during the presentation and were sometimes employed inconsistently : &lt;Source Code, Data/Metadata, Gradle build, Dependency, Tasks/Actions</p>
+		<h4 data-sourcepos="447:1-447:13" dir="auto">
+		<a id="user-content-decision-33" class="anchor" href="#decision-33" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="448:1-448:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="449:1-449:31" dir="auto">
+		<a id="user-content-justification-for-decision-33" class="anchor" href="#justification-for-decision-33" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="450:1-450:110" dir="auto">We recognize that some terms can be confusing especially when they are not used consistently throughout the AD</p>
+		<h4 data-sourcepos="451:1-451:12" dir="auto">
+		<a id="user-content-changes-33" class="anchor" href="#changes-33" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="452:1-452:171" dir="auto">We will include a glossary which includes terms we believe are confusing. We will also review our AD to ensure that the meaning of terms are consistent throughout the AD.</p>
+		<hr data-sourcepos="454:1-454:3">
+		<h3 data-sourcepos="455:1-455:7" dir="auto">
+		<a id="user-content-anchor-35" class="anchor" href="#anchor-35" aria-hidden="true"></a>35.</h3>
+		<h4 data-sourcepos="456:1-456:14" dir="auto">
+		<a id="user-content-criticism-34" class="anchor" href="#criticism-34" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="457:1-457:472" dir="auto">Where does dependency management fit into all this? We understand that Gradle is more of a processing service and doesn't manage lots of data (as opposed to a database system), but from a high-level, user's POV, one important piece of data that Gradle does manage are library dependencies. While these are somewhat represented in the ArtifactRepository component, it's not clear how this component interacts with the others and how dependencies are woven into the project.</p>
+		<h4 data-sourcepos="458:1-458:13" dir="auto">
+		<a id="user-content-decision-34" class="anchor" href="#decision-34" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="459:1-459:6" dir="auto">Ignore</p>
+		<h4 data-sourcepos="460:1-460:31" dir="auto">
+		<a id="user-content-justification-for-decision-34" class="anchor" href="#justification-for-decision-34" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="461:1-461:234" dir="auto">We believe that detailed explanations regarding dependency management will be software implementation details rather than architecturally significant information. We will not be addressing this due to timeliness constraints of our AD.</p>
+		<h4 data-sourcepos="463:1-463:12" dir="auto">
+		<a id="user-content-changes-34" class="anchor" href="#changes-34" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="464:1-464:3" dir="auto">N/A</p>
+		<hr data-sourcepos="466:1-466:3">
+		<h3 data-sourcepos="467:1-467:7" dir="auto">
+		<a id="user-content-anchor-36" class="anchor" href="#anchor-36" aria-hidden="true"></a>36.</h3>
+		<h4 data-sourcepos="468:1-468:14" dir="auto">
+		<a id="user-content-criticism-35" class="anchor" href="#criticism-35" aria-hidden="true"></a>Criticism</h4>
+		<p data-sourcepos="469:1-469:246" dir="auto">The views do not contain any code references or supporting evidence (e.g., links to data generated by analysis tools). It would be useful if there was a tangible reference to the system, both for proof, and as a pointer for further investigation.</p>
+		<h4 data-sourcepos="470:1-470:13" dir="auto">
+		<a id="user-content-decision-35" class="anchor" href="#decision-35" aria-hidden="true"></a>Decision</h4>
+		<p data-sourcepos="471:1-471:18" dir="auto">Completely address</p>
+		<h4 data-sourcepos="472:1-472:31" dir="auto">
+		<a id="user-content-justification-for-decision-35" class="anchor" href="#justification-for-decision-35" aria-hidden="true"></a>Justification for decision</h4>
+		<p data-sourcepos="473:1-473:52" dir="auto">We recognize the lack of evidence throughout our AD.</p>
+		<h4 data-sourcepos="474:1-474:12" dir="auto">
+		<a id="user-content-changes-35" class="anchor" href="#changes-35" aria-hidden="true"></a>Changes</h4>
+		<p data-sourcepos="475:1-475:54" dir="auto">We will add evidence via hyperlinks throughout our AD.</p>
+		<hr data-sourcepos="477:1-478:0">
+		<h1 data-sourcepos="479:1-479:17" dir="auto">
+		<a id="user-content-self-assessment" class="anchor" href="#self-assessment" aria-hidden="true"></a>Self-Assessment</h1>
+		<p data-sourcepos="481:1-481:71" dir="auto">This section does not follow the same formatting as the other sections.</p>
+		<h3 data-sourcepos="483:1-483:7" dir="auto">
+		<a id="user-content-anchor-37" class="anchor" href="#anchor-37" aria-hidden="true"></a>37.</h3>
+		<p data-sourcepos="485:1-485:169" dir="auto">We presented our context view during the oral presentation. After our presentation, we were asked why Gradle was shown as residing within a project in the context model.</p>
+		<p data-sourcepos="487:1-487:284" dir="auto">Our answer had little to do with Gradle's desired functionality (to build), but rather its potential functional capabilities (it can be heavily edited to the point where it is no longer a build automation tool and basically software). We recognize that this is not relevant in our AD.</p>
+		<p data-sourcepos="489:1-489:212" dir="auto">We will review our context model to clearly distinguish between a project (the functional component/configuration object) and the software. We will also showcase Gradle as a seperate element in the context model.</p>
+		<h3 data-sourcepos="491:1-491:7" dir="auto">
+		<a id="user-content-anchor-38" class="anchor" href="#anchor-38" aria-hidden="true"></a>38.</h3>
+		<p data-sourcepos="493:1-493:59" dir="auto">It is unclear how tasks and plugins are added to a project.</p>
+		<p data-sourcepos="495:1-495:193" dir="auto">We will add an entry in the appendix showcasing how tasks are added to a project's configuration script file. We will also add a sequence diagram detailing how plugins are applied on a project.</p>
+		<h3 data-sourcepos="497:1-497:7" dir="auto">
+		<a id="user-content-anchor-39" class="anchor" href="#anchor-39" aria-hidden="true"></a>39.</h3>
+		<p data-sourcepos="499:1-499:65" dir="auto">We believe our information view lacks architectural significance.</p>
+		<p data-sourcepos="501:1-501:87" dir="auto">We will completely rewrite the information view to be focused on configuration objects.</p>
+		<h3 data-sourcepos="503:1-503:7" dir="auto">
+		<a id="user-content-anchor-40" class="anchor" href="#anchor-40" aria-hidden="true"></a>40.</h3>
+		<p data-sourcepos="505:1-505:121" dir="auto">We believe Gradle's build lifecycle has been ignored in our old AD. The build lifecycle is key to Gradle's functionality.</p>
+		<p data-sourcepos="507:1-507:93" dir="auto">We will rewrite our functional view such that it is centered around Gradle's build lifecycle.</p>
+		<h3 data-sourcepos="509:1-509:7" dir="auto">
+		<a id="user-content-anchor-41" class="anchor" href="#anchor-41" aria-hidden="true"></a>41.</h3>
+		<p data-sourcepos="511:1-511:81" dir="auto">The development view currently looks like an information dump rather than a view.</p>
+		<p data-sourcepos="513:1-513:52" dir="auto">We will improve and reorganize the development view.</p>
+		<h3 data-sourcepos="515:1-515:7" dir="auto">
+		<a id="user-content-anchor-42" class="anchor" href="#anchor-42" aria-hidden="true"></a>42.</h3>
+		<p data-sourcepos="517:1-517:187" dir="auto">Back when we had a very poor understanding of Gradle, we came up with some concerns and architectural principles. We no longer believe they are good concerns and architectural principles.</p>
+		<p data-sourcepos="519:1-519:213" dir="auto">We will find and write good concerns and architectural principles to standalone documents. We will show evidence for our architectural principles and we will make sure our concerns are addressed throughout the AD.</p>
+		</div>
+	</body>
+</html>

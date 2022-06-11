@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Architectural Principles</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:26" dir="auto">
+		<a id="user-content-architectural-principles" class="anchor" href="#architectural-principles" aria-hidden="true"></a>Architectural Principles</h1>
+		<h2 data-sourcepos="2:1-2:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="3:1-3:162" dir="auto">Architectual principles are the overall guiding philosophies that Gradle follows. The following list is not exhaustive but captures key and interesting principles</p>
+		<h2 data-sourcepos="4:1-4:17" dir="auto">
+		<a id="user-content-principle-list" class="anchor" href="#principle-list" aria-hidden="true"></a>Principle List</h2>
+		<h3 data-sourcepos="6:1-6:5" dir="auto">
+		<a id="user-content-anchor-1" class="anchor" href="#anchor-1" aria-hidden="true"></a>1</h3>
+		<p data-sourcepos="7:1-7:72" dir="auto"><strong>Gradle will not make assumptions about how projects should be built.</strong></p>
+		<p data-sourcepos="9:1-9:251" dir="auto">While we usually think of a build as a series of steps such as clean, check, assemble, ... Those may not always be exhaustive or necessary for a build. Assuming that a build is comprised of such steps may simplify  development at the cost of rigidity.</p>
+		<p data-sourcepos="11:1-11:263" dir="auto">This principle molded the architectural decision to put the standard build steps in a <a href="https://docs.gradle.org/current/userguide/base_plugin.html" rel="nofollow noreferrer noopener" target="_blank">BasePlugin</a>. The usage of the standard steps is not enforced, developers may write their own tasks and dependencies.</p>
+		<h3 data-sourcepos="13:1-13:5" dir="auto">
+		<a id="user-content-anchor-2" class="anchor" href="#anchor-2" aria-hidden="true"></a>2</h3>
+		<p data-sourcepos="15:1-15:63" dir="auto"><strong>Gradle will prioritize performance over memory consumption.</strong></p>
+		<p data-sourcepos="17:1-17:164" dir="auto">In software, the opportunity to sacrifice memory for performance often arises. Gradle will capitalize on such opportunities by prioritizing performance over memory.</p>
+		<p data-sourcepos="19:1-19:582" dir="auto">This principle molded the architectural decision of having a <a href="Functional View.html#gradle-daemon">Gradle Daemon</a>. One of Gradle's main advantage over Maven is its  speed (as described in the <a href="Context View.html#gradle-vs-maven">context view</a>). Part of Gradle's performance can be attributed to the Gradle Daemon which is a lingering build process used to save bootstraping time. In some scenarios, this process can consume gigabytes of memory!</p>
+		</div>
+	</body>
+</html>

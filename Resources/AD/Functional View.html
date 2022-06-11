@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Functional View</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:17" dir="auto">
+		<a id="user-content-functional-view" class="anchor" href="#functional-view" aria-hidden="true"></a>Functional View</h1>
+		<h2 data-sourcepos="2:1-2:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="4:1-4:208" dir="auto">Gradle's build behavior will vary with regards to the user's configuration. Gradle is engineered to provide each user the ability to configure it such that it exhibits the desired externally visible behavior.</p>
+		<p data-sourcepos="6:1-6:122" dir="auto">The functional view is focused on the functional capabilities of Gradle. Notably, its ability to build a software project.</p>
+		<p data-sourcepos="8:1-8:419" dir="auto">We believe that by narrowing the scope of our functional view to that of a Java project build specifically, we are able to better identify the architecturally significant components. The component diagram addresses <a href="Important Scenarios.html#scenario-1">important scenario 1</a> by showing how functional components interact together to perform a build.</p>
+		<p data-sourcepos="11:1-11:318" dir="auto">Therefore, we have decided to use a Java project build as the scope of our functional view. Albeit not necessary for a succesful build, our scope includes the <a href="#gradle-daemon">Gradle daemon</a> since it <a href="https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:why_the_daemon" rel="nofollow noreferrer noopener" target="_blank">improves performance significantly</a>.</p>
+		<p data-sourcepos="13:1-13:555" dir="auto">Readers will notice that the functionality described in this view mostly pertains to Gradle's initialization and configuration. Since Gradle follows a <a href="Appendix.html#microkernel-architectural-style">microkernel architectural style</a>, we focus our view not on the build behavior, but rather the systems which allow users to configure the build behavior. Exactly what is being built and executed is dictated by user-specific plugins and tasks, which we categorize as extended functionality.</p>
+		<h2 data-sourcepos="15:1-15:20" dir="auto">
+		<a id="user-content-table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"></a>Table of Contents</h2>
+		<table data-sourcepos="17:1-24:160" dir="auto">
+		<thead>
+		<tr data-sourcepos="17:1-17:21">
+		<th data-sourcepos="17:2-17:8">Content</th>
+		<th data-sourcepos="17:10-17:20">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="19:1-19:144">
+		<td data-sourcepos="19:2-19:50"><a href="#gradle-build-lifecycle">Gradle Build Lifecycle</a></td>
+		<td data-sourcepos="19:52-19:143">Introduces the inialization, configuration and execution phase of Gradle's build lifecycle.</td>
+		</tr>
+		<tr data-sourcepos="20:1-20:131">
+		<td data-sourcepos="20:2-20:52"><a href="#initialization-component-diagram">Initialization</a></td>
+		<td data-sourcepos="20:54-20:130">Showcases the functional components pertaining to the initialization phase.</td>
+		</tr>
+		<tr data-sourcepos="21:1-21:114">
+		<td data-sourcepos="21:2-21:50"><a href="#configuration-component-diagram">Configuration</a></td>
+		<td data-sourcepos="21:52-21:113">Describes the components relating to the configuration phase.</td>
+		</tr>
+		<tr data-sourcepos="22:1-22:172">
+		<td data-sourcepos="22:2-22:31"><a href="#execution-system">Execution</a></td>
+		<td data-sourcepos="22:33-22:171">Gives a brief explanation of the execution system and explains why our AD does not go in much depth when describing the execution system.</td>
+		</tr>
+		<tr data-sourcepos="23:1-23:109">
+		<td data-sourcepos="23:2-23:32"><a href="#gradle-daemon">Gradle Daemon</a></td>
+		<td data-sourcepos="23:34-23:108">Details the Gradle Daemon, a lingering process used to improve build time.</td>
+		</tr>
+		<tr data-sourcepos="24:1-24:160">
+		<td data-sourcepos="24:2-24:76"><a href="#plugin-application-sequence-diagram">Plugin Application Sequence Diagram</a></td>
+		<td data-sourcepos="24:78-24:159">Details the sequence of events necessary for a plugin to be applied to a project.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h2 data-sourcepos="27:1-27:25" dir="auto">
+		<a id="user-content-gradle-build-lifecycle" class="anchor" href="#gradle-build-lifecycle" aria-hidden="true"></a>Gradle Build Lifecycle</h2>
+		<p data-sourcepos="0:0-0:0" dir="auto">To properly understand the way in which Gradle processes a build, it is important to understand the Gradle Build Lifecycle.</p>
+		<table data-sourcepos="28:1-33:227" dir="auto">
+		<thead>
+		<tr data-sourcepos="28:1-28:143">
+		<th data-sourcepos="28:126-28:130">Phase</th>
+		<th data-sourcepos="28:132-28:142">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="31:1-31:298">
+		<td data-sourcepos="31:2-31:24">1. Initialization phase</td>
+		<td data-sourcepos="31:26-31:297">A build begins in this phase. During this phase, the command line arguments are parsed, the settings script file is found and loaded into a Settings configuration object. The Settings configuration object is crucial since it contains the description of projects to build.</td>
+		</tr>
+		<tr data-sourcepos="32:1-32:631">
+		<td data-sourcepos="32:2-32:25">2. Configuratation phase</td>
+		<td data-sourcepos="32:27-32:630">During this phase, the <a href="Information View.html#data-source">configuration script files</a> are loaded into run-time <a href="Information View.html#configuration-objects">configuration objects</a>, all the  configuration objects (except Settings) are initialized in this phase (e.g. a Project configuration objects is initialized by loading its corresponding script file into it). Since plugins configure projects at run-time, plugins are applied onto projects during this phase.</td>
+		</tr>
+		<tr data-sourcepos="33:1-33:227">
+		<td data-sourcepos="33:2-33:19">3. Execution phase</td>
+		<td data-sourcepos="33:21-33:226">During this final phase, a Task execution tree is built with regards to the task dependencies. The tasks are then executed in a correct order using the tree. Once this phase is over, the build is complete.</td>
+		</tr>
+		</tbody>
+		</table>
+		<p data-sourcepos="37:1-37:122" dir="auto">More information can be found in <a href="https://docs.gradle.org/current/userguide/build_lifecycle.html" rel="nofollow noreferrer noopener" target="_blank">Gradle's documentation</a>.</p>
+		<h3 data-sourcepos="39:1-39:36" dir="auto">
+		<a id="user-content-initialization-component-diagram" class="anchor" href="#initialization-component-diagram" aria-hidden="true"></a>Initialization Component Diagram</h3>
+		<p data-sourcepos="41:1-41:68" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/ev7a5ZO.jpg" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/ev7a5ZO.jpg" alt="Initialization Component Diagram" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<h4 data-sourcepos="44:1-44:35" dir="auto">
+		<a id="user-content-initialization-element-catalog" class="anchor" href="#initialization-element-catalog" aria-hidden="true"></a>Initialization Element Catalog</h4>
+		<table data-sourcepos="45:1-52:490" dir="auto">
+		<thead>
+		<tr data-sourcepos="45:1-45:37">
+		<th data-sourcepos="45:2-45:22">Functional Component</th>
+		<th data-sourcepos="45:24-45:36">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="47:1-47:409">
+		<td data-sourcepos="47:2-47:9">Launcher</td>
+		<td data-sourcepos="47:11-47:408">The Launcher is Gradle's entry point. (relating to the <a href="https://github.com/gradle/gradle/blob/master/subprojects/launcher/src/main/java/org/gradle/launcher/bootstrap/EntryPoint.java" rel="nofollow noreferrer noopener" target="_blank">Entry Point</a> class in the code). It is responsible for any initial bootstraping process, it then forwards any input arguments to the ActionManager which would use those arguments to initialize and execute a build.</td>
+		</tr>
+		<tr data-sourcepos="48:1-48:613">
+		<td data-sourcepos="48:2-48:14">ActionManager</td>
+		<td data-sourcepos="48:16-48:612">The ActionManager's responsibility is to build an action. It receives arguments and parses them (in the form of a <a href="https://github.com/gradle/gradle/blob/master/subprojects/launcher/src/main/java/org/gradle/launcher/bootstrap/CommandLineActionFactory.java" rel="nofollow noreferrer noopener" target="_blank">CommandLineExecution</a>). It then initializes the build action and forwards the result to the Initializer.   The Initializer may run on the current process or on a seperate process depending on the input arguments. To run the Initializer on a seperate process, the ActionManager will instead forward the arguments to a DaemonClient.</td>
+		</tr>
+		<tr data-sourcepos="49:1-49:406">
+		<td data-sourcepos="49:2-49:14">DeamonClient</td>
+		<td data-sourcepos="49:16-49:406">The <a href="https://github.com/gradle/gradle/blob/master/subprojects/launcher/src/main/java/org/gradle/launcher/daemon/client/DaemonClient.java" rel="nofollow noreferrer noopener" target="_blank">DaemonClient's</a> main responsibility is to find a lingering Daemon and forward the build action to it. It creates a Daemon if it cannot find one. More information on why it does this can be found in the <a href="#Gradle-Daemon">Gradle Daemon</a> section.</td>
+		</tr>
+		<tr data-sourcepos="50:1-50:283">
+		<td data-sourcepos="50:2-50:8">Daemon</td>
+		<td data-sourcepos="50:10-50:282">The <a href="https://github.com/gradle/gradle/blob/master/subprojects/launcher/src/main/java/org/gradle/launcher/daemon/server/Daemon.java" rel="nofollow noreferrer noopener" target="_blank">Daemon's</a> main responsibility is to receive build actions from the DaemonClient and to execute the action via a (process local) Initializer.</td>
+		</tr>
+		<tr data-sourcepos="51:1-51:890">
+		<td data-sourcepos="51:2-51:13">Initializer</td>
+		<td data-sourcepos="51:15-51:889">The Initializer's main responsibility is to coordinate the inialization phase of the Gradle Build Lifecycle. It first starts by loading the <a href="Information View.html#settingsgradle">settings script file</a> into a Settings <a href="Information View.html#configuration-objects">configuration object</a>.  The initializer then launches the configuration phase by interfacing with configuration subsytem. The configuration phase requires a loaded Settings configuration object which contains valuable information such as which projects to build (therefore which Project configuration object to configure). Once, the configuration phase is done, the Initializer launches the execution phase by interfacing with the Execution subsystem.</td>
+		</tr>
+		<tr data-sourcepos="52:1-52:490">
+		<td data-sourcepos="52:2-52:10">Settings</td>
+		<td data-sourcepos="52:12-52:489">
+		<a href="https://github.com/gradle/gradle/blob/master/subprojects/core-api/src/main/java/org/gradle/api/initialization/Settings.java" rel="nofollow noreferrer noopener" target="_blank">Settings</a> is a <a href="Information View.html#configuration-objects">configuration object</a>. Its main responsibility is to locate and load the settings script file (into itself). This step includes identifying all the projects required for the build (dictated in the settings' script file).</td>
+		</tr>
+		</tbody>
+		</table>
+		<h4 data-sourcepos="54:1-54:30" dir="auto">
+		<a id="user-content-initialization-interfaces" class="anchor" href="#initialization-interfaces" aria-hidden="true"></a>Initialization Interfaces</h4>
+		<table data-sourcepos="56:1-64:362" dir="auto">
+		<thead>
+		<tr data-sourcepos="56:1-56:26">
+		<th data-sourcepos="56:2-56:11">Interface</th>
+		<th data-sourcepos="56:13-56:25">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="58:1-58:640">
+		<td data-sourcepos="58:2-58:25">createAndRunBuildAction</td>
+		<td data-sourcepos="58:27-58:639">This interface provides a way to parse the Launcher's input arguments and intialize a <a href="https://github.com/gradle/gradle/blob/3a59747205706ef419fa41c1a4dbae0a3ea864a4/subprojects/core/src/main/java/org/gradle/internal/invocation/BuildAction.java#L23" rel="nofollow noreferrer noopener" target="_blank">BuildAction</a>. A BuildAction simply simply represents a Gradle build to be performed. The BuildAction is created by an action factory, for example <a href="https://github.com/gradle/gradle/blob/049876d4dd8b0cc7615cf96b9b6d979ffb965be7/subprojects/launcher/src/main/java/org/gradle/launcher/cli/DefaultCommandLineActionFactory.java#L57" rel="nofollow noreferrer noopener" target="_blank">DefaultCommandLineActionFactory</a>.</td>
+		</tr>
+		<tr data-sourcepos="59:1-59:215">
+		<td data-sourcepos="59:2-59:17">executeOnDaemon</td>
+		<td data-sourcepos="59:19-59:214">This interfaces provides a way for the ActionManager to forward a BuildAction to the DaemonClient. The Daemon Client then finds a lingered Daemon process on which the BuildAction can be executed.</td>
+		</tr>
+		<tr data-sourcepos="60:1-60:315">
+		<td data-sourcepos="60:2-60:20">executeBuildAction</td>
+		<td data-sourcepos="60:22-60:314">This interface is provided by the Initializer and simply begins the execution of a BuildAction. The Initializer includes classes such as the <a href="https://github.com/gradle/gradle/blob/master/subprojects/tooling-api/src/main/java/org/gradle/tooling/BuildActionExecuter.java" rel="nofollow noreferrer noopener" target="_blank">BuildActionExecuter</a>.</td>
+		</tr>
+		<tr data-sourcepos="61:1-61:664">
+		<td data-sourcepos="61:2-61:9">Message</td>
+		<td data-sourcepos="61:11-61:663">The build action is sent between a DaemonClient and the Daemon through a <a href="https://github.com/gradle/gradle/blob/master/subprojects/launcher/src/main/java/org/gradle/launcher/daemon/protocol/Message.java" rel="nofollow noreferrer noopener" target="_blank">Message</a>. The message is sent from the Client through a <a href="https://github.com/gradle/gradle/blob/master/subprojects/launcher/src/main/java/org/gradle/launcher/daemon/client/DaemonClientConnection.java" rel="nofollow noreferrer noopener" target="_blank">DaemonClientConnection</a>. The message is received in a <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/launcher/src/main/java/org/gradle/launcher/daemon/server/api/DaemonConnection.java" rel="nofollow noreferrer noopener" target="_blank">DaemonConnection</a>
+		</td>
+		</tr>
+		<tr data-sourcepos="62:1-62:591">
+		<td data-sourcepos="62:2-62:21">findAndLoadSettings</td>
+		<td data-sourcepos="62:23-62:590">Creates an instance of a Settings <a href="Information View.html#configuration-objects">configuration object</a>. This is done via a <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/core/src/main/java/org/gradle/initialization/SettingsLoader.java" rel="nofollow noreferrer noopener" target="_blank">SettingsLoader</a> which takes care of the loading of the <a href="Information View.html#settingsgradle">settings' script file</a> into the configuration object</td>
+		</tr>
+		<tr data-sourcepos="63:1-63:179">
+		<td data-sourcepos="63:2-63:16">startExecution</td>
+		<td data-sourcepos="63:18-63:178">Forwards the necessary information to the Execution System (projects, tasks, ...) and begins the final phase of the Gradle build lifecylce, the execution phase.</td>
+		</tr>
+		<tr data-sourcepos="64:1-64:362">
+		<td data-sourcepos="64:2-64:16">createProjects</td>
+		<td data-sourcepos="64:18-64:361">Loads the Project's <a href="Information View.html#buildgradle">build.gradle file</a> in to the project configuration object. Further initializes the project configuration object instance by resolving any missing artifact such as plugins. Applies the necessary plugins to the project.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h3 data-sourcepos="65:1-65:35" dir="auto">
+		<a id="user-content-configuration-component-diagram" class="anchor" href="#configuration-component-diagram" aria-hidden="true"></a>Configuration Component Diagram</h3>
+		<p data-sourcepos="66:1-66:53" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/0RCRDEO.jpg" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/0RCRDEO.jpg" alt="Component Diagram" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<h4 data-sourcepos="68:1-68:44" dir="auto">
+		<a id="user-content-configurationexecution-element-catalog" class="anchor" href="#configurationexecution-element-catalog" aria-hidden="true"></a>Configuration/Execution Element Catalog</h4>
+		<table data-sourcepos="69:1-76:231" dir="auto">
+		<thead>
+		<tr data-sourcepos="69:1-69:37">
+		<th data-sourcepos="69:2-69:22">Functional Component</th>
+		<th data-sourcepos="69:24-69:36">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="71:1-71:340">
+		<td data-sourcepos="71:2-71:6">Task</td>
+		<td data-sourcepos="71:8-71:339">The <a href="https://github.com/gradle/gradle/blob/master/subprojects/core-api/src/main/java/org/gradle/api/Task.java" rel="nofollow noreferrer noopener" target="_blank">Task</a> component's main responsibility is to represent a "unit of work". A task contains an ordered list of runnable actions (much like a linked-list) and keeps track of the tasks it depends on (must be executed before).</td>
+		</tr>
+		<tr data-sourcepos="72:1-72:639">
+		<td data-sourcepos="72:2-72:9">Project</td>
+		<td data-sourcepos="72:11-72:638">A <a href="https://github.com/gradle/gradle/blob/master/subprojects/core-api/src/main/java/org/gradle/api/Project.java" rel="nofollow noreferrer noopener" target="_blank">Project</a> <a href="Information View.html#configuration-objects">configuration object</a> is mapped to a <a href="Information View.html#buildgradle">build.gradle file</a>. It may contain subprojects but there is only one root project. A Project contains tasks and may have plugins applied on it. It is the glue that connects most components together and it represents source code that must be built.</td>
+		</tr>
+		<tr data-sourcepos="73:1-73:376">
+		<td data-sourcepos="73:2-73:13">Build Cache</td>
+		<td data-sourcepos="73:15-73:375">In terms of functionalities the <a href="Information View.html#build-cache">BuildCache</a> handles the storing and retrieval of cached files (task outputs), it is explored in depth in the <a href="Information View.html">information view</a>.</td>
+		</tr>
+		<tr data-sourcepos="74:1-74:399">
+		<td data-sourcepos="74:2-74:8">Plugin</td>
+		<td data-sourcepos="74:10-74:398">A <a href="https://github.com/gradle/gradle/blob/master/subprojects/core-api/src/main/java/org/gradle/api/Plugin.java" rel="nofollow noreferrer noopener" target="_blank">Plugin</a> can be used to extend a project in many ways. The most common way is to add a (or multiple) tasks to a project. Plugins are specified in a <a href="Information View.html#buildgradle">project's script file</a>.</td>
+		</tr>
+		<tr data-sourcepos="75:1-75:271">
+		<td data-sourcepos="75:2-75:21">Artifact Repository</td>
+		<td data-sourcepos="75:23-75:270">A repository contains artifacts that follow a specific format, for example "[artifact]-[version].[ext]". when a project's artifact repositories are missing an important artifact (such as a plugin), then the artifact must be fetched from a Source.</td>
+		</tr>
+		<tr data-sourcepos="76:1-76:231">
+		<td data-sourcepos="76:2-76:9">Source</td>
+		<td data-sourcepos="76:11-76:230">An abstract components which is used to model any entity that exposes a way to retrieve artifacts (such as files). The artifact repository will resolve missing artifacts from the source via the strategy design pattern.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h4 data-sourcepos="79:1-79:41" dir="auto">
+		<a id="user-content-configuration-execution-interfaces" class="anchor" href="#configuration-execution-interfaces" aria-hidden="true"></a>Configuration &amp; Execution Interfaces</h4>
+		<table data-sourcepos="80:1-88:236" dir="auto">
+		<thead>
+		<tr data-sourcepos="80:1-80:26">
+		<th data-sourcepos="80:2-80:11">Interface</th>
+		<th data-sourcepos="80:13-80:25">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="82:1-82:557">
+		<td data-sourcepos="82:2-82:10">execute</td>
+		<td data-sourcepos="82:12-82:556">Executes the task. The actual work done is done by <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/base-services/src/main/java/org/gradle/api/Action.java" rel="nofollow noreferrer noopener" target="_blank">Actions</a>. To execute a Task, the list of actions are retreived, and then executed in order. This work is wrapped in a <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/core/src/main/java/org/gradle/api/internal/tasks/execution/TaskExecution.java" rel="nofollow noreferrer noopener" target="_blank">TaskExecution</a>. This is called by the execution system.</td>
+		</tr>
+		<tr data-sourcepos="83:1-83:123">
+		<td data-sourcepos="83:2-83:15">registerTask</td>
+		<td data-sourcepos="83:17-83:122">A project contains tasks, therefore the registerTask interface is used to register a task to a project.</td>
+		</tr>
+		<tr data-sourcepos="84:1-84:210">
+		<td data-sourcepos="84:2-84:19">configureProject</td>
+		<td data-sourcepos="84:21-84:209">Represents the inversion of control, meaning that a Project gives an "instance" of itself to Plugin such that Plugin can configure the instance of Project (by addding tasks for example).</td>
+		</tr>
+		<tr data-sourcepos="85:1-85:192">
+		<td data-sourcepos="85:2-85:18">getCachedOutput</td>
+		<td data-sourcepos="85:20-85:191">Accesses a previously computed task output from the <a href="Information View.html#build-cache">BuildCache</a>.</td>
+		</tr>
+		<tr data-sourcepos="86:1-86:406">
+		<td data-sourcepos="86:2-86:14">applyPlugin</td>
+		<td data-sourcepos="86:16-86:405">The Plugin component applies itself to a Project instance in order to given the plugin increased functionality through making the Project aware of available Tasks. The <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/core-api/src/main/java/org/gradle/api/plugins/PluginManager.java" rel="nofollow noreferrer noopener" target="_blank">PluginManager</a> keeps track of which plugins have been applied.</td>
+		</tr>
+		<tr data-sourcepos="87:1-87:484">
+		<td data-sourcepos="87:2-87:18">resolveArtifact</td>
+		<td data-sourcepos="87:20-87:483">The artifact resolution uses the strategy design pattern to define a resolution protocol specific to a perticular Source. The resolution strategy should be such that artifacts are only  fetched from a remote Source if they are not present locally. This is evidenced by the <a href="https://github.com/gradle/gradle/blob/31be39c23e3d4c5d6ab3c043c189166d09ce3085/subprojects/file-collections/src/main/java/org/gradle/api/internal/file/FileResolver.java#L29" rel="nofollow noreferrer noopener" target="_blank">FileResolver</a>.</td>
+		</tr>
+		<tr data-sourcepos="88:1-88:236">
+		<td data-sourcepos="88:2-88:14">getArtifact</td>
+		<td data-sourcepos="88:16-88:235">This is a conceptual interface which abstracts the way a source exposes artifacts to the ArtifactRepository. Since each Source may expose artifacts differently (e.g. via an HTTP web server), we will not go into details.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h3 data-sourcepos="91:1-91:20" dir="auto">
+		<a id="user-content-execution-system" class="anchor" href="#execution-system" aria-hidden="true"></a>Execution System</h3>
+		<p data-sourcepos="93:1-93:232" dir="auto">The execution system is architecturally simple and its complexity is present mostly at the software design level. Our AD, strives to be both clear and concise, therefore we will present a high-level overview of the execution system.</p>
+		<p data-sourcepos="95:1-95:373" dir="auto">Once the configuration phase is over the initialization system begins the execution phase. The execution system builds a task dependency tree and executes tasks in a correct order (with regards to the dependency tree). Since tasks can be seen as a linked-list of actions, the execution system further ensures that the actions of each task are executed in the correct order.</p>
+		<h2 data-sourcepos="97:1-97:16" dir="auto">
+		<a id="user-content-gradle-daemon" class="anchor" href="#gradle-daemon" aria-hidden="true"></a>Gradle Daemon</h2>
+		<p data-sourcepos="98:1-98:93" dir="auto">Gradle strives to be very performant. It achieves this partly by utilizing a daemon process.</p>
+		<p data-sourcepos="100:1-100:231" dir="auto">Gradle's initialization is loosely coupled with the configuration and execution of the build, therefore running the build on a seperate process is as simple as delivering a BuildAction message to another process, the Gradle daemon.</p>
+		<p data-sourcepos="102:1-102:137" dir="auto">The Gradle daemon is a lingering background process which maintains the result of any previously executed build's bootstraping in memory.</p>
+		<h4 data-sourcepos="105:1-105:16" dir="auto">
+		<a id="user-content-performance" class="anchor" href="#performance" aria-hidden="true"></a>Performance</h4>
+		<p data-sourcepos="106:1-106:327" dir="auto">The Gradle daemon can speed up <a href="https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:why_the_daemon" rel="nofollow noreferrer noopener" target="_blank">builds by 15-75%</a>. The daemon allows redundant, yet expensive, bootstrapping operations to be skipped (e.g. loading of large libraries into memory) by keeping the preivious build's bootstrapping results in-memory.</p>
+		<p data-sourcepos="109:1-109:418" dir="auto">This performance does come with a cost, <a href="https://java.tutorialink.com/high-memory-usage-by-gradle-daemon/" rel="nofollow noreferrer noopener" target="_blank">alot of memory</a> can be used by the Gradle daemon. However, due to <a href="Architectural Principles.html#anchor-2">architectural princple #2</a>, which dictates that build performance takes precedence over memory utilization, this is not a major issue.</p>
+		<p data-sourcepos="111:1-111:136" dir="auto">It is strongly discouraged to execute Gradle builds without the daemon since in most scenarios, the daemon does not consume much memory.</p>
+		<h2 data-sourcepos="113:1-113:38" dir="auto">
+		<a id="user-content-plugin-application-sequence-diagram" class="anchor" href="#plugin-application-sequence-diagram" aria-hidden="true"></a>Plugin Application Sequence Diagram</h2>
+		<p data-sourcepos="114:1-114:71" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/58eu4Bt.jpg" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/58eu4Bt.jpg" alt="Plugin Application Sequence Diagram" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<h3 data-sourcepos="116:1-116:35" dir="auto">
+		<a id="user-content-description-of-sequence-diagram" class="anchor" href="#description-of-sequence-diagram" aria-hidden="true"></a>Description of Sequence Diagram</h3>
+		<p data-sourcepos="117:1-117:206" dir="auto">One of our <a href="Important Scenarios.html#scenario-2">important scenarios</a> is the application of plugins to increase Gradle's functionality.</p>
+		<p data-sourcepos="119:1-119:247" dir="auto">Plugin application is not straight forward and unintuitive (evidenced by the inversion of control). Therefore, we believe that it is important to properly showcase the execution sequence which leads to a plugin being applied on a specific Project.</p>
+		<p data-sourcepos="122:1-122:138" dir="auto">We hope that this diagram helps readers understand that the plugin configures the project at run-time, after the initialization of Gradle.</p>
+		<p data-sourcepos="124:1-124:193" dir="auto">In the diagram, we notice that Project appears twice. In fact, readers will notice that the same instance "proj:Project" calls apply on Plugin and Plugin calls configure back on "proj:Project".</p>
+		</div>
+	</body>
+</html>

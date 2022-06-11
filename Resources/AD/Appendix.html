@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Appendix</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:10" dir="auto">
+		<a id="user-content-appendix" class="anchor" href="#appendix" aria-hidden="true"></a>Appendix</h1>
+		<p data-sourcepos="2:1-2:21" dir="auto"><a href="#glossary">Glossary</a></p>
+		<h2 data-sourcepos="6:1-6:11" dir="auto">
+		<a id="user-content-glossary" class="anchor" href="#glossary" aria-hidden="true"></a>Glossary</h2>
+		<p data-sourcepos="0:0-0:0" dir="auto">List of terms used in this AD.</p>
+		<table data-sourcepos="7:1-13:108" dir="auto">
+		<thead>
+		<tr data-sourcepos="7:1-7:51">
+		<th data-sourcepos="7:33-7:38">Name</th>
+		<th data-sourcepos="7:40-7:51">Definition</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="10:1-10:119">
+		<td data-sourcepos="10:2-10:8">Build</td>
+		<td data-sourcepos="10:10-10:118">Highest level execution of a Gradle execution. A build starts and ends with the command line call of Gradle.</td>
+		</tr>
+		<tr data-sourcepos="11:1-11:132">
+		<td data-sourcepos="11:2-11:7">Task</td>
+		<td data-sourcepos="11:9-11:131">Represents a "unit of work". Contains a list of Actions. A Task keeps track of dependencies. Can be marked as <em>cacheable</em>
+		</td>
+		</tr>
+		<tr data-sourcepos="12:1-12:37">
+		<td data-sourcepos="12:2-12:9">Action</td>
+		<td data-sourcepos="12:11-12:36">A Runnable piece of code</td>
+		</tr>
+		<tr data-sourcepos="13:1-13:108">
+		<td data-sourcepos="13:2-13:11">Artifact</td>
+		<td data-sourcepos="13:13-13:107">An artifact of a software component that may be requested in the result of an artifact query.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h5 data-sourcepos="15:1-15:65" dir="auto">
+		<a id="user-content-clarifying-the-difference-between-build-action-and-a-task" class="anchor" href="#clarifying-the-difference-between-build-action-and-a-task" aria-hidden="true"></a>Clarifying the difference between Build, Action, and a Task</h5>
+		<p data-sourcepos="17:1-17:154" dir="auto">A build is composed of one or more Projects. These projects have one or more Tasks within them. Each Task is composed of a list of Actions to be executed.</p>
+		<h2 data-sourcepos="19:1-19:20" dir="auto">
+		<a id="user-content-extra-information" class="anchor" href="#extra-information" aria-hidden="true"></a>Extra Information</h2>
+		<h3 data-sourcepos="21:1-21:15" dir="auto">
+		<a id="user-content-build-cache" class="anchor" href="#build-cache" aria-hidden="true"></a>Build Cache</h3>
+		<h5 data-sourcepos="23:1-23:24" dir="auto">
+		<a id="user-content-incremental-builds" class="anchor" href="#incremental-builds" aria-hidden="true"></a>Incremental Builds</h5>
+		<p data-sourcepos="24:1-24:362" dir="auto">To improve performance Gradle executes <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks" rel="nofollow noreferrer noopener" target="_blank">incremental builds</a>. An incremental build is one which only recompiles the necessary source files. A source file which has not been modified need not be recompiled. To enable this, Gradle uses the cached output of build related Tasks.</p>
+		<h5 data-sourcepos="27:1-27:34" dir="auto">
+		<a id="user-content-cached-configuration-objects" class="anchor" href="#cached-configuration-objects" aria-hidden="true"></a>Cached Configuration Objects</h5>
+		<p data-sourcepos="29:1-29:177" dir="auto">The configuration phase is part of Gradle's <a href="Functional View.html#gradle-build-lifecycle">build lifecycle</a>.</p>
+		<p data-sourcepos="31:1-31:630" dir="auto">Much like source code for incremental builds, if the <a href="Information View.html#data-source">configuration script files</a> were not modified, their <a href="Information View.html#configuration-object-definition-model">corresponding configuration objects</a> can be fetched from previously cached executions rather than loaded from the script files. For example, if the settings.gradle file was not modified, then a serialized Settings instance can be fetched from the cache store. This improves performance.</p>
+		<h5 data-sourcepos="33:1-33:20" dir="auto">
+		<a id="user-content-cacheable-task" class="anchor" href="#cacheable-task" aria-hidden="true"></a>Cacheable Task</h5>
+		<p data-sourcepos="34:1-34:355" dir="auto">A task is cacheable if its output is both relocatable and reproducible as evidenced by the <a href="https://github.com/gradle/gradle/blob/master/subprojects/core-api/src/main/java/org/gradle/api/tasks/CacheableTask.java" rel="nofollow noreferrer noopener" target="_blank">code</a>. At run-time tasks which are labelled as <em>cacheable</em> may be skipped provided that a valid entry can be found and fetched from the cache.</p>
+		<h5 data-sourcepos="35:1-35:17" dir="auto">
+		<a id="user-content-local-cache" class="anchor" href="#local-cache" aria-hidden="true"></a>Local Cache</h5>
+		<p data-sourcepos="36:1-36:331" dir="auto">Gradle's local cache refers to the cached entites stored on a local (mounted) file system. The cached entities (files) are typically found in a <a href="https://github.com/gradle/gradle/blob/5e08aaad9dbddfda762904006127f2662af33453/subprojects/core-api/src/main/java/org/gradle/caching/local/DirectoryBuildCache.java#L24" rel="nofollow noreferrer noopener" target="_blank">local directory</a>.</p>
+		<h5 data-sourcepos="37:1-37:18" dir="auto">
+		<a id="user-content-remote-cache" class="anchor" href="#remote-cache" aria-hidden="true"></a>Remote Cache</h5>
+		<p data-sourcepos="38:1-38:458" dir="auto">Gradle enables cached entities to be accessed remotely. This allows developers to share cache, which may significantly increase performance when building large projects that involve multiple developers. One way to use remote cache would be through an <a href="https://github.com/gradle/gradle/blob/master/subprojects/build-cache-http/src/main/java/org/gradle/caching/http/HttpBuildCache.java" rel="nofollow noreferrer noopener" target="_blank">HTTP remote cache</a>, which can be configured via the Gradle build scripts.</p>
+		<h3 data-sourcepos="41:1-41:16" dir="auto">
+		<a id="user-content-script-files" class="anchor" href="#script-files" aria-hidden="true"></a>Script files</h3>
+		<h4 data-sourcepos="42:1-42:17" dir="auto">
+		<a id="user-content-buildgradle" class="anchor" href="#buildgradle" aria-hidden="true"></a>build.gradle</h4>
+		<h5 data-sourcepos="43:1-43:23" dir="auto">
+		<a id="user-content-configure-project" class="anchor" href="#configure-project" aria-hidden="true"></a>Configure Project</h5>
+		<p data-sourcepos="44:1-44:193" dir="auto">Projects can be configured under the buildscript closure in the build.gradle file. The following is an example of how an ArtifactRepository and project dependencies would be appear in the file.</p>
+		<div class="gl-relative markdown-code-block js-markdown-code">
+		<pre data-sourcepos="45:1-54:3" class="code highlight js-syntax-highlight language-plaintext white" lang="plaintext" v-pre="true" id="code-2"><code><span id="LC1" class="line" lang="plaintext">buildscript {</span>
+		<span id="LC2" class="line" lang="plaintext">    repositories {</span>
+		<span id="LC3" class="line" lang="plaintext">        maven{url("https://plugins.gradle.org/)}</span>
+		<span id="LC4" class="line" lang="plaintext">    }</span>
+		<span id="LC5" class="line" lang="plaintext">    dependencies {</span>
+		<span id="LC6" class="line" lang="plaintext">        classpath group: 'myclasspath'</span>
+		<span id="LC7" class="line" lang="plaintext">    }</span>
+		<span id="LC8" class="line" lang="plaintext">}</span></code></pre>
+		<copy-code><button type="button" class="btn btn-default btn-md gl-button btn-icon has-tooltip" data-title="Copy to clipboard" data-clipboard-target="pre#code-2"><svg><use xlink:href="/assets/icons-7f1680a3670112fe4c8ef57b9dfb93f0f61b43a2a479d7abd6c83bcb724b9201.svg#copy-to-clipboard"></use></svg></button></copy-code>
+		</div>
+		<h5 data-sourcepos="55:1-55:15" dir="auto">
+		<a id="user-content-add-tasks" class="anchor" href="#add-tasks" aria-hidden="true"></a>Add Tasks</h5>
+		<p data-sourcepos="56:1-56:213" dir="auto">Tasks may be added to the associated project via the task registry. Adding a task to a project is simple, the following code snippet shows how to add an action for a task 'mytask' in a project's build.gradle file.</p>
+		<div class="gl-relative markdown-code-block js-markdown-code">
+		<pre data-sourcepos="57:1-63:3" class="code highlight js-syntax-highlight language-plaintext white" lang="plaintext" v-pre="true" id="code-3"><code><span id="LC1" class="line" lang="plaintext">tasks.register('mytask'){</span>
+		<span id="LC2" class="line" lang="plaintext">    doFirst{</span>
+		<span id="LC3" class="line" lang="plaintext">        code</span>
+		<span id="LC4" class="line" lang="plaintext">    }</span>
+		<span id="LC5" class="line" lang="plaintext">}</span></code></pre>
+		<copy-code><button type="button" class="btn btn-default btn-md gl-button btn-icon has-tooltip" data-title="Copy to clipboard" data-clipboard-target="pre#code-3"><svg><use xlink:href="/assets/icons-7f1680a3670112fe4c8ef57b9dfb93f0f61b43a2a479d7abd6c83bcb724b9201.svg#copy-to-clipboard"></use></svg></button></copy-code>
+		</div>
+		<p data-sourcepos="64:1-64:185" dir="auto">The action would be executed at the beginning of the task's action list as per the doFirst directive. We can chain actions to create complex behavior as shown in the code snippet below.</p>
+		<div class="gl-relative markdown-code-block js-markdown-code">
+		<pre data-sourcepos="65:1-76:3" class="code highlight js-syntax-highlight language-plaintext white" lang="plaintext" v-pre="true" id="code-4"><code><span id="LC1" class="line" lang="plaintext">tasks.register('mytask'){</span>
+		<span id="LC2" class="line" lang="plaintext">    doFirst{</span>
+		<span id="LC3" class="line" lang="plaintext">        codeA</span>
+		<span id="LC4" class="line" lang="plaintext">    }</span>
+		<span id="LC5" class="line" lang="plaintext">}</span>
+		<span id="LC6" class="line" lang="plaintext">tasks.register('mytask'){</span>
+		<span id="LC7" class="line" lang="plaintext">    doFirst{</span>
+		<span id="LC8" class="line" lang="plaintext">        codeB</span>
+		<span id="LC9" class="line" lang="plaintext">    }</span>
+		<span id="LC10" class="line" lang="plaintext">}</span></code></pre>
+		<copy-code><button type="button" class="btn btn-default btn-md gl-button btn-icon has-tooltip" data-title="Copy to clipboard" data-clipboard-target="pre#code-4"><svg><use xlink:href="/assets/icons-7f1680a3670112fe4c8ef57b9dfb93f0f61b43a2a479d7abd6c83bcb724b9201.svg#copy-to-clipboard"></use></svg></button></copy-code>
+		</div>
+		<p data-sourcepos="78:1-78:97" dir="auto">The task will execution will simply be the execution of codeB followed by the execution of codeA.</p>
+		<h4 data-sourcepos="80:1-80:22" dir="auto">
+		<a id="user-content-gradleproperties" class="anchor" href="#gradleproperties" aria-hidden="true"></a>gradle.properties</h4>
+		<h5 data-sourcepos="81:1-81:41" dir="auto">
+		<a id="user-content-setting-project-specific-properties" class="anchor" href="#setting-project-specific-properties" aria-hidden="true"></a>Setting Project Specific Properties</h5>
+		<p data-sourcepos="83:1-83:45" dir="auto"><code>org.gradle.project.myproject=myproperty</code></p>
+		<h2 data-sourcepos="86:1-86:49" dir="auto">
+		<a id="user-content-architectural-style-software-design-patterns" class="anchor" href="#architectural-style-software-design-patterns" aria-hidden="true"></a>Architectural Style &amp; Software Design Patterns</h2>
+		<h3 data-sourcepos="87:1-87:35" dir="auto">
+		<a id="user-content-microkernel-architectural-style" class="anchor" href="#microkernel-architectural-style" aria-hidden="true"></a>Microkernel Architectural Style</h3>
+		<p data-sourcepos="89:1-89:321" dir="auto">The Microkernel pattern (194) [POSA1] applies to software systems that must adapt to changing system requirements. It separates a minimal functional core from extended functionality and customer-specific parts. The microkernel also serves as a socket for plugging in these extensions and coordinating their collaboration.</p>
+		<p data-sourcepos="91:1-91:530" dir="auto">Gradle's provides a core (microkernel) described in the <a href="Functional View.html">functional view</a> and <a href="Information View.html">information view</a>. The core mostly deals with how Gradle is configured and how tasks are executed. The specific tasks being executed usually stem from plug-ins which would be the "extended functionality and customer-specific parts" described in the above paragraph.</p>
+		<h3 data-sourcepos="93:1-93:26" dir="auto">
+		<a id="user-content-command-design-pattern" class="anchor" href="#command-design-pattern" aria-hidden="true"></a>Command Design Pattern</h3>
+		<p data-sourcepos="95:1-95:464" dir="auto">The command design pattern is a software design pattern. A command is an action which may be executed at a later time. On top of an action to be executed (e.g. a method call), commands additionally contain necessary information required for delayed execution, such as a method's (action) input parameters. Commands are usually executed via an invoker, which may keep track of previously executed tasks and provide extra features such as an undo/redo functionality.</p>
+		<p data-sourcepos="97:1-97:887" dir="auto">Gradle tasks are derived from the command design pattern. Tasks are simply a linked-list of actions, which would represent a composite command. They are <strong>derived</strong> and not a direct application of the command design pattern. Tasks enhances the standard pattern by associating a task with a <a href="https://github.com/gradle/gradle/blob/96a84592d30e211f334679bf5de126f1915d1080/subprojects/core-api/src/main/java/org/gradle/api/tasks/TaskState.java" rel="nofollow noreferrer noopener" target="_blank">task state</a> and a <a href="https://github.com/gradle/gradle/blob/05f603bc1d5b89ad7e92dec1c0f27f81871b61be/subprojects/core/src/main/java/org/gradle/api/internal/tasks/TaskExecutionContext.java" rel="nofollow noreferrer noopener" target="_blank">task execution context</a> (and other things). Tasks have <a href="https://github.com/gradle/gradle/blob/fd2c0a3d3b7ca52b1d2b6eb17133b33693d11b7b/subprojects/core-api/src/main/java/org/gradle/api/Task.java#L542" rel="nofollow noreferrer noopener" target="_blank">task properties</a>, which are analogous to input parameters.</p>
+		</div>
+	</body>
+</html>

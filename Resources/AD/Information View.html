@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Information View</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:18" dir="auto">
+		<a id="user-content-information-view" class="anchor" href="#information-view" aria-hidden="true"></a>Information View</h1>
+		<h2 data-sourcepos="3:1-3:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="5:1-5:246" dir="auto">As a build automation tool, Gradle strives to be both performant and flexible. Gradle's build cache is used to achieve its performance goals. Similarly, Gradle's configuration objects and script files are designed to be flexible automation tools.</p>
+		<table data-sourcepos="7:1-10:269" dir="auto">
+		<thead>
+		<tr data-sourcepos="7:1-7:21">
+		<th data-sourcepos="7:2-7:8">Content</th>
+		<th data-sourcepos="7:10-7:20">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="9:1-9:183">
+		<td data-sourcepos="9:2-9:28"><a href="#build-cache">Build Cache</a></td>
+		<td data-sourcepos="9:30-9:182">This section descibes how Gradle uses the cache to meet its performance goals, the run-time cache implementation behavior and the cache storage solution.</td>
+		</tr>
+		<tr data-sourcepos="10:1-10:269">
+		<td data-sourcepos="10:2-10:63"><a href="#configuration-object-definition-model">Configuration Object</a></td>
+		<td data-sourcepos="10:65-10:268">This section describes how Gradle meets its flexibility by using run-time configuration objects, how those objects are loaded from persistent configuration data and how those objects relate to each other.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h2 data-sourcepos="13:1-13:14" dir="auto">
+		<a id="user-content-build-cache" class="anchor" href="#build-cache" aria-hidden="true"></a>Build Cache</h2>
+		<p data-sourcepos="15:1-15:248" dir="auto">We identify Gradle's caching mechanism as a key architectural element which contributes greatly to Gradle's performance. We will describe the purpose of Gradle's cache, its usage, cached information integrity mechanisms and data retention policies.</p>
+		<p data-sourcepos="17:1-17:588" dir="auto">The inclusion of the build cache section is motivated partially by important <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Important%20Scenarios.md#scenario-3">scenario 3</a>. Gradle's <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#incremental-builds">incremental builds</a> use the build cache. Therefore, we believe that this section will convince readers that Gradle possesses the required tools to perform <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#incremental-builds">incremental builds</a>.</p>
+		<h3 data-sourcepos="20:1-20:19" dir="auto">
+		<a id="user-content-purpose-usage" class="anchor" href="#purpose-usage" aria-hidden="true"></a>Purpose &amp; Usage</h3>
+		<p data-sourcepos="22:1-22:354" dir="auto">One of Gradle's quality properties is performance. Gradle's <a href="https://docs.gradle.org/current/userguide/build_cache.html" rel="nofollow noreferrer noopener" target="_blank">build cache</a>, improves performance by storing previously computed information such that subsequent Gradle builds need not perform redundant work. Caching is an application of the <em>reuse of resources and results</em> architectural tactic.</p>
+		<p data-sourcepos="25:1-25:437" dir="auto">To improve performance, Gradle utilizes the cache by executing <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#incremental-builds">incremental builds</a> and skipping the loading phase phase for some <a href="#configuration-objects">configuation objects</a> during the <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Functional%20View.md#gradle-build-lifecycle">configuration lifecycle phase</a>.</p>
+		<h3 data-sourcepos="28:1-28:24" dir="auto">
+		<a id="user-content-cache-implementation" class="anchor" href="#cache-implementation" aria-hidden="true"></a>Cache Implementation</h3>
+		<p data-sourcepos="30:1-30:366" dir="auto">Tasks which are tagged as <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#cacheable-task">cacheable</a> will have their output stored in the cache <a href="#storage">storage</a> following a successful execution. A task which produces reproducible results (if the same input is given, then the same output is produced) can be tagged as cacheable.</p>
+		<p data-sourcepos="32:1-32:173" dir="auto">Therefore, instead of executing cacheable tasks, the cached outputs may be retrieved through a simple key-value pair lookup. The key would be the task's input (or its hash).</p>
+		<p data-sourcepos="34:1-34:422" dir="auto">When looking for cached entitites, Gradle will <a href="https://github.com/gradle/gradle/blob/f5dbf19bdf2115386000a16bc1722b220f1622f1/subprojects/build-cache/src/main/java/org/gradle/caching/internal/controller/DefaultBuildCacheController.java#L99" rel="nofollow noreferrer noopener" target="_blank">first search the local cache</a> followed by the remote cache. This maximizes performance by minimizing <a href="https://en.wikipedia.org/wiki/Overhead_(computing)" rel="nofollow noreferrer noopener" target="_blank">network transfer overhead</a></p>
+		<p data-sourcepos="36:1-36:674" dir="auto">Gradle uses a a simple <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/locks/ReadWriteLock.html" rel="nofollow noreferrer noopener" target="_blank">locking mechanism</a> as as evidenced by the <a href="https://github.com/gradle/gradle/blob/7b9ecdc1ebabb0ffd78e23b9611edddaf2638c28/subprojects/build-cache/src/main/java/org/gradle/caching/local/internal/DirectoryBuildCacheService.java#L107" rel="nofollow noreferrer noopener" target="_blank">code</a> to prevent concurrent read and write access to the cache. The integrity of the cache is maintained by <a href="https://github.com/gradle/gradle/blob/7b9ecdc1ebabb0ffd78e23b9611edddaf2638c28/subprojects/build-cache/src/main/java/org/gradle/caching/local/internal/DirectoryBuildCacheService.java#L121" rel="nofollow noreferrer noopener" target="_blank">removing corrupt cached files</a>.</p>
+		<h3 data-sourcepos="38:1-38:11" dir="auto">
+		<a id="user-content-storage" class="anchor" href="#storage" aria-hidden="true"></a>Storage</h3>
+		<p data-sourcepos="39:1-39:750" dir="auto">The caching feature allows for cache to be stored both <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#local-cache">locally</a> and <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#remote-cache">remotely</a>. However, Gradle's default caching solution is a simple local <a href="https://github.com/gradle/gradle/blob/5e08aaad9dbddfda762904006127f2662af33453/subprojects/core-api/src/main/java/org/gradle/caching/local/DirectoryBuildCache.java#L29" rel="nofollow noreferrer noopener" target="_blank">directory build cache</a>. Each cached file has a <a href="https://github.com/gradle/gradle/blob/79394f9910a9ea08d223e435c6cad14e887e58b7/subprojects/core-api/src/main/java/org/gradle/caching/BuildCacheKey.java#L23" rel="nofollow noreferrer noopener" target="_blank">build cache key</a> which may maps to a file.</p>
+		<p data-sourcepos="42:1-42:353" dir="auto">Information retention policies may be set to <a href="https://github.com/gradle/gradle/blob/5e08aaad9dbddfda762904006127f2662af33453/subprojects/core-api/src/main/java/org/gradle/caching/local/DirectoryBuildCache.java#L55" rel="nofollow noreferrer noopener" target="_blank">remove unused cached files</a> after a given period of time. These policies are used to save storage space and can be configured by the user.</p>
+		<h2 data-sourcepos="44:1-44:40" dir="auto">
+		<a id="user-content-configuration-object-definition-model" class="anchor" href="#configuration-object-definition-model" aria-hidden="true"></a>Configuration Object Definition Model</h2>
+		<p data-sourcepos="45:1-45:138" dir="auto">The configuration object definition model is used to demonstrate how Gradle can be configured through the use of user-defined files/ code.</p>
+		<p data-sourcepos="47:1-47:73" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/nxdJ92U.png" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/nxdJ92U.png" alt="Configuartion Object Definition Model" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<h3 data-sourcepos="49:1-49:25" dir="auto">
+		<a id="user-content-configuration-objects" class="anchor" href="#configuration-objects" aria-hidden="true"></a>Configuration Objects</h3>
+		<p data-sourcepos="51:1-51:428" dir="auto">Configuration objects are run-time object instances whose state determines the behavior of a given Gradle execution. The configuration object definition model demonstrates the mapping between architecturally significant run-time configuration objects and the persistent data from which they loaded. ArtifactRepository configuration objects are not included in the model due to the ambiguous nature of their defining data source.</p>
+		<p data-sourcepos="54:1-54:160" dir="auto">As mentioned in the <a href="#Build-Cache">build cache</a> section, configuration objects can be fetched from the cache rather than loaded from their defining data source.</p>
+		<p data-sourcepos="56:1-56:200" dir="auto">Configuration objects are initialized during the Gradle's configuration lifecycle phase (orthe initialization phase for Settings). Their configuartion dictates the behavior during the execution phase.</p>
+		<h3 data-sourcepos="58:1-58:15" dir="auto">
+		<a id="user-content-data-source" class="anchor" href="#data-source" aria-hidden="true"></a>Data Source</h3>
+		<h3 data-sourcepos="60:1-60:16" dir="auto">
+		<a id="user-content-buildgradle" class="anchor" href="#buildgradle" aria-hidden="true"></a>build.gradle</h3>
+		<p data-sourcepos="62:1-62:416" dir="auto">The build.gradle file has a 1-1 mapping with a project configuration object. The content of the file is written in either Groovy or Kotlin. The file is used to <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#configure-project">configure</a> and <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#add-tasks">add tasks</a> to a project configuration object.</p>
+		<h3 data-sourcepos="64:1-64:21" dir="auto">
+		<a id="user-content-gradleproperties" class="anchor" href="#gradleproperties" aria-hidden="true"></a>gradle.properties</h3>
+		<p data-sourcepos="66:1-66:428" dir="auto">The gradle properties file is a simple key value store used to configure build variables. The file may appear multiple times especially in a multi-project setup. The properties file is not required by all Gradle executions. The properties file may be used to set both general or <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#setting-project-specific-properties">project specific properties</a>.</p>
+		<h3 data-sourcepos="68:1-68:19" dir="auto">
+		<a id="user-content-settingsgradle" class="anchor" href="#settingsgradle" aria-hidden="true"></a>settings.gradle</h3>
+		<p data-sourcepos="70:1-70:353" dir="auto">A gradle execution loads a single settings.gradle file. During the initialization lifecycle phase the settings.gradle file is loaded into a Settings configurations object. The settings object contains all the necessary information to initiate the configuration lifecycle phase. This includes information such project descriptors and a project hierarchy.</p>
+		<h3 data-sourcepos="72:1-72:14" dir="auto">
+		<a id="user-content-class-file" class="anchor" href="#class-file" aria-hidden="true"></a>class file</h3>
+		<p data-sourcepos="74:1-74:593" dir="auto">A plugin is a class which implements the <a href="https://github.com/gradle/gradle/blob/b0032a8a355379e5868b22d660f8be5cf857168e/subprojects/core-api/src/main/java/org/gradle/api/Plugin.java" rel="nofollow noreferrer noopener" target="_blank">plugin interface</a>. When adding a plugin to a project, the plugin's class name is provided. For example, the <a href="https://github.com/gradle/gradle/blob/0f10e5f6bd873a7fdcc1861e6b6ffc8aafa774d1/subprojects/plugins/src/main/java/org/gradle/api/plugins/JavaBasePlugin.java#L74" rel="nofollow noreferrer noopener" target="_blank">JavaBase plugin</a> has the class name "JavaBase". Gradle will look for the class name and its corresponding file during plugin configuration.</p>
+		<h2 data-sourcepos="76:1-76:42" dir="auto">
+		<a id="user-content-configuration-object-relationship-model" class="anchor" href="#configuration-object-relationship-model" aria-hidden="true"></a>Configuration Object Relationship Model</h2>
+		<p data-sourcepos="77:1-77:245" dir="auto">To understand how configuration objects interact together and are composed to create a fully configurable Gradle Build, the configuration object relationship model demonstrates the relationship between the configuration objects introduced above.</p>
+		<p data-sourcepos="79:1-79:36" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/MQmFNrI.png" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/MQmFNrI.png" alt="" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<p data-sourcepos="81:1-81:175" dir="auto">Configuration objects interact with and are comprised of other configuration objects. For example, a project may contain many tasks, but a task can only belong to one project.</p>
+		</div>
+	</body>
+</html>

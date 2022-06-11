@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Context View</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:14" dir="auto">
+		<a id="user-content-context-view" class="anchor" href="#context-view" aria-hidden="true"></a>Context View</h1>
+		<h2 data-sourcepos="2:1-2:20" dir="auto">
+		<a id="user-content-table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"></a>Table of Contents</h2>
+		<table data-sourcepos="3:1-6:117" dir="auto">
+		<thead>
+		<tr data-sourcepos="3:1-3:11">
+		<th data-sourcepos="3:2-3:10">Section</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="5:1-5:146">
+		<td data-sourcepos="5:2-5:145">
+		<a href="#introduction">Introduction</a> <br>- <a href="#gradle-vs-scripts">Gradle vs Scripts</a> <br>- <a href="#gradle-vs-maven">Gradle vs Maven</a> <br>- <a href="#summary">Summary</a>
+		</td>
+		</tr>
+		<tr data-sourcepos="6:1-6:117">
+		<td data-sourcepos="6:2-6:116">
+		<a href="#context-model">Context Model</a> <br>- <a href="#external-entities">External Entities</a> <br>- <a href="#interactions">Interactions</a>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+		<h2 data-sourcepos="9:1-9:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="11:1-11:229" dir="auto">Gradle is a build automation tool written in Java and runs on the Java Virtual Machine. Within the context of software development, building refers to the process of converting source code into executables (and other artifacts).</p>
+		<p data-sourcepos="13:1-13:379" dir="auto">Gradle offers a set of <a href="Information View.html#data-source">configuration script files</a> which can be configured to dictate build behavior. These files may define tasks, which are executable pieces of code. They can further apply plugins which can add more tasks or modify a project's configuration at run-time.</p>
+		<p data-sourcepos="15:1-15:303" dir="auto">Plugins are a direct consequence of both Gradle's <a href="Architectural Principles.html#anchor-1">architectural principle #1</a> and its <a href="Concerns.html">flexibility concerns</a>.</p>
+		<p data-sourcepos="17:1-17:369" dir="auto">As evidenced by plugins, Gradle follows a <a href="Appendix.html#microkernel-architectural-style">microkernel architectural style</a>. On the other hand, tasks are derived from the <a href="Appendix.html#command-design-pattern">command design pattern</a>.</p>
+		<h3 data-sourcepos="19:1-19:21" dir="auto">
+		<a id="user-content-gradle-vs-scripts" class="anchor" href="#gradle-vs-scripts" aria-hidden="true"></a>Gradle vs Scripts</h3>
+		<p data-sourcepos="21:1-21:242" dir="auto">While it is possible for developers to write their own script files to build their projects, such simple scripts are often rigid and lacking in features. A change in the project's structure may require the scripts to be completely rewritten.</p>
+		<p data-sourcepos="23:1-23:198" dir="auto">Writing scripts to automate the building process of complex software is a time consuming endeavor. On the other hand, configuring Gradle to build complex software is simpler and less time consuming.</p>
+		<p data-sourcepos="25:1-25:169" dir="auto">Gradle allows developers to save time by "sharing code" via plugins. It also has the ability to download  missing dependencies, run automated tests or even custom tasks.</p>
+		<h3 data-sourcepos="27:1-27:19" dir="auto">
+		<a id="user-content-gradle-vs-maven" class="anchor" href="#gradle-vs-maven" aria-hidden="true"></a>Gradle vs Maven</h3>
+		<p data-sourcepos="29:1-29:144" dir="auto">Maven is another build automation tool and is Gradle's main competitor. Gradle is architectured to be both faster and more flexible than Maven.</p>
+		<p data-sourcepos="31:1-31:225" dir="auto">Maven uses a simple and easy to grasp language, XML, to define its build configuration. Gradle uses Java-like languages, Groovy and Kotlin, to define its build configuration. This allows Gradle to be more flexible than Maven.</p>
+		<p data-sourcepos="33:1-33:427" dir="auto">It outperforms Maven thanks to the combination of the <a href="Functional View.html#Gradle-Daemon">gradle daemon</a>, <a href="Appendix.html#incremental-builds">incremental builds</a> and the <a href="Information View.html#build-cache">build cache</a>.</p>
+		<h3 data-sourcepos="35:1-35:11" dir="auto">
+		<a id="user-content-summary" class="anchor" href="#summary" aria-hidden="true"></a>Summary</h3>
+		<p data-sourcepos="37:1-37:39" dir="auto">Gradle is a build automation tool that:</p>
+		<ul data-sourcepos="38:1-41:0" dir="auto">
+		<li data-sourcepos="38:1-38:74">Is more convenient to use than custom build scripts for complex software</li>
+		<li data-sourcepos="39:1-39:40">Is faster and more flexible than Maven</li>
+		<li data-sourcepos="40:1-41:0">Can download missing dependencies and run a multitide of custom tasks.</li>
+		</ul>
+		<h2 data-sourcepos="42:1-42:16" dir="auto">
+		<a id="user-content-context-model" class="anchor" href="#context-model" aria-hidden="true"></a>Context Model</h2>
+		<p data-sourcepos="44:1-44:49" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/JotGi0q.jpg" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/JotGi0q.jpg" alt="Context Model" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<h3 data-sourcepos="47:1-47:21" dir="auto">
+		<a id="user-content-external-entities" class="anchor" href="#external-entities" aria-hidden="true"></a>External Entities</h3>
+		<table data-sourcepos="49:1-54:267" dir="auto">
+		<thead>
+		<tr data-sourcepos="49:1-49:20">
+		<th data-sourcepos="49:2-49:7">Entity</th>
+		<th data-sourcepos="49:9-49:19">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="51:1-51:222">
+		<td data-sourcepos="51:2-51:19">Project Developers</td>
+		<td data-sourcepos="51:21-51:221">These are Gradle's typical users. They are software developers tasked with writing the software entity depicted in the model. Their main interaction with Gradle would be the execution of a build task.</td>
+		</tr>
+		<tr data-sourcepos="52:1-52:196">
+		<td data-sourcepos="52:2-52:18">Plugin Developers</td>
+		<td data-sourcepos="52:20-52:195">These are Gradle users or Gradle developers who are usually more familiar with Gradle. They extend Gradle's functionality by writing plugins and making them publicly available.</td>
+		</tr>
+		<tr data-sourcepos="53:1-53:273">
+		<td data-sourcepos="53:2-53:11">Repository</td>
+		<td data-sourcepos="53:13-53:272">Refers to (usually remote) storage which <strong>facilitates</strong> the download and upload of software packages. Examples include <a href="https://github.com/" rel="nofollow noreferrer noopener" target="_blank">GitHub</a>, <a href="https://mvnrepository.com/" rel="nofollow noreferrer noopener" target="_blank">Maven Repository</a>, and <a href="https://plugins.gradle.org/" rel="nofollow noreferrer noopener" target="_blank">Gradle Plugin Repository</a>.</td>
+		</tr>
+		<tr data-sourcepos="54:1-54:267">
+		<td data-sourcepos="54:2-54:9">Software</td>
+		<td data-sourcepos="54:11-54:266">This is the software Gradle is tasked with building. It may be comprised of a single or multiple projects. This respresents the software's source code and other artifacts relevant to the building process. The software is written by the Project Developers.</td>
+		</tr>
+		</tbody>
+		</table>
+		<h3 data-sourcepos="57:1-57:16" dir="auto">
+		<a id="user-content-interactions" class="anchor" href="#interactions" aria-hidden="true"></a>Interactions</h3>
+		<h4 data-sourcepos="58:1-58:23" dir="auto">
+		<a id="user-content-project-developers" class="anchor" href="#project-developers" aria-hidden="true"></a>Project Developers</h4>
+		<p data-sourcepos="60:1-60:162" dir="auto">Project developers mainly run build tasks. Upon execution, this task typically automatically downloads missing dependencies, compiles the code, runs tests, etc...</p>
+		<p data-sourcepos="62:1-62:404" dir="auto">For the build task to exhibit the desired build behavior project developers would have to first setup the build automation process. To do this, they would add the appropriate plugins and tasks to each project's <a href="Information View.html#data-source">build script file</a>. They would also configure Gradle's general settings and properties.</p>
+		<p data-sourcepos="64:1-64:434" dir="auto">Once the automation setup is complete, they usually make small configuration changes such as modifying the value of a property in the <a href="Information View.html#gradleproperties">gradle.properties</a> file(s) or modfiying a project's configuration. The difference between these configuration changes and the changes made during the automation setup is simply their scale.</p>
+		<h4 data-sourcepos="66:1-66:22" dir="auto">
+		<a id="user-content-plugin-developers" class="anchor" href="#plugin-developers" aria-hidden="true"></a>Plugin Developers</h4>
+		<p data-sourcepos="68:1-68:364" dir="auto">Plugin developers write Java/Kotlin/Groovy classes and make them publicly available. These plugins are used to extend Gradle's functionality. Plugin developers upload their class/plugin to a repository such as GitHub and register their plugin to <a href="https://plugins.gradle.org/" rel="nofollow noreferrer noopener" target="_blank">Gradle's plugin repository</a> which is used for indexing (e.g. plugin name -&gt; GitHub url).</p>
+		<p data-sourcepos="70:1-70:363" dir="auto">Project developers may want to apply a plugin to a project. To do this, they simply include the plugin name under the <a href="Information View.html#buildgradle">project's configuration script file</a>. Gradle defines a resolution process to download the plugin from the appropriate source (e.g. Github).</p>
+		<p data-sourcepos="72:1-72:324" dir="auto">More information on Plugins can be found in the <a href="Functional View.html#configurationexecution-element-catalog">functional view</a> and <a href="Information View.html#class-file">information view</a>.</p>
+		<h4 data-sourcepos="74:1-74:15" dir="auto">
+		<a id="user-content-repository" class="anchor" href="#repository" aria-hidden="true"></a>Repository</h4>
+		<p data-sourcepos="76:1-76:242" dir="auto">Repositories contain information relevant to the build process, this could be missing project dependencies, missing plugins or simply a url (e.g. the Gradle Plugin Repository is used to index plugin names to the urls where they can be found).</p>
+		<h4 data-sourcepos="78:1-78:13" dir="auto">
+		<a id="user-content-software" class="anchor" href="#software" aria-hidden="true"></a>Software</h4>
+		<p data-sourcepos="80:1-80:464" dir="auto">Refers to the software being developed by the Project Developers. The software may follow a single-project or multi-project structure. Gradle enables each project to be built, compiled, tested, etc... Project Developers can specify the build behavior desired for a particular software by modifying each of the software's <a href="Information View.html#buildgradle">projects configuration script files</a>.</p>
+		</div>
+	</body>
+</html>

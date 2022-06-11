@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		
+		<title>README</title>
+	</head>
+	<body>
+		<div data-qa-selector="blob_viewer_content" itemprop="about" class="blob-viewer"><div><div data-rich-type="markup" data-path="m4/README.md" class="blob-viewer">
+		<div class="file-content md">
+		<h1 dir="auto" data-sourcepos="1:1-1:8">
+		<a aria-hidden="true" href="#readme" class="anchor" id="user-content-readme"></a>README</h1>
+		<h4 dir="auto" data-sourcepos="3:1-3:27">
+		<a aria-hidden="true" href="#build-automation-tools" class="anchor" id="user-content-build-automation-tools"></a>Build Automation Tools</h4>
+		<p dir="auto" data-sourcepos="5:1-5:34">Gradle is a build automation tool.</p>
+		<p dir="auto" data-sourcepos="7:1-7:233">The building and compilation of software is fairly trivial for small projects. However, as projects grow in scale and adopt a more complex structure (e.g. multi-project structure), a build automation tool quickly becomes a necessity.</p>
+		<p dir="auto" data-sourcepos="9:1-9:307">It is possible to write scripts that automate the building process, however those scripts tend to be rigid. This rigidity is unacceptable due to the fast-paced nature of software development. The need for flexible yet performant build automation tools is the main driving force pushing Gradle's development.</p>
+		<h4 dir="auto" data-sourcepos="11:1-11:36">
+		<a aria-hidden="true" href="#architectural-description-goals" class="anchor" id="user-content-architectural-description-goals"></a>Architectural Description Goals</h4>
+		<p dir="auto" data-sourcepos="13:1-13:332">Our architectural description focuses on how Gradle achieves its functional requirements. Throughout our architectural description, we emphasize and detail architectural elements which contribute to Gradle's performance and flexibility.  Our goal is to demonstrate to the readers that Gradle can quickly build a variety of software.</p>
+		<h4 dir="auto" data-sourcepos="15:1-15:17">
+		<a aria-hidden="true" href="#gradle-goals" class="anchor" id="user-content-gradle-goals"></a>Gradle Goals</h4>
+		<p dir="auto" data-sourcepos="17:1-17:220">As a build automation tool, Gradle should have the ability to be configured by users to build their specific project. It provides a framework used for specifying build behavior for both single and multi-project software.</p>
+		<p dir="auto" data-sourcepos="19:1-19:119">To be more specific, we focus the architectural description on one of Gradle's main use cases: building Java projects.</p>
+		<h4 dir="auto" data-sourcepos="21:1-21:33">
+		<a aria-hidden="true" href="#high-level-solution-overview" class="anchor" id="user-content-high-level-solution-overview"></a>High-Level Solution Overview</h4>
+		<p dir="auto" data-sourcepos="23:1-23:387">To be flexible, Gradle makes heavy use of configuration files and run-time configuration objects which dictate the behavior of a perticular Gradle execution. These configuration files and objects are used to extend Gradle's functionality via tasks and plugins. Gradle's configuration-based approach makes use of scripting languages (Groovy and Kotlin), which introduces a learning curve.</p>
+		<p dir="auto" data-sourcepos="25:1-25:81">Gradle's speed is mostly attributed to the Gradle daemon and its caching feature.</p>
+		<h1 dir="auto" data-sourcepos="27:1-27:19">
+		<a aria-hidden="true" href="#table-of-contents" class="anchor" id="user-content-table-of-contents"></a>Table of Contents</h1>
+		<table dir="auto" data-sourcepos="29:1-40:94">
+		<thead>
+		<tr data-sourcepos="29:1-29:25">
+		<th data-sourcepos="29:2-29:10">Content</th>
+		<th data-sourcepos="29:12-29:24">Description</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr data-sourcepos="31:1-31:139">
+		<td data-sourcepos="31:2-31:32"><a href="Stakeholders.html">Stakeholders</a></td>
+		<td data-sourcepos="31:34-31:138">Describes Gradle's stakeholders alongside their interest and power with regards to Gradle's development.</td>
+		</tr>
+		<tr data-sourcepos="32:1-32:163">
+		<td data-sourcepos="32:2-32:24"><a href="Concerns.html">Concerns</a></td>
+		<td data-sourcepos="32:26-32:163">Identifies the main concerns which Gradle's architecture strives to satisfiy. Our AD should demonstrates that the concerns are satisfied.</td>
+		</tr>
+		<tr data-sourcepos="33:1-33:133">
+		<td data-sourcepos="33:2-33:58"><a href="Architectural Principles.html">Architectural Principles</a></td>
+		<td data-sourcepos="33:60-33:132">Enumerates the architectural principles which guide Gradle's development.</td>
+		</tr>
+		<tr data-sourcepos="34:1-34:236">
+		<td data-sourcepos="34:2-34:48"><a href="Views and Viewpoints.html">Views &amp; Viewpoints</a></td>
+		<td data-sourcepos="34:50-34:235">Introduces our choice of views and the viewpoints from which they are derived. Describes the scope of each view and how they fit together to provide a holistic understanding of Gradle.</td>
+		</tr>
+		<tr data-sourcepos="35:1-35:176">
+		<td data-sourcepos="35:2-35:48"><a href="Important Scenarios.html">Important Scenarios</a></td>
+		<td data-sourcepos="35:50-35:175">Details important scenarios and how Gradle should respond in those scenarios. This section is used to validate our AD's scope.</td>
+		</tr>
+		<tr data-sourcepos="36:1-36:317">
+		<td data-sourcepos="36:2-36:30"><a href="Perspective.html">Perspective</a></td>
+		<td data-sourcepos="36:32-36:316">Describes the changes brought about from applying the performance perspective on the functional and information view. Explains how our old AD failed to properly address performance related concerns. Briefly mentions concurrency and why we did not include a concurrency view in our AD.</td>
+		</tr>
+		<tr data-sourcepos="37:1-37:205">
+		<td data-sourcepos="37:2-37:56"><a href="Architectural Criticism.html">Architectural Criticism</a></td>
+		<td data-sourcepos="37:58-37:204">Gradle is a well architected system, however it is not without downfalls. We criticize Gradle's software design and architecture in this section.</td>
+		</tr>
+		<tr data-sourcepos="38:1-38:253">
+		<td data-sourcepos="38:2-38:36"><a href="Revision Plan.html">Revision Plan</a></td>
+		<td data-sourcepos="38:38-38:252">Our current AD is the product of our revision plan. This section details the criticism our colleagues had of our old AD. It further describes the actions that will be (and have been) taken to address the criticism.</td>
+		</tr>
+		<tr data-sourcepos="39:1-39:263">
+		<td data-sourcepos="39:2-39:24"><a href="Appendix.html">Appendix</a></td>
+		<td data-sourcepos="39:26-39:263">The appendix contains a variety of information and resources. Many documents in our architectural description will redirect to the appendix for more information. The appendix is not meant to and should not be read as a standalone document</td>
+		</tr>
+		</tbody>
+		</table>
+		</div>
+
+		</div>
+		</div></div>
+	</body>
+</html>

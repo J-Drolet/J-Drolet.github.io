@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Development View</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:18" dir="auto">
+		<a id="user-content-development-view" class="anchor" href="#development-view" aria-hidden="true"></a>Development View</h1>
+		<h2 data-sourcepos="2:1-2:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="3:1-3:307" dir="auto">Gradle is a large open-source project. The size and scope of the system necessitates the need for a clear way for new developers to the project to contribute to Gradle while ensuring that they can understand the code and make sure their changes will not have a butterfly effect on the rest of the code base.</p>
+		<p data-sourcepos="5:1-5:250" dir="auto">The Development view focuses on several concerns: module organization, common processing, standardization of design, standardization of testing, instumentation, and codeline organization, as well as developer, production engineer and tester concerns.</p>
+		<p data-sourcepos="7:1-7:221" dir="auto">Because of Gradle's modular design, this view is focused on the module, codeline organization and common processing concerns and how Gradle's source code is structured in order to ensure a good separation between modules.</p>
+		<p data-sourcepos="9:1-9:312" dir="auto">This view will be of particular interest to developers looking to contribute to gradle as an open-source project but also for IDE developers who need to understand its structure and functionality. Additionally, it may be helpful to developers who will use gradle to better understand how to exploit its features.</p>
+		<h2 data-sourcepos="11:1-11:25" dir="auto">
+		<a id="user-content-module-structure-model" class="anchor" href="#module-structure-model" aria-hidden="true"></a>Module Structure Model</h2>
+		<p data-sourcepos="13:1-13:58" dir="auto"><a class="no-attachment-icon" href="https://i.imgur.com/ijo5XjS.png" target="_blank" rel="nofollow noreferrer noopener"><img src="https://i.imgur.com/ijo5XjS.png" alt="Module Structure Model" class="js-lazy-loaded qa-js-lazy-loaded" loading="lazy"></a></p>
+		<p data-sourcepos="15:1-15:264" dir="auto">The modules are organized into layers that group together modules which colaborate to perform a single functionality. An incoming arrow into a layer means that the layer uses the incoming module layer. Some layers share bidirectional arrows such as build and core.</p>
+		<p data-sourcepos="17:1-17:202" dir="auto">Since Gradle is bootstapped, the modules are organized as subprojects of the gradle project. This allows for developers to easily add functionality to gradle by adding subprojects to the gradle project.</p>
+		<h3 data-sourcepos="19:1-19:26" dir="auto">
+		<a id="user-content-explaination-of-layers" class="anchor" href="#explaination-of-layers" aria-hidden="true"></a>Explaination Of Layers</h3>
+		<ul data-sourcepos="21:1-42:0" dir="auto">
+		<li data-sourcepos="21:1-23:0">
+		<p data-sourcepos="21:3-22:454"><strong>Runtime Support Layer:</strong>
+		The modules in runtime support layer can be consider as basic components to run Gradle. The modules' names start with 'base' provide some tasks and conventions that are common to most builds and add a structure to the build which will promotes consistency. The modules' names start with 'worker' will allow the running of pieces of work in the background. The other modules will provide support of java Virtual Machine, java process and the use of cache.</p>
+		</li>
+		<li data-sourcepos="24:1-26:0">
+		<p data-sourcepos="24:3-25:138"><strong>File Layer:</strong>
+		The modules in file layer will allow Gradle to interact with files like source files, file dependencies, reports and so on in an easy way.</p>
+		</li>
+		<li data-sourcepos="27:1-29:0">
+		<p data-sourcepos="27:3-28:360"><strong>Core Layer:</strong>
+		The core layer contains Gradle’s Project API. The Project API is available from build files and made up of 2 main interfaces: Project and Task. Project interface is main API we use to interact with Gradle. We can access all features of Gradle through this interface. Each task belongs to a project, the Task interface allows us to access each task instances.</p>
+		</li>
+		<li data-sourcepos="30:1-32:0">
+		<p data-sourcepos="30:3-31:412"><strong>Build Layer:</strong>
+		The modules in build layer are responsible for initializing plugins and tasks, also allowing plugins to receive information about the operations during a build. Some modules’ names contain 'build cache' which means they are responsible for a cache mechanism that aim to save time by reusing outputs produced by other builds. So, it can allow builds to fetch these outputs from cache when the inputs not change.</p>
+		</li>
+		<li data-sourcepos="33:1-35:0">
+		<p data-sourcepos="33:3-34:121"><strong>Plugins Layer:</strong>
+		The modules in plugins layer are responsible for managing plugin resolution and use, also assist with plugin development.</p>
+		</li>
+		<li data-sourcepos="36:1-38:0">
+		<p data-sourcepos="36:3-37:207"><strong>Utility Layer:</strong>
+		The modules in utility are responsible for launching Gradle, the Gradle command-line interface, doing composite-builds, the execution of command, producing report after each build, and dependency-management.</p>
+		</li>
+		<li data-sourcepos="39:1-42:0">
+		<p data-sourcepos="39:3-40:221"><strong>Test Layer:</strong>
+		The modules in test layer are responsible for testing. It contains Junit specific testing classes and support for general test suit. It also contains a library called 'test kit' that can help test plugins and build logic.</p>
+		</li>
+		</ul>
+		<h2 data-sourcepos="43:1-43:22" dir="auto">
+		<a id="user-content-common-design-model" class="anchor" href="#common-design-model" aria-hidden="true"></a>Common Design Model</h2>
+		<p data-sourcepos="45:1-45:443" dir="auto">Gradle uses several common designs including an extensive use of interfaces and a microkernal design pattern best exemplified through the integration of functionality in the form of plugins. Plugins can be built by third parties or the gradle team itself (although since gradle is open-source there is a bit of a grey line here). Additionally, most of the key parametric information for the gradle project is stored in the <em>gradle.build</em> file.</p>
+		<h3 data-sourcepos="47:1-47:30" dir="auto">
+		<a id="user-content-common-processing-required" class="anchor" href="#common-processing-required" aria-hidden="true"></a>Common Processing Required</h3>
+		<ol data-sourcepos="49:1-51:0" dir="auto">
+		<li data-sourcepos="49:1-51:0">Use of third-party libraries
+		<ul data-sourcepos="50:5-51:0">
+		<li data-sourcepos="50:5-51:0">Plugins should be declared in the build script of the project before use. Gradle will automatically resolve and apply the correct plugins.</li>
+		</ul>
+		</li>
+		</ol>
+		<h3 data-sourcepos="52:1-52:19" dir="auto">
+		<a id="user-content-standard-design" class="anchor" href="#standard-design" aria-hidden="true"></a>Standard Design</h3>
+		<ol data-sourcepos="53:1-62:0" dir="auto">
+		<li data-sourcepos="53:1-54:118">Initialization and recovery
+		<ul data-sourcepos="54:5-54:118">
+		<li data-sourcepos="54:5-54:118">The gradle project is built from the the <em>build.gradle</em> file. This file is used to build all other gradle files.</li>
+		</ul>
+		</li>
+		<li data-sourcepos="55:1-57:62">Processing configuration parameters
+		<ul data-sourcepos="56:5-57:62">
+		<li data-sourcepos="56:5-56:142">The <em>build.gradle</em> file contains the core parameters for the project, and is where core plugins can be applied, short names can be used.</li>
+		<li data-sourcepos="57:5-57:62">The build file is written using either Groovy or Kotlin.</li>
+		</ul>
+		</li>
+		<li data-sourcepos="58:1-62:0">Use of third-party libraries
+		<ul data-sourcepos="59:5-62:0">
+		<li data-sourcepos="59:5-59:100">All plugins should be declared in the build script under ‘plugins’ using Groovy or Kotlin.</li>
+		<li data-sourcepos="60:5-60:155">To apply a core plugin, short names can be used. To apply a community plugin from a portal, the fully qualified plugin id and version should be used.</li>
+		<li data-sourcepos="61:5-62:0">Plugins can be declared with detailed information in the build script of the root project and just used in subprojects only with their name.</li>
+		</ul>
+		</li>
+		</ol>
+		<h3 data-sourcepos="63:1-63:32" dir="auto">
+		<a id="user-content-standard-software-components" class="anchor" href="#standard-software-components" aria-hidden="true"></a>Standard Software Components</h3>
+		<ol data-sourcepos="64:1-68:1" dir="auto">
+		<li data-sourcepos="64:1-68:1">Internal and external interfacing
+		<ul data-sourcepos="65:5-68:1">
+		<li data-sourcepos="65:5-65:72">Gradle uses interfaces extensively to allow for easy polymorphism.</li>
+		<li data-sourcepos="66:5-68:1">Specifically, in the subproject ‘core-api’, the package ‘org.gradle.api.plugins’ interfaces are used to get name of plugin from build script, find the correct version of plugin, check its validation, add t to the container, and finally apply the plugin to project.</li>
+		</ul>
+		</li>
+		</ol>
+		<h2 data-sourcepos="69:1-69:17" dir="auto">
+		<a id="user-content-codeline-model" class="anchor" href="#codeline-model" aria-hidden="true"></a>Codeline Model</h2>
+		<p data-sourcepos="71:1-71:195" dir="auto">Gradle is a complex muiltilayered build integration tool that is rendered all the more complicated by its bootstrapped design. This model is designed to help make sense of its code and structure.</p>
+		<p data-sourcepos="73:1-73:195" dir="auto">It is worth noting however, that this model focuses on the code structure pre-compilation. For each release gradle is complied using gradle, and thus the code structure will significantly change.</p>
+		<h3 data-sourcepos="75:1-75:25" dir="auto">
+		<a id="user-content-source-code-structure" class="anchor" href="#source-code-structure" aria-hidden="true"></a>Source Code Structure</h3>
+		<ul data-sourcepos="77:1-80:1" dir="auto">
+		<li data-sourcepos="77:1-77:137">One root project directory and a subprojects directory containing all the core functionalities described in the Module Structure Model.</li>
+		<li data-sourcepos="78:1-78:58">Each subproject has its own directory under subprojects.</li>
+		<li data-sourcepos="79:1-80:1">If a given functionality is too difficult to fit into one subproject or a series of subprojects are dependent on each other, they are broken into different subprojects whose names start with the same keyword, such as <em>core</em> and <em>core-api</em>.</li>
+		</ul>
+		<h3 data-sourcepos="81:1-81:41" dir="auto">
+		<a id="user-content-build-integration-and-test-approach" class="anchor" href="#build-integration-and-test-approach" aria-hidden="true"></a>Build, Integration, and Test Approach</h3>
+		<ul data-sourcepos="83:1-86:1" dir="auto">
+		<li data-sourcepos="83:1-83:100">Gradle is bootstrapped, so as previously mentioned, new releases are complied using gradle itself.</li>
+		<li data-sourcepos="84:1-84:86">New features are integrated as new subprojects of the gradle-built "gradle project".</li>
+		<li data-sourcepos="85:1-86:1">Tests are performed using gradle tests built into gradle itself.</li>
+		</ul>
+		<h3 data-sourcepos="87:1-87:19" dir="auto">
+		<a id="user-content-release-process" class="anchor" href="#release-process" aria-hidden="true"></a>Release Process</h3>
+		<ul data-sourcepos="89:1-90:1" dir="auto">
+		<li data-sourcepos="89:1-90:1">When the new version of Gradle is successfully built and tested, the new binary releases will be compiled using gradle. Then, the binary-only and complete version will be released with updated user manual, API Javadoc, DSL Reference, and Release Notes.</li>
+		</ul>
+		<h3 data-sourcepos="91:1-91:28" dir="auto">
+		<a id="user-content-configuration-management" class="anchor" href="#configuration-management" aria-hidden="true"></a>Configuration Management</h3>
+		<ul data-sourcepos="93:1-95:115" dir="auto">
+		<li data-sourcepos="93:1-94:1">
+		<p data-sourcepos="93:3-93:369">The source code is on GitHub. When someone wishes to contribute to Gradle, a new branch needs is created with a suitable name: developer name/project. After the changes are submitted, one of the core developers will review the pull request and make a decision on it. More information can be found <a href="https://github.com/gradle/gradle/blob/master/CONTRIBUTING.md" rel="nofollow noreferrer noopener" target="_blank">here</a>.</p>
+		</li>
+		<li data-sourcepos="95:1-95:115">
+		<p data-sourcepos="95:5-95:115">Anyone who contributes to Gradle must also adhere to the <a href="https://gradle.org/conduct/" rel="nofollow noreferrer noopener" target="_blank">Gradle Code of Conduct</a>.</p>
+		</li>
+		</ul>
+		</div>
+	</body>
+</html>

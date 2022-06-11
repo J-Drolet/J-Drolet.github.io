@@ -24,12 +24,13 @@ h1 {
 }
 
 h2 {
-	color: #064663;
+	/*color: #064663;*/
+	color: #D9B08C;
 }
 
 hr {
 	height: 3px;
-    background-color: #D9B08C;
+    background-color: #FFCB9A;
 	border: none;
 }
 

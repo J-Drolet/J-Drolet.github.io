@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<link rel="stylesheet" media="all" href="Markdown Style Sheet.css" data-startupcss="loaded">
+		<title>Architectural Criticism</title>
+	</head>
+	<body>
+		<div class="file-content md">
+		<h1 data-sourcepos="1:1-1:25" dir="auto">
+		<a id="user-content-architectural-criticism" class="anchor" href="#architectural-criticism" aria-hidden="true"></a>Architectural Criticism</h1>
+		<h2 data-sourcepos="2:1-2:15" dir="auto">
+		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
+		<p data-sourcepos="4:1-4:297" dir="auto">We have identified a software design decision and an architectural decision which we believe are questionable. Despite being students currently learning about software architecture, we believe there are things that Gradle could've done better. Therefore, we humbly present the following criticism.</p>
+		<h2 data-sourcepos="6:1-6:37" dir="auto">
+		<a id="user-content-criticism-1-overuse-of-interfaces" class="anchor" href="#criticism-1-overuse-of-interfaces" aria-hidden="true"></a>Criticism 1: Overuse of interfaces</h2>
+		<h4 data-sourcepos="7:1-7:26" dir="auto">
+		<a id="user-content-architectual-decision" class="anchor" href="#architectual-decision" aria-hidden="true"></a>Architectual decision</h4>
+		<p data-sourcepos="8:1-8:461" dir="auto">Across Gradle's developers have made the design decision to use interfaces for a vast majority of interactions between software elements. This is despite the fact that some of these interfaces are implemented by only one class and conceptually, are very unlikely to have other implementing classes in the future. An common pattern we observe throughout the code would be the presence of an interface "X", with a single implementation "DefaultX" or "XInternal".</p>
+		<p data-sourcepos="10:1-10:611" dir="auto">Examples include <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/core/src/main/java/org/gradle/api/internal/plugins/PluginManagerInternal.java" rel="nofollow noreferrer noopener" target="_blank">PluginManagerInternal</a>, <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/core/src/main/java/org/gradle/api/internal/tasks/TaskContainerInternal.java" rel="nofollow noreferrer noopener" target="_blank">TaskContainerInternal</a>, and <a href="https://github.com/gradle/gradle/blob/a7ed5ebdd4bbbcb02b7323e418acc0998abc27aa/subprojects/launcher/src/main/java/org/gradle/launcher/bootstrap/CommandLineActionFactory.java" rel="nofollow noreferrer noopener" target="_blank">CommandLineActionFactory</a>.</p>
+		<h4 data-sourcepos="12:1-12:34" dir="auto">
+		<a id="user-content-argument-against-the-decision" class="anchor" href="#argument-against-the-decision" aria-hidden="true"></a>Argument against the decision</h4>
+		<p data-sourcepos="13:1-13:239" dir="auto">By polluting the source code with interfaces that serve no practical purpose, the code becomes extremely convoluted. This makes contribution to the source code by developers that are not initmately familiar with Gradle extremely difficult.</p>
+		<p data-sourcepos="15:1-15:261" dir="auto">Overusing interfaces also makes using IDE tools difficult. For example, tools that show class hierarchies or find where a class is used / instantiated (the interface is instantiated instead). Understanding such a large codebase is difficult without those tools.</p>
+		<h4 data-sourcepos="17:1-17:25" dir="auto">
+		<a id="user-content-possible-alternative" class="anchor" href="#possible-alternative" aria-hidden="true"></a>Possible alternative</h4>
+		<p data-sourcepos="18:1-18:487" dir="auto">In our opinion, a better solution would be to only use interfaces when there are multiple implementing classes or if the interface is identified as a variation point (high likely-hood of change or future implementations). In the future, in the very rare cases where a class "X" was not properly identified as a variation point and thus did not implement an interface, simply rename the class to "DefaultX" and add the interface "X". Notice how very little change to the code is required.</p>
+		<h4 data-sourcepos="20:1-20:26" dir="auto">
+		<a id="user-content-compare-pros-and-cons" class="anchor" href="#compare-pros-and-cons" aria-hidden="true"></a>Compare pros and cons</h4>
+		<p data-sourcepos="21:1-21:387" dir="auto">It can be understood that this decision was in support of achieving greater flexibility for future development. In many cases however, this decision results in producing all the negative effects of using interfaces without any of the benefits. That is to say,  more and more interfaces make the source code increasingly difficult to read and understand without any flexibility benefits.</p>
+		<p data-sourcepos="23:1-23:234" dir="auto">We acknowledge that removing interfaces might make it slightly more difficult to create new implementing classes in the future, however we do not believe this warrants the overuse of interfaces we've observed across Gradle's codebase.</p>
+		<h2 data-sourcepos="25:1-25:31" dir="auto">
+		<a id="user-content-criticism-2-file-generation" class="anchor" href="#criticism-2-file-generation" aria-hidden="true"></a>Criticism 2: File Generation</h2>
+		<h4 data-sourcepos="26:1-26:26" dir="auto">
+		<a id="user-content-architectual-decision-1" class="anchor" href="#architectual-decision-1" aria-hidden="true"></a>Architectual decision</h4>
+		<p data-sourcepos="27:1-27:695" dir="auto">Gradle enforces a strict requirement on builds to have one <a href="Information View.html#settingsgradle">settings file</a> on top of a <a href="Information View.html#buildgradle">build.gradle file</a> for each project. To use Gradle, we must first initialize the directory with "gradle init" this adds several additional files to the directory. For example, initializing the directory adds a <a href="Information View.html#gradleproperties">gradle.properties</a>, .gitattributes, .gitignore, gradlew, and gradlew.bat.</p>
+		<h4 data-sourcepos="28:1-28:34" dir="auto">
+		<a id="user-content-argument-against-the-decision-1" class="anchor" href="#argument-against-the-decision-1" aria-hidden="true"></a>Argument against the decision</h4>
+		<p data-sourcepos="29:1-29:227" dir="auto">Generating an excessive amount of files makes it difficult to justify using gradle to build simple software. Even if the software follows a single-project structure, gradle requires a build.gradle file and settings.gradle file.</p>
+		<h4 data-sourcepos="31:1-31:25" dir="auto">
+		<a id="user-content-possible-alternative-1" class="anchor" href="#possible-alternative-1" aria-hidden="true"></a>Possible alternative</h4>
+		<p data-sourcepos="32:1-32:383" dir="auto">We believe that there should be a way to initialize Gradle for simple projects (no multi-project structure) such that a single file is generated (e.g. only the settings script file). The file could contain all the information relating to the settings, properties and project build configuration. This file would be similar to Maven's <a href="https://maven.apache.org/pom.html" rel="nofollow noreferrer noopener" target="_blank">pom.xml file</a></p>
+		<h4 data-sourcepos="34:1-34:26" dir="auto">
+		<a id="user-content-compare-pros-and-cons-1" class="anchor" href="#compare-pros-and-cons-1" aria-hidden="true"></a>Compare pros and cons</h4>
+		<p data-sourcepos="35:1-35:477" dir="auto">Gradle uses the script files to achieve seperation of concerns. However, the amount of files generated is overwhelming and may scare away inexperienced developers from using Gradle as a build tool. Therefore, since inexperienced developers will not use Gradle, they will also not learn to use Gradle progressively, thus when they finally become experienced developers they will keep relying on simpler yet inefficient tools such as Maven (which they have been using all along).</p>
+		<p data-sourcepos="37:1-37:127" dir="auto">Such a file will obviously incurr development cost since new script loaders must be written and the feature must be maintained.</p>
+		</div>	
+	</body>
+</html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="This is the personal website for Jack Drolet. Check out my resume and previous projects">
+		<meta name="author" content="Jack Drolet">
+		<meta name="keywords" content="Software engineer, entry level">
+		<meta name="viewport" content="width=devide-width, initial-scale=1.0">
+		
+		<title>Testing Report</title>
+	</head>
+	<body>
+		<h1 id="group-project-team-5-">Group Project - {Team 5}</h1>
+		<h2 id="test-plan">Test Plan</h2>
+		<p>
+			<strong>Unit Test Plan:</strong>  Our unit testing approach will focus on mustering and applying white box testing coverage criteria such as function coverage, statement coverage, branch coverage, condition coverage, and line coverage. Our goal from Unit Testing is to achieve a rate of 85% test coverage for both the model classes as well as the service ones. More details can be found under the Unit Testing section.
+		</p>
+		<p>
+			<strong>Integration Test Plan:</strong> Given the structure of a spring boot application and our area of testing we opted for a bottom up testing approach running tests on the live database. This seems simplest as it avoids the need to rely on mocking and implementation of drivers is done easily within the context of JUnit tests. Testing the persistence layer will require testing of two primary elements. 
+		</p>
+		<p>
+			The mapping of entities to tables in the database would need to be verified to ensure it is done properly. This can be done automatically by the Spring framework or more specifically hibernate itself at runtime with a simple tweak of <code>application.properties</code> and as such no explicit testing is required. 
+		</p>
+		<p>
+			The functionality provided by the repository classes would be the second portion requiring testing. This part must be done manually. Using JUnit and Spring Data JPA we can test the queries provided in the repository classes without worrying about affecting the live database as the functionality provided by Spring Data JPA ensures database rollback after each test.
+		</p>
+		<p>
+			In summary, the entity mapping will be validated at runtime and from there we can run a test suite to test the queries contained in the repository classes. This should suffice to test the integration of the persistence layer.
+		</p>
+		<p>
+			<strong>API Test Plan:</strong> The role of the controller is to receive requests at the specified endpoints, unpack data sent in the requests, manipulate an underlying model in accordance with these requests and then return a view of the model to the requester. Therefore, alterations to the model, and the view returned, reflect the behaviour of the controller. Behaviour oriented testing implies that only the input and output are considered in the schematic and approaches black-box testing the less is known about the soundness of the business logic.
+		</p>
+		<p>
+			The necessary condition for confidence in your black-box is branch coverage, i.e., that all return values are probed at least once in your test suite. The sufficient condition for confidence is that the business logic (functionality of classes representing the Model) are unit and integrate tested from the bottom-up, precisely the condition achieved by our Unit and Integration testing teams. Meaning all there is left to achieve confidence in the aptitude of the controllers is to isolate the context of their invocation and verify manipulations to the model while inspecting all view returns.
+		</p>
+		<p>
+			<strong>Acceptance Test Plan:</strong> Our Acceptance testing approach focuses on a deep exploration on the common use cases for Client registration, Pet registration, and visit registration. We aim to explore all the inputs with valid input types and all inputs with all invalid input types. We also aim to explore situations in which it does not make sense to be able to execute the scenarios.
+		</p>
+		<h2 id="roles-and-responsibilities">Roles and Responsibilities</h2>
+		<h3 id="unit-testing-team">Unit Testing Team</h3>
+		<h4 id="eric-chehata-unit-testing-and-unit-testing-report-">Eric Chehata - Unit Testing and Unit Testing Report.</h4>
+		<h4 id="fadi-tawfik-unit-testing-and-unit-testing-report-">Fadi Tawfik - Unit Testing and Unit Testing Report.</h4>
+		<h3 id="integration-testing-team">Integration Testing Team</h3>
+		<h4 id="ethan-c-t-implementation-of-testing-suite-">Ethan Côté - Implementation of testing suite.</h4>
+		<h4 id="christophe-simon-architectural-mapping-of-the-application-">Christophe Simon - Architectural mapping of the application.</h4>
+		<h3 id="api-testing-team">API Testing Team</h3>
+		<h4 id="joseph-horeczy-api-testing-and-api-report-">Joseph Horeczy - API Testing and API Report.</h4>
+		<h3 id="acceptance-testing-team">Acceptance Testing Team</h3>
+		<h4 id="jack-drolet-acceptance-testing-and-acceptance-testing-report-">Jack Drolet - Acceptance Testing and Acceptance Testing Report.</h4>
+		<h3 id="non-functional-testing-team">Non-Functional Testing Team</h3>
+		<h4 id="gregory-pope-performance-testing-and-performance-report-">Gregory Pope - Performance Testing and Performance Report.</h4>
+		<h2 id="unit-testing">Unit Testing</h2>
+		<h3 id="plan">Plan</h3>
+		<p>
+			Our goal from Unit Testing is to achieve a rate of at least 80% line coverage and at least 60% branch coverage for both the model classes as well as the service ones. To ensure we at least meet these coverage rates, we will follow and execute the following plan.
+		</p>
+		<p>
+			<strong>Function coverage:</strong> We will first address the functions present in the service and model classes. While our intention is to test every function, we will not be doing so directly as it would be redundant to create tests just for functions like setters and getters. Alternatively, we plan on testing them through more sophisticated function calls, allowing us to potentially expose more bugs and achieve a high coverage test rate.
+		</p>
+		<p>
+			<strong>Statement coverage:</strong> This type of coverage is equivalent to covering all nodes in the control flow graph so our goal is to test all statements in the model classes and the service ones. 
+			Branch coverage: For branch coverage, every decision branch is executed. There will be emphasis on ensuring that for if-statements all conditions are tested along with boolean combinations. We will exercise all conditions that govern control flow of the program at least once with true and once with false values. 
+		</p>
+		<p>
+			<strong>Condition coverage:</strong> Each condition constituent will be evaluated to true at least once and to false at least once.  
+		</p>
+		<p>
+			<strong>Line coverage:</strong> Another approach is to test the most amount of lines possible from the model and service classes.
+		</p>
+		<h3 id="technique">Technique</h3>
+		<p>
+			Our testing technique is to create and match with each file that we test from the model and service classes a new testing class file under the respective path. We will select tests based on a test’s ability to cover the most functions with the highest level of sophistication possible. In other words, we will not just create tests for getters and setters but rather design tests that stimulate a higher level of operation. Given the nature of the system at hand, being of low sophistication, we will refrain from utilizing any stubs or drivers.
+		</p>
+		<h3 id="design">Design</h3>
+		<p>
+			We implemented and executed our tests using JUnit and JaCoCo for code coverage. There is no need for test input data files as we will declare the input data in each test file to make it tailored for our designed tests.
+		</p>
+		<h3 id="report">Report</h3>
+		<p><strong>List of Test Cases</strong></p>
+		<hr>
+		<p><strong>Model Classes Tests</strong></p>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/BaseEntityTests.java">BaseEntityTests.java</a></p>
+		<p><code>BaseEntityTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a setup() function to initialize a new Base Entity() and setting its ID value.</p>
+		<ol>
+		<li><p><code>getIDTest()</code>: retrieves the ID value associated with it and ensures it is the same value used in setup()</p>
+		</li>
+		<li><p><code>isNewTest()</code>: ensures there is an ID value</p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/NamedEntityTests.java">NamedEntityTests.java</a></p>
+		<p><code>NamedEntityTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a setup() function to initialize a new Named Entity() and setting both its Name and ID values.</p>
+		<ol>
+		<li><p><code>getNameTest()</code>: retrieves the name value associated with it and ensures it is the same value used in setup()</p>
+		</li>
+		<li><p><code>getIDTest()</code>: retrieves the ID value associated with it and ensures it is the same value used in setup()</p>
+		</li>
+		<li><p><code>isNewTest()</code>: ensures there is an ID value</p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/OwnerTests.java">OwnerTests.java</a></p>
+		<p><code>OwnerTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a setup() function to initialize a new pet() and owner(). For the pet and owner created, all of their values are set. The pet is given a name, an ID, an owner, a birthdate. A list of pets is instantiated as a hash set with the aforementioned pet added to it. The owner is given an ID, a first name, a last name, an address, a city, a telephone and a hash set containing all the owner’s pets.</p>
+		<ol>
+		<li><p><code>getPetsTest()</code>: retrieves the owner’s list of pets to test whether there is indeed an associated pet with the owner. The attributes of the pet are then tested and compared to those used in <code>setup()</code>.</p>
+		</li>
+		<li><p><code>addPetTest()</code>: attempts to add another pet to the owner’s list of pets then checks if this pet addition is reflected in the owner’s attributes.</p>
+		</li>
+		<li><p><code>addPetToNewOwnerTest()</code>: creates a new owner and sets all of its respective attributes then gives it a pet. The tests then check to compare if the pet’s owner’s attributes match those used in the beginning of the test. This test leads to the detection of Bug 1 explained in detail below. Note that this test has been disabled with an <code>@Disabled</code> annotation, to allow JaCoCo to successfully generate the code coverage report.</p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/PersonTests.java">PersonTests.java</a></p>
+		<p><code>PersonTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a <code>setup()</code> function to initialize a new person() and set its first and last name.</p>
+		<p><code>getPersonTest()</code>: retrieves the person’s first and last name and tests to make sure they are the ones used.</p>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/PetTests.java">PetTests.java</a></p>
+		<p><code>PetTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a <code>setup()</code> function to initialize a new pet(), owner() and visit(). For the pet, it is given an ID, a name, an owner, a birthdate and a type. The owner is given a first name, last name, ID, address, city, telephone and a list of pets. The visit is given an ID, a date and a description.</p>
+		<ol>
+		<li><p><code>getOwnerTest()</code>: retrieves the pet&#39;s owner and tests all its respective attributes by comparing them to the ones set in <code>setup()</code>.</p>
+		</li>
+		<li><p><code>getTypeTest()</code>: retrieves the pet’s type and tests if it matches the actual type.</p>
+		</li>
+		<li><p><code>getVisitTest()</code>: retrieves the visit associated with the pet and checks all its attributes</p>
+		</li>
+		<li><p><code>addPetTest()</code>: creates a new visit and adds its to the pet then checks if all respective attributes were updated.</p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/VetTests.java">VetTests.java</a></p>
+		<p><code>VetTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a <code>setup()</code> function to initialize a new vet() and specialty(). For the pet, it is given an ID, a name, an owner, a birthdate and a type. The specialty is given an ID, a name and a list of specialties containing this specialty is created using a hashset.</p>
+		<ol>
+		<li><p><code>getSpecialtiesTest()</code>: retrieves the vet’s specialties and tests all its associated attributes.</p>
+		</li>
+		<li><p><code>addSpecialtyTest()</code>: creates a new specialty and attempts to add it to a vet then checks if it was successfully added.</p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/model/VisitTests.java">VisitTests.java</a></p>
+		<p><code>VisitTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a <code>setup()</code> function to initialize a new visit(). The visit is given a date, ID and description. It is also associated with a pet ID.</p>
+		<ol>
+		<li><code>getVisitTest()</code>: retrieves the visit’s attributes and validates them.</li>
+		</ol>
+		<hr>
+		<p><strong>Service Classes Tests</strong></p>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/service/PetValidatorTests.java">PetValidatorTests.java</a></p>
+		<p><code>PetValidatorTests.java</code></p>
+		<p><code>@BeforeEach</code> includes a <code>setup()</code> function to initialize a new pet(), owner() and visit(). For the pet, it is given an ID, a name, an owner, a birthdate and a type.</p>
+		<ol>
+		<li><p><code>validateTest()</code>: validates error count.</p>
+		</li>
+		<li><p><code>rejectNameTest()</code>: validates error count and field error count.</p>
+		</li>
+		<li><p><code>validateTypePetIsNewTest()</code>: validates error count and field error count.</p>
+		</li>
+		<li><p><code>rejectTypeTest()</code>: validates error count and field error count.</p>
+		</li>
+		<li><p><code>rejectBirthDateTest()</code>: validates error count and field error count.</p>
+		</li>
+		<li><p><code>supportTest()</code>: ensures that pet.Validator does not support inputs.</p>
+		</li>
+		</ol>
+		<h3 id="bugs-found-">Bugs found:</h3>
+		<p><strong>Bug 1:</strong> Adding an existing pet to a new owner. </p>
+		<p><strong>Explanation</strong></p>
+		<ul>
+		<li>The bug was discovered in <code>addPetToNewOwnerTest()</code>.</li>
+		<li>When an existing pet is added to a new owner, the pet&#39;s owner is changed to the new owner, which is expected. However, the pet is not added to the new owner&#39;s pets list and remains in the pets list of its previous owner.</li>
+		</ul>
+		<p><strong>Pre-conditions</strong></p>
+		<ul>
+		<li>A pet is created and assigned to an owner.</li>
+		</ul>
+		<p><strong>Steps to reproduce</strong></p>
+		<ul>
+		<li>Create a new owner.</li>
+		<li>Add the previously created pet to the new owner, using the <code>addPet()</code> method of the Owner class.</li>
+		</ul>
+		<p><strong>Frequency</strong></p>
+		<ul>
+		<li>Occurs for any existing (not new) pet.</li>
+		</ul>
+		<p><strong>Productivity impact</strong></p>
+		<ul>
+		<li>High as it prevents from updating the owners pets list. This may lead to some data inaccuracies.</li>
+		</ul>
+		<h3 id="code-coverage-">Code coverage:</h3>
+		<ul>
+		<li>For the model layer, we were able to meet our expectations and we achieved 85% line coverage and 60% branch coverage as seen below. 
+		<img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/Screenshots/Model%20layer%20code%20coverage.png" alt=""></li>
+		<li>For the service layer, we were also able to meet our expectations, achieved 100% line coverage and 100% branch coverage as seen below. 
+		<img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/Screenshots/Service%20layer%20code%20coverage.png" alt=""></li>
+		</ul>
+		<h2 id="integration-testing">Integration Testing</h2>
+		<h3 id="plan">Plan</h3>
+		<p>Given the structure of a spring boot application and our area of testing we opted for a bottom up testing approach running tests on the live database. This seems simplest as it avoids the need to rely on mocking and implementation of drivers is done easily within the context of JUnit tests. Testing the persistence layer will require testing of two primary elements. </p>
+		<p>The mapping of entities to tables in the database would need to be verified to ensure it is done properly. This can be done automatically by the Spring framework or more specifically hibernate itself at runtime with a simple tweak of <code>application.properties</code> and as such no explicit testing is required. </p>
+		<p>The functionality provided by the repository classes would be the second portion requiring testing. This part must be done manually. Using JUnit and Spring Data JPA we can test the queries provided in the repository classes without worrying about affecting the live database as the functionality provided by Spring Data JPA ensures database rollback after each test.</p>
+		<p>In summary, the entity mapping will be validated at runtime and from there we can run a test suite to test the queries contained in the repository classes. This should suffice to test the integration of the persistence layer.</p>
+		<h3 id="report">Report</h3>
+		<p>The following is a high level block diagram showing dependencies across the application: 
+		<img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Integration%20Testing%20Docs/Complex.png" alt=""> </p>
+		<p>As the above graph can be overwhelming and contains a lot of irrelevant information when it comes to the integration testing of the persistence layer a reduced version containing only the relevant dependencies is what we used for the testing:
+		<img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Integration%20Testing%20Docs/Simple.png" alt=""></p>
+		<p>The functionality testing of the Model classes in yellow was done as part of the unit testing. Their mapping to database tables was tested as described above. The green classes are the ones that were manually tested and it is here that their test cases are documented. </p>
+		<p><strong>Entity Mapping Tests</strong></p>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/main/resources/application.properties">application.properties</a></p>
+		<p><code>spring.jpa.hibernate.ddl-auto</code> was simply set to <code>validate</code> in <code>application.properties</code>.</p>
+		<p><strong>Repository Class Tests</strong></p>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/OwnerRepositoryTests.java">OwnerRepositoryTests.java</a></p>
+		<p><code>OwnerRepositoryTests.java</code></p>
+		<ol>
+		<li><p><code>setup()</code> Creates a standard Owner to be used before each test. </p>
+		</li>
+		<li><p><code>testFindByLastName()</code>: Tests when multiple Owners in the database have the same last name.</p>
+		</li>
+		<li><p><code>testFindById()</code>: Tests that a certain Owner can be retrieved by Id. </p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/VetRepositoryTests.java">VetRepositoryTests.java</a></p>
+		<p><code>VetRepositoryTests.java</code></p>
+		<ol>
+		<li><code>testFindAll()</code>: Tests that all Vets in the database are retrieved.</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/VisitRepositoryTests.java">VisitRepositoryTests.java</a></p>
+		<p><code>VisitRepositoryTests.java</code></p>
+		<ol>
+		<li><p><code>setup()</code> Creates a standard Owner, Visit, Pet and PetType before each test to be used. Persists the Owner, Pet and PetType as well. </p>
+		</li>
+		<li><p><code>testFindByPetId()</code>: Tests that all visits for certain Pet can be found.</p>
+		</li>
+		<li><p><code>testSaveInsert()</code>: Tests that save() will insert a visit that was not in the database. </p>
+		</li>
+		<li><p><code>testSaveUpdate()</code>: Tests that save() will update a visit that was in the database. </p>
+		</li>
+		</ol>
+		<p>File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/PetRepositoryTests.java">PetRepositoryTests.java</a></p>
+		<p><code>PetRepositoryTests.java</code></p>
+		<ol>
+		<li><p><code>setup()</code> Creates a standard Owner, PetType and Pet before each test for testing. Persists the Owner and PetType as well. </p>
+		</li>
+		<li><p><code>testFindPetTypes()</code>: Tests that all PetTypes of persisted Pets can be found.</p>
+		</li>
+		<li><p><code>testFindById()</code>: Tests that a certain Pet can be retrieved by Id. </p>
+		</li>
+		<li><p><code>testSaveInsert()</code>: Tests that save() will insert a Pet that was not in the database. </p>
+		</li>
+		<li><p><code>testSaveUpdate()</code>: Tests that save() will update a Pet that was in the database. </p>
+		</li>
+		</ol>
+		<p><strong>Coverage</strong></p>
+		<p>After the integration and unit tests are executed we obtain a line coverage of 100% among the repository classes:
+		<img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Integration%20Testing%20Docs/Capture.PNG" alt=""> </p>
+		<p>Unfortunately this is using the native coverage tools found in the IntelliJ IDE as we were unable to generate a Jacoco report including the functional testing. The tests are run by Maven but the coverage data does not seem to appear in the report. </p>
+		<p>Still, a total line coverage of 100% in the repository classes is indicative that a base level of functionality can be ensured. </p>
+		<h2 id="api-testing">API Testing</h2>
+		<h3 id="-plan-"><strong>Plan</strong></h3>
+		<p>The role of the controller is to receive requests at the specified endpoints, unpack data sent in the requests, manipulate an underlying model in accordance with these requests and then return a view of the model to the requester. Therefore, alterations to the model, and the view returned, reflect the behaviour of the controller. Behaviour oriented testing implies that only the input and output are considered in the schematic and approaches black-box testing the less is known about the soundness of the business logic. The necessary condition for confidence in your black-box is branch coverage, i.e., that all return values are probed at least once in your test suite.</p>
+		<p>The sufficient condition for confidence is that the business logic (functionality of classes representing the Model) are unit and integrate tested from the bottom-up, precisely the condition achieved by our Unit and Integration testing teams. Meaning all there is left to achieve confidence in the aptitude of the controllers is to isolate the context of their invocation and verify manipulations to the model while inspecting all view returns.</p>
+		<p>=&gt; <strong>Coverage-Goal: 100% Branch Coverage</strong></p>
+		<h3 id="-report-"><strong>Report</strong></h3>
+		<h3 id="mocking-technology">Mocking Technology</h3>
+		<p>In order to &quot;isolate the context of the invocation&quot; of the controller methods, as well as performing the necessary behavioural verifications, the following general mapping from controller classes to their test classes was performed:</p>
+		<ul>
+		<li>the class was tagged with &#39;@WebMvcTest(-class object of the derived class-)&#39;</li>
+		<li>each of the controller fields was mocked via the tag &#39;@MockBean&#39; with any requisite functionality established using BDDMockito.given</li>
+		<li>an instance of <em>MockMvc</em> was &#39;@Autowired&#39; into the class</li>
+		<li>upon each method &#39;@Test&#39; methods were produced to cover all paths through the method.</li>
+		</ul>
+		<p>These &#39;@Test&#39; methods were produced with &#39;@DisplayName&#39;s that describe the goal of the test case in the following format:</p>
+		<p>GET: [url] = Model-&gt;[Model Updates if present] View-&gt;[path to resource returned]</p>
+		<p>{Valid|Invalid}-POST: [url] = Model-&gt;[Model updates if present] View-&gt;[path to resource returned]</p>
+		<p>In this way we communicate which endpoint is being exercised, and what behaviour we expect to see from it in terms of the model and view. The actual implementation of these goals employs <em>MockHttpServletRequestBuilder</em>s and <em>ResultMatcher</em>s, where the pattern <em>MockMvc.perform(MockHttpServletRequestBuilder)[.andExpect(ResultMatcher)]</em> mocks a request over the endpoint under examination and the expected behaviour is affirmed.</p>
+		<p>Model behaviour falls into three categories:</p>
+		<ol>
+		<li>An attribute of the model is staged by adding a default instance (an object whose sequence diagram is just a call to the default constructor) to the model, in which case we verify that the model attribute exists post-api call.</li>
+		</ol>
+		<p>In this case the <em>ResultMatcher</em> is <em>model().attributeExists(-String name of staged attribute-)</em></p>
+		<ol>
+		<li>An object with non-default fields is submitted as an attribute to the model, in which case we verify that the model has an attribute pointing to that self-same object post-api call.</li>
+		</ol>
+		<p>In this case the <em>ResultMatcher</em> is <em>model().attribute(-String name of attribute-, -the attribute object itself-)</em></p>
+		<ol>
+		<li>There is no alteration to the model, in which case we do no checks on the model and omit this field in the display.</li>
+		</ol>
+		<p>View behaviour is either one of</p>
+		<ul>
+		<li>Path to HTML =&gt; <em>ResultMatcher</em> is <em>status().isOk()</em> and <em>view().name(-string of path-)</em></li>
+		<li>Redirected URL =&gt; <em>ResultMatcher</em> is <em>status().isFound()</em> and <em>redirectedUrl(-String of url-)</em></li>
+		</ul>
+		<p>NOTE: that POSTs when compared to GETs have an additional field specifying whether the object passed to the controller is a valid or invalid object (as these will result in different model/view behaviour) the object being passed is specified in parameter form by attaching pattern [<em>.param(-String of field name-,-String of field value-)</em>] to <em>MockHttpServletRequestBuilder</em>; no GETs required submission of parameters to establish branch coverage. For the sake of concision, methods that submit params to the controller as above will be documented below with the params in the method argument&#39;s position, this representation is technically untrue, as none of the test methods take arguments.</p>
+		<p>NOTE: Path variables are documented in the URL as one would submit them on the URL in Postman.</p>
+		<h3 id="test-cases">Test Cases</h3>
+		<p>Note: Cases are considered non-trivial and are elucidated beyond an instance of the goal-pattern if they contain calls to <em>given()</em> in their method body.</p>
+		<p><a href="src/test/java/org/springframework/samples/petclinic/controller/VetControllerTest.java">VetControllerTest.java</a></p>
+		<p>Already achieved branch coverage as-provided; was left untouched.</p>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/98cf66eeef1f729c3c92e42a7764908ae8efbce0/APIDocs/VetControllerBranchCoverage.png" alt=""></p>
+		<p><a href="src/test/java/org/springframework/samples/petclinic/controller/WelcomeControllerTest.java">WelcomeControllerTest.java</a></p>
+		<ul>
+		<li><code>testWelcome()</code> =&gt; GET: / = View-&gt;welcome</li>
+		</ul>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/98cf66eeef1f729c3c92e42a7764908ae8efbce0/APIDocs/WelcomeControllerBranchCoverage.png" alt=""></p>
+		<p><a href="src/test/java/org/springframework/samples/petclinic/controller/VisitControllerTest.java">VisitControllerTest.java</a></p>
+		<ul>
+		<li><code>initNewVisitFormTest()</code> =&gt; GET: /owners/*/pets/:petid=123/visits/new = Model-&gt;pet View-&gt;pets/createOrUpdateVisitForm</li>
+		<li><code>processNewVisitFormInvalidTest()</code> =&gt; Invalid-POST: /owners/:ownerId=123/pets/:petId=123/visits/new WITH = View-&gt;pets/createOrUpdateVisitForm</li>
+		<li><code>processNewVisitFormValidTest(&quot;description: was kinda fun&quot;)</code> =&gt; Valid-POST: /owners/:ownerId=123/pets/:petId=123/visits/new = View-&gt;redirect:/owners/123.</li>
+		</ul>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/98cf66eeef1f729c3c92e42a7764908ae8efbce0/APIDocs/VisitControllerBranchCoverage.png" alt=""></p>
+		<p><a href="src/test/java/org/springframework/samples/petclinic/controller/PetControllerTest.java">PetControllerTest.java</a></p>
+		<p>This is the only class with a &#39;@BeforeEach&#39; annotated method, <em>setup2()</em> gives the behaviour that a call to <em>OwnerRepository.findById(123)</em> will return an <em>Owner</em> with id 123 and that <em>PetRepository.findPetTypes()</em> will return a size 1 list of <em>Pet</em>s containing the type &quot;hamster&quot;. These pseudo-populate the databases so long as they are accessed in the <em>given()</em> way (which occurs explicitly or implicitly throughout <em>PetController</em>).</p>
+		<ul>
+		<li><code>initCreationFormTest()</code> =&gt; GET: /owners/:ownerId=123/pets/new = Model-&gt;pet View-&gt;pets/createOrUpdatePetForm</li>
+		<li><code>initUpdateFormTest()</code> =&gt; GET: /owners/:ownerId=123/pets/:petId=123/edit = Model-&gt;pet View-&gt;pets/createOrUpdatePetForm</li>
+		</ul>
+		<p>In <code>initUpdateForm()</code> from <code>PetController</code> a pet is retrieved from the <em>PetRepository</em> using the petId path variable, this functionality was mocked with a <em>given()</em>. What ends up happening is we verify the Model has an attribute &quot;pet&quot; with the retrieved <em>Pet</em> as the value.</p>
+		<ul>
+		<li><code>processCreationFormInvalidTest()</code> =&gt; Invalid-POST: /owners/:ownerId=123/pets/new = View-&gt;pets/createOrUpdatePetForm</li>
+		<li><code>processCreationFormValidTest(&quot;name: Garfield&quot;, &quot;birthDate: 2020-01-01&quot;, &quot;type: hamster&quot;)</code> =&gt; Valid-POST: /owners/:ownerId=123/pets/new = View-&gt;redirected:/owners/123</li>
+		<li><code>processUpdateFormInvalidTest()</code> =&gt; Invalid-POST: /owners/:ownerId=123/pets/:petId=123 = Model-&gt;pet View-&gt;pets/createOrUpdatePetForm</li>
+		<li><code>processUpdateFormValidTest(&quot;name: Garfield&quot;, &quot;birthDate: 2020-01-01&quot;, &quot;type: hamster&quot;)</code> =&gt; Valid-POST: /owners/:ownerId=123/pets/:petId=123 = View-&gt;redirected:/owners/123</li>
+		</ul>
+		<p>NOTE: The encoding for an &#39;@Valid&#39; <em>PetType</em> proved incredibly difficult, we relieved ourselves of the need to manually produce such an encoding by adding an extra annotation argument to the class level annotation &#39;@WebMvcTest&#39; found online.</p>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/98cf66eeef1f729c3c92e42a7764908ae8efbce0/APIDocs/PetControllerBranchCoverage.png" alt=""></p>
+		<p><a href="src/test/java/org/springframework/samples/petclinic/controller/OwnerControllerTest.java">OwnerControllerTest.java</a></p>
+		<ul>
+		<li><code>initFindFormTest()</code> =&gt; GET: /owners/find = Model-&gt;owner View-&gt;owners/findOwners</li>
+		<li><code>initCreationFormTest()</code> =&gt; GET: /owners/new = Model-&gt;owner View-&gt;owners/createOrUpdateOwnerForm</li>
+		<li><code>initUpdateOwnerFormTest()</code> =&gt; GET: /owners/:ownerId=123/edit = Model-&gt;owner View-&gt;owners/createOrUpdateOwnerForm</li>
+		</ul>
+		<p><code>initUpdateOwnerForm()</code> from <code>OwnerController</code> requires the retrieval of an <em>Owner</em> from <em>OwnerRepository</em> using the path variable ownerId and then the addition of this <em>Owner</em> to the attribute &quot;owner&quot; of the model, <em>given()</em> solution to mock the behaviour was in owner:pet analogy to the mocked solution in <code>initUpdateFormTest()</code> of <code>PetControllerTest</code>.</p>
+		<ul>
+		<li>The following suite of tests establish branch coverage for <code>processFindForm()</code> in <code>OwnerController</code>:</li>
+		<li><code>processFindFormWithNoOwnersTest()</code> =&gt; GET: /owners = View-&gt;owners/findOwners</li>
+		<li><code>processFindFormWithOneOwnerTest()</code> =&gt; GET: /owners = View-&gt;redirect:/owners/123</li>
+		<li><code>processFindFormWithMultipleOwnersTest()</code> =&gt; GET: /owners = Model-&gt;selections View-&gt;owners/ownersList</li>
+		</ul>
+		<p>They vary only in their <em>given()</em> call, which establishes a list of <em>Owner</em>s that a call to <em>OwnerRepository.findByLastName()</em> ought to return. In the first case it is an empty list, the second a list of size 1, and in the third a list of multiple <em>Owner</em>s (2).</p>
+		<ul>
+		<li><code>showOwnerTest()</code> =&gt; GET: /owners/:ownerId=123 = Model-&gt;owner View-&gt;owners/ownerDetails</li>
+		</ul>
+		<p><code>showOwner</code> from <code>OwnerController</code> requires an <em>Owner</em> of some <em>Set&lt;&gt;</em> of <em>Pet</em>s be present in the <em>OwnerRepository</em>, the <em>given()</em> here returns such an <em>Owner</em>.</p>
+		<ul>
+		<li><code>processCreationFormInvalidTest()</code> =&gt; Invalid-POST: /owners/new = Model-&gt;owner View-&gt;owners/createOrUpdateOwnerForm</li>
+		<li><code>processUpdateOwnerFormInvalidTest()</code> =&gt; Invalid-POST: /owners/:ownerId=123/edit = Model-&gt;owner View-&gt;owners/createOrUpdateOwnerForm</li>
+		<li><code>processCreationFormValidTest(&quot;address: 221B Baker Street&quot;, &quot;city: London&quot;, &quot;telephone: 0123456789&quot;, &quot;firstName: Sherlock&quot;, &quot;lastName: Holmes&quot;)</code> =&gt; Valid-POST: /owners/new = View-&gt;redirect:/owners/null</li>
+		<li><code>processUpdateOwnerFormValidTest(&quot;address: 221B Baker Street&quot;, &quot;city: London&quot;, &quot;telephone: 0123456789&quot;, &quot;firstName: Sherlock&quot;, &quot;lastName: Holmes&quot;)</code> =&gt; Valid-POST: /owners/:ownerId=123/edit = View-&gt;redirect:/owners/123</li>
+		</ul>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/98cf66eeef1f729c3c92e42a7764908ae8efbce0/APIDocs/CrashControllerBranchCoverage.png" alt=""></p>
+		<p><a href="src/test/java/org/springframework/samples/petclinic/controller/OwnerControllerTest.java"><code>CrashControllerTest.java</code></a></p>
+		<ul>
+		<li><code>testThrowExcetption()</code> =&gt; Checks that the exception is thrown and that the message is as written.</li>
+		</ul>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/98cf66eeef1f729c3c92e42a7764908ae8efbce0/APIDocs/CrashControllerBranchCoverage.png" alt=""></p>
+		<h3 id="coverage-achieved">Coverage Achieved</h3>
+		<p>The goal of full branch coverage was accomplished, excepting one branch in PetController. This branch concerns the case of invalidating a submission to create a new pet if that pet already exists. As following this path simply means reproducing the Invalid-POST submission behaviour via a different business logic (which is unit tested), it was considered redundant probing of endpoint behaviour and omitted.</p>
+		<h3 id="failures">Failures</h3>
+		<p>There were no test failures.</p>
+		<h2 id="acceptance-testing">Acceptance Testing</h2>
+		<h3 id="plan">Plan</h3>
+		<p>Since the project did not come with a high level requirements document, acceptance requirements were generated by thinking of user stories of relevant stakeholders. Since this application is mainly going to be interfaced by a receptionist, the stories focus on scenarios of high importance to the receptionist. The use cases examined are captured in the following user stories:</p>
+		<ul>
+		<li>User story: As a Receptionist at a pet clinic I want to be able to register new owners when so that their information is kept track of in the PetClinic database.<ul>
+		<li>Acceptance Criteria<ul>
+		<li>The system should tell me if any information entered is incorrect</li>
+		<li>The system should tell me if the client is already registered in the system</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li>User story:  As a Receptionist at a pet clinic I want to easily create visits for a specific pet so that all visits are easily kept track of.<ul>
+		<li>Acceptance Criteria<ul>
+		<li>The system should should inform me if the date inputted is incorrect</li>
+		<li>The system should not allow me to create appointments in the past</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li>User Story: As a receptionist at a pet clinic, I want to be able to create new pets in the database so that pet information is easily stored and recalled.<ul>
+		<li>Acceptance Criteria<ul>
+		<li>The system should should inform me if the date inputted is incorrect</li>
+		<li>The system should not allow me to create pets that have not been born yet</li>
+		<li>The system should not allow for the creation of duplicate pets</li>
+		<li>The system should restrict the types of pets that can be added</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		<p>These use cases cover the main modules of the pet clinic application: Clients, pets and visits. The vets section of the application has not been explored extensively since it is clear that vets is not a core part of the application other than providing an informative list.</p>
+		<h3 id="report">Report</h3>
+		<p>The acceptance tests were written in Gherkin language and run within the cucumber framework. Each user story was designated its own .feature file.
+		Feature 1: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/resources/RegisterClients.feature">Client Registration</a>
+		Feature 2: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/resources/RegisterPets.feature">Pet Registration</a>
+		Feature 3: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/resources/ScheduleAppointments.feature">Schedule Appointments</a></p>
+		<p>Since the number of step definitions were of a manageable scale, all the step definitions are found in <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/acceptance/stepdefs/StepDefinitions.java">one file</a></p>
+		<p>All the tests are run by JUnit in the <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/acceptance/CucumberTest.java">CucumberTests class</a></p>
+		<h4 id="feature-1-client-registration">Feature 1: Client Registration</h4>
+		<h5 id="scenario-1-add-a-new-client">Scenario 1: Add a new client</h5>
+		<p>This is the main success scenario in which a client is being added to the system for the first time </p>
+		<ul>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe&quot; has not been added to the database yet [<em>mapped to</em>: <code>clientIsNotInDatabase(String firstName, String lastName)</code>]</li>
+		<li><strong>When</strong> User enters and sends information for &quot;John&quot; &quot;Doe&quot; <em>mapped to</em>: <code>addClientToDatabase(String firstName, String lastName)</code>]</li>
+		<li><strong>Then</strong> Client &quot;John&quot; &quot;Doe&quot; is in the database [<em>mapped to</em>: <code>clientHasBeenAddedToTheDatabase(String firstName, String lastName)</code>]</li>
+		</ul>
+		<p>This scenario runs on a database that does not have the client John Doe defined in the database yet. We expect that the actions in this scenario creates a new client John Doe and adds it to the database. This scenario <strong>passes</strong> and runs as expected</p>
+		<h5 id="scenario-2-try-to-add-a-new-client-in-the-database-that-is-already-present">Scenario 2: Try to add a new client in the database that is already present</h5>
+		<p>Situation in which the user attempts to add an existing client. Should not create a new client until an extra prompt is given.</p>
+		<ul>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe2&quot; has been added to the database [<em>mapped to</em>: <code>addClientToDatabase(String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> There exists 1 client with name &quot;John&quot; &quot;Doe2&quot; [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		<li><strong>When</strong> User enters and sends information for &quot;John&quot; &quot;Doe2&quot; [<em>mapped to</em>: <code>addClientToDatabase(String firstName, String lastName)</code>]</li>
+		<li><strong>Then</strong> There exists 1 client with name &quot;John&quot; &quot;Doe2&quot; [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		</ul>
+		<p>This scenario runs on a database that does not have the client John Doe2 defined in the database yet. In the given we ensure that there is a client registered as John Doe2. We expect that the system does not automatically create the new client without an extra confirmation to ensure that the user is not referring to the person that is already in the database. However, this scenario <strong>fails</strong>. This isn&#39;t the most crucial of fails as it is important that the user has the ability to create duplicate names but without confirmation needed it can be easy to duplicate clients which can be a hassle since client deletion is not simple.</p>
+		<h5 id="scenario-3-try-to-enter-incorrect-phone-number">Scenario 3: Try to enter incorrect phone number</h5>
+		<p>Trying to add a client with information that is incorrect. Should fail and inform user of this.</p>
+		<ul>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe3&quot; has not been added to the database yet [<em>mapped to</em>: <code>clientIsNotInDatabase(String firstName, String lastName)</code>]</li>
+		<li><strong>When</strong> User enters and sends information: &quot;John&quot;, &quot;Doe3&quot;, &quot;809 Sherbrooke St W&quot;, &quot;Montreal&quot;, &quot;NotaNum&quot; [<em>mapped to</em>: <code>addClientToDatabase(String firstName, String lastName, String address, String city, String telephone)</code>]</li>
+		<li><strong>Then</strong> There exists 0 client with name &quot;John&quot; &quot;Doe3&quot; [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		</ul>
+		<p>This scenario runs on a database that does not have the client John Doe3 defined in the database yet. We expect that the system does not allow for the inputting of new clients without a valid contact phone number. This scenario <strong>passes</strong> and a new client is not created.</p>
+		<h4 id="scenario-4-a-field-is-empty">Scenario 4: A field is empty</h4>
+		<p>The user is trying to add a user but forgets to add a field. Should not add the Client to the database</p>
+		<ul>
+		<li>Given Client <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> has not been added to the database yet [<em>mapped to</em>: <code>clientIsNotInDatabase(String firstName, String lastName)</code>]</li>
+		<li>When User enters and sends information: <code>&lt;firstName&gt;</code>, <code>&lt;lastName&gt;</code>, <code>&lt;address&gt;</code>, <code>&lt;city&gt;</code>, <code>&lt;phoneNumber&gt;</code> [<em>mapped to</em>: <code>addClientToDatabase(String firstName, String lastName, String address, String city, String telephone)</code>]</li>
+		<li>Then There exists 0 client with name <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		</ul>
+		<p><strong>Examples</strong>:</p>
+		<ul>
+		<li>| firstName | lastName | address | city | phoneNumber |</li>
+		<li>| &quot;&quot; | &quot;TestLastName1&quot; | &quot;TestAddress&quot; | &quot;TestCity&quot; | &quot;5145551234&quot; |</li>
+		<li>| &quot;TestFirstName&quot; | &quot;&quot; | &quot;TestAddress&quot; | &quot;TestCity&quot; | &quot;5145551234&quot; |</li>
+		<li>| &quot;TestFirstName&quot; | &quot;TestLastName2&quot; | &quot;&quot; | &quot;TestCity&quot; | &quot;5145551234&quot; |</li>
+		<li>| &quot;TestFirstName&quot; | &quot;TestLastName3&quot; | &quot;TestAddress&quot; | &quot;&quot; | &quot;5145551234&quot; |</li>
+		<li>| &quot;TestFirstName&quot; | &quot;TestLastName4&quot; | &quot;TestAddress&quot; | &quot;TestCity&quot; | &quot;&quot; |</li>
+		</ul>
+		<p>The test is run on a database that does not contain the defined first and last name. The system should deny the request since there is information missing from the client definition. The system <strong>passes</strong> this scenario test.</p>
+		<h4 id="feature-2-pet-registration">Feature 2: Pet Registration</h4>
+		<h5 id="scenario-1-pet-is-correctly-added">Scenario 1: Pet is correctly added</h5>
+		<p>Main Success Scenario in which a pet is added correctly to the system</p>
+		<ul>
+		<li><strong>Given</strong> Client <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> has been added to the system [<em>mapped to</em>: <code>clientHasBeenAddedToTheSystem(String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> Client <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		<li><strong>When</strong> User enters and sends pet information to create a new pet of type <code>&quot;&lt;pet&gt;&quot;</code> for <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code>: &quot;Sparky&quot; and &quot;2005-04-02&quot; [<em>mapped to</em>: <code>userEntersAndSendsPetInformationToCreateANewPetOfTypeForAnd(String petType, String firstName, String lastName, String petName, String petBirthday)</code>]</li>
+		<li><strong>Then</strong> The pet &quot;Sparky&quot; with birthday &quot;2005-04-02&quot; has been created in the database and associated with <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> [<em>mapped to</em>: <code>thePetWithBirthdayHasBeenCreatedInTheDatabaseAndAssociatedWith(String petName, String petBirthday, String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> Client <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> has 1 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		</ul>
+		<p><strong>Examples</strong>:</p>
+		<ul>
+		<li>| pet | firstName | lastName |</li>
+		<li>| bird | &quot;John&quot; | &quot;Doe15&quot; |</li>
+		<li>| cat  | &quot;John&quot; | &quot;Doe16&quot; |</li>
+		<li>| dog  | &quot;John&quot; | &quot;Doe17&quot; |</li>
+		<li>| hamster | &quot;John&quot; | &quot;Doe18&quot; |</li>
+		<li>| lizard  | &quot;John&quot; | &quot;Doe19&quot; |</li>
+		<li>| snake   | &quot;John&quot; | &quot;Doe20&quot; |</li>
+		</ul>
+		<p>This scenario is performed on the database that does not contain the defined client. In the scenario the defined client is created. The client should have 0 pets in the database before performing the scenario actions. The actions should result in the defined pet being created. The system <strong>passes</strong> these tests</p>
+		<h5 id="scenario-2-pet-birthday-specified-is-in-the-future">Scenario 2: Pet birthday specified is in the future</h5>
+		<p>This should not be allowed as it is unrealistic to add a pet that has not been born yet.</p>
+		<ul>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe21&quot; has been added to the system [<em>mapped to</em>: <code>clientHasBeenAddedToTheSystem(String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> Client &quot;John&quot; &quot;Doe21&quot; has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		<li><strong>When</strong> User enters and sends pet information to create a new pet of type &quot;dog&quot; for &quot;John&quot; &quot;Doe21&quot;: &quot;Sparky&quot; and &quot;2025-04-02&quot; [<em>mapped to</em>: <code>userEntersAndSendsPetInformationToCreateANewPetOfTypeForAnd(String petType, String firstName, String lastName, String petName, String petBirthday)</code>]</li>
+		<li><strong>Then</strong> Client &quot;John&quot; &quot;Doe21&quot; has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		</ul>
+		<p>This scenario is run on a database that does not contain client John Doe21. This scenario should not create a new pet since it does not make any sense to create pets that have not been born yet. The system <strong>fails</strong> this scenario.</p>
+		<h4 id="scenario-3-a-field-is-empty">Scenario 3: A field is empty</h4>
+		<p>While specifying a pet, a field is left empty</p>
+		<ul>
+		<li><strong>Given</strong> Client <code>&quot;&lt;firstName&gt;&quot;</code> <code>&quot;&lt;lastName&gt;&quot;</code> has been added to the system [<em>mapped to</em>: <code>clientHasBeenAddedToTheSystem(String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> Client <code>&quot;&lt;firstName&gt;&quot;</code> <code>&quot;&lt;lastName&gt;&quot;</code> has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		<li><strong>When</strong> User enters and sends pet information to create a new pet of type &quot;dog&quot; for <code>&quot;&lt;firstName&gt;&quot;</code> <code>&quot;&lt;lastName&gt;&quot;</code>: <code>&quot;&lt;petName&gt;&quot;</code> and <code>&quot;&lt;petBirthday&gt;&quot;</code> [<em>mapped to</em>: <code>userEntersAndSendsPetInformationToCreateANewPetOfTypeForAnd(String petType, String firstName, String lastName, String petName, String petBirthday)</code>]</li>
+		<li><strong>Then</strong> Client <code>&quot;&lt;firstName&gt;&quot;</code> <code>&quot;&lt;lastName&gt;&quot;</code> has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		</ul>
+		<p><strong>Examples</strong>:</p>
+		<ul>
+		<li>| firstName | lastName | petName | petBirthday |</li>
+		<li>| John      | Doe22    |         | 2005-04-02  |</li>
+		<li>| John      | Doe23    | Sparky  |             |</li>
+		</ul>
+		<p>The scenarios are run on a database that does not contain the specified client. After the scenario, the specified client should be created and there should be no created pets. The system <strong>passes</strong> these scenarios and does not allow for the pets to be created.</p>
+		<h4 id="scenario-4-incorrect-animal-type">Scenario 4: Incorrect animal type</h4>
+		<p>While specifying a pet, an unsupported animal is sent to the system. Should fail</p>
+		<ul>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe24&quot; has been added to the system [<em>mapped to</em>: <code>clientHasBeenAddedToTheSystem(String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> Client &quot;John&quot; &quot;Doe24&quot; has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		<li><strong>When</strong> User enters and sends pet information to create a new pet of type &quot;Gorilla&quot; for &quot;John&quot; &quot;Doe24&quot;: &quot;Sparky&quot; and &quot;2005-04-02&quot; [<em>mapped to</em>: <code>userEntersAndSendsPetInformationToCreateANewPetOfTypeForAnd(String petType, String firstName, String lastName, String petName, String petBirthday)</code>]</li>
+		<li><strong>Then</strong> Client &quot;John&quot; &quot;Doe24&quot; has 0 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		</ul>
+		<p>This scenario is run on a database that does not contain John Doe24. After the scenario, the specified client should be created and there should be no created pets. The system <strong>passes</strong> this scenario and does not allow for the pet to be created.</p>
+		<h4 id="scenario-5-attempt-to-add-duplicate-pet">Scenario 5: Attempt to add duplicate pet</h4>
+		<p>Attempt to create a pet with the same name and birthday as an existing pet. Should fail.</p>
+		<ul>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe25&quot; has been added to the system [<em>mapped to</em>: <code>clientHasBeenAddedToTheSystem(String firstName, String lastName)</code>]</li>
+		<li><strong>And</strong> Client &quot;John&quot; &quot;Doe25&quot; has pet of type &quot;dog&quot; with name &quot;Sparky&quot; and birthday &quot;2005-04-02&quot; [<em>mapped to</em>: <code>clientHasPetOfTypeWithNameAndBirthday(String firstName, String lastName, String petType, String petName, String petBirthday)</code>]</li>
+		<li><strong>And</strong> Client &quot;John&quot; &quot;Doe25&quot; has 1 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		<li><strong>When</strong> User enters and sends pet information to create a new pet of type &quot;dog&quot; for &quot;John&quot; &quot;Doe25&quot;: &quot;Sparky&quot; and &quot;2005-04-02&quot; [<em>mapped to</em>: <code>userEntersAndSendsPetInformationToCreateANewPetOfTypeForAnd(String petType, String firstName, String lastName, String petName, String petBirthday)</code>]</li>
+		<li><strong>Then</strong> Client &quot;John&quot; &quot;Doe25&quot; has 1 pets [<em>mapped to</em>: <code>clientHasPets(String firstName, String lastName, int numPets)</code>]</li>
+		</ul>
+		<p>This scenario is run on a database that does not contain John Doe25. After the scenario, the specified client should be created and there should be only 1 created pet. The system <strong>passes</strong> this scenario and does not allow for the duplicate pet to be created.</p>
+		<h3 id="feature-3-schedule-appointments">Feature 3: Schedule Appointments</h3>
+		<h4 id="scenario-1-normal-appointment-is-made">Scenario 1: Normal Appointment is made</h4>
+		<p>Main success scenario where the pet exists and the date is in the future.</p>
+		<ul>
+		<li><strong>Given</strong> There exists 0 client with name <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		<li><strong>Given</strong> Client <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> with a &quot;<code>&lt;pet&gt;</code>&quot; is in the system [<em>mapped to</em>: <code>addClientWithPetType(String firstName, String lastName, String petType)</code>]</li>
+		<li><strong>When</strong> User enters and sends visit information for <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code>&#39;s pet: &quot;2025-04-02&quot;, and &quot;TestVisit&quot; [<em>mapped to</em>: <code>createAppointment(String firstName, String lastName, String date, String desc)</code>]</li>
+		<li><strong>Then</strong> An appointment is created in the database for <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code>&#39;s pet at &quot;2025-04-02&quot; with desc &quot;TestVisit&quot; [<em>mapped to</em>: <code>assertAppointHasBeenCreated(String firstName, String lastName, String date, String desc)</code>]</li>
+		</ul>
+		<p><strong>Examples</strong>:</p>
+		<ul>
+		<li>| pet | firstName | lastName |</li>
+		<li>| bird | &quot;John&quot; | &quot;Doe6&quot; |</li>
+		<li>| cat  | &quot;John&quot; | &quot;Doe7&quot; |</li>
+		<li>| dog  | &quot;John&quot; | &quot;Doe8&quot; |</li>
+		<li>| hamster | &quot;John&quot; | &quot;Doe9&quot; |</li>
+		<li>| lizard  | &quot;John&quot; | &quot;Doe10&quot; |</li>
+		<li>| snake   | &quot;John&quot; | &quot;Doe11&quot; |</li>
+		</ul>
+		<p>The scenarios are done on a database that does not contain the given client. The scenario should create the client, a pet of the specified type, and an appointment in the future. The system <strong>passes</strong> these scenarios.</p>
+		<h4 id="scenario-2-appointment-made-in-the-past">Scenario 2: Appointment made in the past</h4>
+		<p>Alternate Scenario in which the user tries to add an appointment in the past. Should be disallowed</p>
+		<ul>
+		<li><strong>Given</strong> There exists 0 client with name &quot;John&quot; &quot;Doe12&quot; [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		<li><strong>Given</strong> Client &quot;John&quot; &quot;Doe12&quot; with a &quot;dog&quot; is in the system [<em>mapped to</em>: <code>addClientWithPetType(String firstName, String lastName, String petType)</code>]</li>
+		<li><strong>When</strong> User enters and sends visit information for &quot;John&quot; &quot;Doe12&quot;&#39;s pet: &quot;2000-04-02&quot;, and &quot;ExpiredVisit&quot; [<em>mapped to</em>: <code>createAppointment(String firstName, String lastName, String date, String desc)</code>]</li>
+		<li><strong>Then</strong> An appointment is not created in the database for &quot;John&quot; &quot;Doe12&quot;&#39;s pet at &quot;2000-04-02&quot; with desc &quot;ExpiredVisit&quot; [<em>mapped to</em>: <code>assertAppointHasNotBeenCreated(String firstName, String lastName, String date, String desc)</code>]</li>
+		</ul>
+		<p>The scenario is done on a database that does not contain the client John Doe12. The scenario should create the client, a pet of the specified type, but not create an appointment. The system <strong>fails</strong> this scenario as it still allows for the creation of a visit in the past which does not make sense.</p>
+		<h4 id="scenario-3-appointment-made-with-missing-fields">Scenario 3: Appointment made with missing fields</h4>
+		<p>Attempt to create an appointment while leaving fields blank</p>
+		<ul>
+		<li><strong>Given</strong> There exists 0 client with name <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> [<em>mapped to</em>: <code>expectedNumberOfClientsWithName(int numClients, String firstName, String lastName)</code>]</li>
+		<li><strong>Given</strong> Client <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code> with a &quot;cat&quot; is in the system [<em>mapped to</em>: <code>addClientWithPetType(String firstName, String lastName, String petType)</code>]</li>
+		<li><strong>When</strong> User enters and sends visit information for <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code>&#39;s pet: <code>&lt;date&gt;</code>, and <code>&lt;desc&gt;</code> [<em>mapped to</em>: <code>createAppointment(String firstName, String lastName, String date, String desc)</code>]</li>
+		<li><strong>Then</strong> An appointment is not created in the database for <code>&lt;firstName&gt;</code> <code>&lt;lastName&gt;</code>&#39;s pet at <code>&lt;date&gt;</code> with desc <code>&lt;desc&gt;</code> [<em>mapped to</em>: <code>assertAppointHasNotBeenCreated(String firstName, String lastName, String date, String desc)</code>]</li>
+		</ul>
+		<p><strong>Examples</strong>:</p>
+		<ul>
+		<li>| firstName | lastName | date | desc |</li>
+		<li>| &quot;John&quot;    | &quot;Doe13&quot;  | &quot;&quot;   | &quot;TestDesc&quot; |</li>
+		<li>| &quot;John&quot;    | &quot;Doe14&quot;   | &quot;2025-04-02&quot; | &quot;&quot; |</li>
+		</ul>
+		<p>The scenarios are done on a database that does not contain the given client. The scenario should create the client, a pet of the specified type, but not create an appointment. Interestingly, the scenario <strong>fails</strong> with a missing date and still creates the visit while it <strong>passes</strong> with a missing description, and forbids the creation of the visit.</p>
+		<h3 id="found-bugs">Found Bugs</h3>
+		<h4 id="feature-1-scenario-2">Feature 1: Scenario 2</h4>
+		<p>The system creates a client with the same name as an existing client without further prompt. This is a minor to moderate bug. It is minor since there is a high chance that there will eventually be more than one client with the same name. However, since the system does not allow to easily delete clients from the system, it can become quite an issue if a user is duplicating users instead of simply editing their information. </p>
+		<h4 id="feature-2-scenario-2">Feature 2: Scenario 2</h4>
+		<p>The system allows for the creation of pets that have not been born yet. This situation surely means that the date was entered by accident. This is a minor bug since the birthday of a pet can be easily changed. However, if the pet clinic is relying on this data for medical records, this can be an issue since the obvious error is not caught at conception.</p>
+		<h4 id="feature-3-scenario-2">Feature 3: Scenario 2</h4>
+		<p>The system allows for the creation of visits in the past. This is a major bug since a client may be expecting to have made an appointment but the erroneous entry leads to no new visits being made (since its in the past). This should be fixed to reduce customer frustration.</p>
+		<h4 id="feature-3-scenario-3-example-1">Feature 3: Scenario 3 - Example 1</h4>
+		<p>The system allows for the creation of a visit without inputting a date. This is a major since a visit can be made and agreed upon, but the date of the visit is never recorded and is lost.</p>
+		<h3 id="acceptance-test-coverage">Acceptance test coverage</h3>
+		<p>The acceptance tests have a 74.7% method coverage and 70.3% line coverage. While this is lower than the overall test coverage goal, the areas that were omitted were notably:</p>
+		<ul>
+		<li>Vet-related classes: these were not a large area of concern as far as the end user is concerned since there is not much functionality attached to this section</li>
+		<li>Owner and pet editing: These were not explored since this will occur much less frequently than owner and pet creation. This section was also considered low risk since creation and editing follow much of the same behavior and should share many of the same bugs.</li>
+		</ul>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Acceptance%20Testing%20Docs/Coverage.PNG" alt="Acceptance coverage"></p>
+		<p>The detailed coverage information is <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Acceptance%20Coverage/index.html">here.</a></p>
+		<h2 id="performance-testing">Performance Testing</h2>
+		<h3 id="report">Report</h3>
+		<p>The test suite is built using the same testing infrastructure as the rest of our suite, partially to take advantage of the lessons learned from implementing API tests. SQL database files have been prepared with 10, 100, 1000, 10000 entries of the elements under test (these can be found in the <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/tree/master/src/test/resources"><code>test/resources/perfTestDBs</code></a> directory), these are loaded for each individual test using the <code>@Sql()</code> annotation. The tests (found in <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/tree/master/src/test/java/org/springframework/samples/petclinic/performance"><code>test/.../performance</code></a>) measure the time for each operation as they&#39;re performed logging them to the console along with a CSV file (tagged with timestamps for comparison to OS performance record data). These tests are broken up into individual files for both entities and operation types. A notable oddity of these tests, an instance of the query under test is performed as a part of the <code>@BeforeAll</code> setup method; this exists to account for a known behaviour with Springboot where the first query takes significantly longer to perform than any following (<a href="https://stackoverflow.com/questions/63019528/why-are-spring-rest-services-slow-on-the-first-request">due to lazy initialization</a>), this might lead us to draw incorrect conclusions from the recorded query times if it were not addressed.</p>
+		<p><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/perfmon">Windows perfmon</a> was used for collection CPU and memory data. The java process executing the tests was monitored for logging. The graphs show memory used in place of free memory as the clearest and most understandable measure offered by this tool. The graphs have been grouped in tables to be concise, but can be opened for full resolution.</p>
+		<h4 id="owner-creation">Owner Creation</h4>
+		<table>
+		<thead>
+		<tr>
+		<th style="text-align:center">Query Times</th>
+		<th style="text-align:center">CPU Usage</th>
+		<th style="text-align:center">Memory Usage</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/ownerCreationTimes.png" alt="times"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/ownerCreationCPU.png" alt="CPU usage"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/ownerCreationMem.png" alt="mem usage"></td>
+		</tr>
+		</tbody>
+		</table>
+		<p>While the it is not perfectly defined in the graph and can be obscured by run-to-run variability, there is an upward trend on the creation of a new owner. This, coupled with the owner test having the highest CPU usage, leads to some concern of a future bottleneck. Owners addition will be key to this system as the businesses that use it grow, and so a looming threat to the system&#39;s performance which might lead to delays and downtime for hardware matinenance/upgrades is frightening.</p>
+		<h4 id="owner-editing">Owner Editing</h4>
+		<table>
+		<thead>
+		<tr>
+		<th style="text-align:center">Query Times</th>
+		<th style="text-align:center">CPU Usage</th>
+		<th style="text-align:center">Memory Usage</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/ownerEditTimes.png" alt="times"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/ownerEditCPU.png" alt="CPU usage"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/ownerEditMem.png" alt="mem usage"></td>
+		</tr>
+		</tbody>
+		</table>
+		<p>Owner editing seems like it may have a subtle upward trend, but can largely be waved away with run-to-run variance. Like owner creation there is a large CPU cost, but it is less so. It seems likely that response times will remain stable until a hardware bottleneck of some kind is reached.</p>
+		<h4 id="pet-creation">Pet Creation</h4>
+		<table>
+		<thead>
+		<tr>
+		<th style="text-align:center">Query Times</th>
+		<th style="text-align:center">CPU Usage</th>
+		<th style="text-align:center">Memory Usage</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/petCreationTimes.png" alt="times"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/petCreationCPU.png" alt="CPU usage"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/petCreationMem.png" alt="mem usage"></td>
+		</tr>
+		</tbody>
+		</table>
+		<p>Pet creation has a distinct upward trend in response time, this is incredibly worrying as it is these entities that will likely be added to the system most frequently (and they are most crucial to the system&#39;s usefulness). The CPU cost however, appears to be low. It seems creating the link to an owner may be adding extra delay to this operation. The memory usage during this test is the most by far, this large jump may in part be due to the java process accumulating memory allocation over time as the data was collected for this analysis, however it seems the relationship between owners and pets may also be contributing to this memory footprint.</p>
+		<h4 id="pet-editing">Pet Editing</h4>
+		<table>
+		<thead>
+		<tr>
+		<th style="text-align:center">Query Times</th>
+		<th style="text-align:center">CPU Usage</th>
+		<th style="text-align:center">Memory Usage</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/petEditTimes.png" alt="times"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/petEditCPU.png" alt="CPU usage"></td>
+		<td style="text-align:center"><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Performance%20Data/images/petEditMem.png" alt="mem usage"></td>
+		</tr>
+		</tbody>
+		</table>
+		<p>Pet editing has a similar trend to pet creation, but again has low CPU usage. The memory footprint here is again larger than those of the owner operations, as discussed for pet creation.</p>
+		<h4 id="overall-conclusions">Overall conclusions</h4>
+		<p>Overall, it seems pet entity interactions are likely to cause long term delays as pet numbers grow and could necessitate a memory upgrade, but owner operations might result in requiring a CPU upgrade for the server hosting this system. There is no simple way to determine where the step in memory and CPU usage occurs (test execution order is unpredictable, and while we log timestamps, the perfmon data is too coarse), it seems somewhere between 100 and 10000 pets there is a rapid increase in latency.</p>
+		<h2 id="test-automation">Test Automation</h2>
+		<p>Tests are automated on all levels and the coverage tool JaCoCo automatically generates a report during the build.</p>
+		<h2 id="application-of-testing-techniques">Application of Testing Techniques</h2>
+		<p>For acceptance testing, use cases were created for the use cases of most interest as well as associated scenario graphs:</p>
+		<h3 id="use-case-1">Use Case 1</h3>
+		<p><strong>Use Case:</strong> Register User <br />
+		<strong>Actors:</strong> User <br />
+		<strong>Pre-condition:</strong> The Pet Clinic software is up and running <br />
+		<strong>Main Success Scenario:</strong> <br /></p>
+		<p>1: The User navigates to the Add Owner page of the System. <br />
+		2: The User inputs the first name, last name, address, city, and phone number of the owner into the System. <br />
+		3: The User sends the information to the System. <br />
+		4: The System acknowledges the creation of the new owner. <br /></p>
+		<p><strong>Alternatives:</strong></p>
+		<p>3a: Some data entries are empty: <br />
+		<em>3a.1</em>: The System informs the user of the empty fields. Use case continues at step 2. <br />
+		3b: Telephone number is in an incorrect form: <br />
+		<em>3b.1</em>: The System informs the user of the error. Use case continues at step 2. <br />
+		4a: An owner with the same name is already present in the system:<br />
+		<em>4a.1</em>: The System prompts the User to confirm that this owner is in fact new and not a copy of an existing owner. <br />
+		<em>4a.2</em>: User confirms that they intend to create a new owner with the same name. Use case continues at step 4. <br /></p>
+		<p><strong>Post-condition:</strong> A new owner is created in the System.</p>
+		<h4 id="scenario-graph">Scenario Graph</h4>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Acceptance%20Testing%20Docs/UseCase1.png" alt="Scenario Graph"></p>
+		<h3 id="use-case-2">Use Case 2</h3>
+		<p><strong>Use Case:</strong> Register Pet <br />
+		<strong>Actors:</strong> User <br />
+		<strong>Pre-condition:</strong> The Pet Clinic software is up and running<br />
+		<strong>Main Success Scenario:</strong></p>
+		<p>1: The User navigates to the Add New Pet page of the System for the intended owner.<br />
+		2: The User inputs the name and birthday of the pet. <br />
+		3: The User sends the information to the System.<br />
+		4: The System acknowledges the creation of the new pet. <br /></p>
+		<p><strong>Alternatives:</strong></p>
+		<p>1a: The owner has not in the database yet. Use case ends in failure. <br />
+		3a: Some data entries are empty: <br />
+		<em>3a.1</em>: The System informs the user of the empty fields. Use case continues at step 2. <br />
+		3b: The birthday is in an incorrect format: <br />
+		<em>3b.1</em>: The System informs the user of the error. Use case continues at step 2. <br />
+		3c: The birthday specified is in future: <br />
+		<em>3c.1</em>: The System informs the user of the impossible date. Use case continues at step 2. <br />
+		4a: There is already a pet with the same name entered for the same owner: <br />
+		<em>4a.1</em>: The System informs the User that the pet has already been created. Use case continues at step 2.<br /></p>
+		<p><strong>Post-condition: (for successful scenario)</strong> A new pet is created in the System and associated with the owner.</p>
+		<h4 id="scenario-graph">Scenario Graph</h4>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Acceptance%20Testing%20Docs/UseCase2.png" alt="Scenario Graph"></p>
+		<h3 id="use-case-3">Use Case 3</h3>
+		<p><strong>Use Case:</strong> Schedule Appointments <br />
+		<strong>Actors:</strong> User <br />
+		<strong>Pre-condition:</strong> The Pet Clinic software is up and running <br />
+		<strong>Main Success Scenario:</strong></p>
+		<p>1: The User navigates to the Add Visit page of the System for the intended pet. <br />
+		2: The User inputs the date and description of the visit. <br />
+		3: The User sends the information to the System. <br />
+		4: The System acknowledges the creation of the new visit. <br /></p>
+		<p><strong>Alternatives:</strong></p>
+		<p>1a: The pet has not in the database yet. Use case ends in failure. <br />
+		3a: Some data entries are empty: <br />
+		<em>3a.1</em>: The System informs the user of the empty fields. Use case continues at step 2. <br />
+		3b: The date is in an incorrect format: <br />
+		<em>3b.1</em>: The System informs the user of the error. Use case continues at step 2. <br />
+		3c: The visit date specified is in past: <br />
+		<em>3c.1</em>: The System informs the user of the past date. Use case continues at step 2. <br /></p>
+		<p><strong>Post-condition: (for successful scenario)</strong> A new visit is created in the System and associated with the pet.</p>
+		<h4 id="scenario-graph">Scenario Graph</h4>
+		<p><img src="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/Acceptance%20Testing%20Docs/UseCase3.png" alt="Scenario Graph"></p>
+		<h3 id="driver-use">Driver Use</h3>
+		<p>The use of drivers is common in the realm of integration testing. Most notoriously perhaps among bottom up testing strategies 
+		such as that to be used in the testing of the persistence layer of this application. </p>
+		<p>Four driver classes within the JUnit framework will be created in order to directly call the methods contained within the repository classes without relying on the yet to be tested upper level classes. This will allow us to easily test the interaction between the repository classes and the database. </p>
+		<p>Driver Classes: </p>
+		<p><a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/VisitRepositoryTests.java">VisitRepositoryTests.java</a></p>
+		<p><a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/PetRepositoryTests.java">PetRepositoryTests.java</a></p>
+		<p><a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/VetRepositoryTests.java">VetRepositoryTests.java</a></p>
+		<p><a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/src/test/java/org/springframework/samples/petclinic/persistence/OwnerRepositoryTests.java">OwnerRepositoryTests.java</a></p>
+		<h2 id="ci">CI</h2>
+		<p>GitHub Actions is able to setup the repository in a controlled environment and utilise Maven in order to prevent erroneous commits that may affect the integrity of the application.
+		File: <a href="https://github.com/McGill-ECSE429-Winter2022/project-test-05/blob/master/.github/workflows/maven.yml">maven.yml</a></p>
+
+	</body>
+</html>

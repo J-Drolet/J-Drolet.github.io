@@ -26,10 +26,10 @@
 		<p data-sourcepos="8:1-8:190" dir="auto">A member of a software development team wants to build the software following a series of changes to the source code, the changes to the source code do not require Gradle to be reconfigured.</p>
 		<h4 data-sourcepos="10:1-10:17" dir="auto">
 		<a id="user-content-system-state" class="anchor" href="#system-state" aria-hidden="true"></a>System state</h4>
-		<p data-sourcepos="12:1-12:325" dir="auto">Gradle is already configured to be build the software via the <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Information%20View.md#settingsgradle">settings script file</a> and <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Information%20View.md#buildgradle">project script files</a>.</p>
+		<p data-sourcepos="12:1-12:325" dir="auto">Gradle is already configured to be build the software via the <a href="Information View.html#settingsgradle">settings script file</a> and <a href="Information View.html#buildgradle">project script files</a>.</p>
 		<h4 data-sourcepos="14:1-14:23" dir="auto">
 		<a id="user-content-system-environment" class="anchor" href="#system-environment" aria-hidden="true"></a>System environment</h4>
-		<p data-sourcepos="16:1-16:155" dir="auto">A <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Functional%20View.md#gradle-daemon">Gradle daemon</a> is available to run the build.</p>
+		<p data-sourcepos="16:1-16:155" dir="auto">A <a href="Functional View.html#gradle-daemon">Gradle daemon</a> is available to run the build.</p>
 		<h4 data-sourcepos="18:1-18:22" dir="auto">
 		<a id="user-content-external-stimulus" class="anchor" href="#external-stimulus" aria-hidden="true"></a>External stimulus</h4>
 		<p data-sourcepos="20:1-20:92" dir="auto">The developer runs a Gradle build task via the command line interface. (<code>gradle build</code>).</p>
@@ -46,7 +46,7 @@
 		<p data-sourcepos="32:1-32:98" dir="auto">A developer modified Gradle's configuration such that it applies a plugin on a particular project.</p>
 		<h4 data-sourcepos="34:1-34:17" dir="auto">
 		<a id="user-content-system-state-1" class="anchor" href="#system-state-1" aria-hidden="true"></a>System state</h4>
-		<p data-sourcepos="36:1-36:293" dir="auto">The plugin is not present locally and must be downloaded/fetched. The project's <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Information%20View.md#buildgradle">configuration script file</a> is configured to include the plugin and includes the plugin's source repository.</p>
+		<p data-sourcepos="36:1-36:293" dir="auto">The plugin is not present locally and must be downloaded/fetched. The project's <a href="Information View.html#buildgradle">configuration script file</a> is configured to include the plugin and includes the plugin's source repository.</p>
 		<h4 data-sourcepos="38:1-38:23" dir="auto">
 		<a id="user-content-system-environment-1" class="anchor" href="#system-environment-1" aria-hidden="true"></a>System environment</h4>
 		<p data-sourcepos="40:1-40:110" dir="auto">The source repository is available (e.g. if the source repository is a website, then the website is not down).</p>
@@ -55,12 +55,12 @@
 		<p data-sourcepos="44:1-44:88" dir="auto">The developer runs a build task which is configured to build the aforementioned project.</p>
 		<h4 data-sourcepos="46:1-46:29" dir="auto">
 		<a id="user-content-required-system-response-1" class="anchor" href="#required-system-response-1" aria-hidden="true"></a>Required system response</h4>
-		<p data-sourcepos="48:1-48:226" dir="auto">Gradle fetches the plugin from the source and applies to the project during the build's <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Functional%20View.md#gradle-build-lifecycle">configuration phase</a>.</p>
+		<p data-sourcepos="48:1-48:226" dir="auto">Gradle fetches the plugin from the source and applies to the project during the build's <a href="Functional View.html#gradle-build-lifecycle">configuration phase</a>.</p>
 		<hr data-sourcepos="50:1-51:0">
 		<h2 data-sourcepos="52:1-52:13" dir="auto">
 		<a id="user-content-scenario-3" class="anchor" href="#scenario-3" aria-hidden="true"></a>Scenario 3</h2>
 		<h3 data-sourcepos="53:1-53:169" dir="auto">
-		<a id="user-content-compile-only-the-source-code-that-changed-incremental-build" class="anchor" href="#compile-only-the-source-code-that-changed-incremental-build" aria-hidden="true"></a>Compile only the source code that changed (<a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Appendix.md#incremental-builds">Incremental Build</a>)</h3>
+		<a id="user-content-compile-only-the-source-code-that-changed-incremental-build" class="anchor" href="#compile-only-the-source-code-that-changed-incremental-build" aria-hidden="true"></a>Compile only the source code that changed (<a href="Appendix.html#incremental-builds">Incremental Build</a>)</h3>
 		<h4 data-sourcepos="54:1-54:13" dir="auto">
 		<a id="user-content-overview-2" class="anchor" href="#overview-2" aria-hidden="true"></a>Overview</h4>
 		<p data-sourcepos="56:1-56:170" dir="auto">A developer runs a build on a project. Gradle does not need to recompile every single source file, if a source file was not changed, Gradle does not need to recompile it.</p>

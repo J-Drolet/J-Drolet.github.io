@@ -18,7 +18,7 @@
 		<a id="user-content-introduction" class="anchor" href="#introduction" aria-hidden="true"></a>Introduction</h2>
 		<p data-sourcepos="5:1-5:373" dir="auto">To properly demonstrate that Gradle's satisfies its desired quality properties and meets its functional requirements, we have derived views from a set of common viewpoints. The viewpoints were picked to best describe how Gradle is configured to achieve a user's desired build behavior. We picked viewpoints that allow us to demonstrate Gradle's flexiblity and performance.</p>
 		<p data-sourcepos="7:1-7:317" dir="auto">Our context view serves as an introduction to Gradle. Readers will acquire a fundamental understanding of Gradle's functionality, its scope and its interactions with external entities. This hopes to answer simple questions such as "What is Gradle used for?", "Who uses Gradle?" and "Why use Gradle over other tools?".</p>
-		<p data-sourcepos="9:1-9:429" dir="auto">The functional and information view work together to detail the Gradle <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Functional%20View.md#gradle-build-lifecycle">build lifecycle</a>. After reading both views, readers will have a good understanding of how Gradle achieves its functional requirements. The views also detail the main architectural elements responsible for Gradle's flexibility and performance.</p>
+		<p data-sourcepos="9:1-9:429" dir="auto">The functional and information view work together to detail the Gradle <a href="Functional View.html#gradle-build-lifecycle">build lifecycle</a>. After reading both views, readers will have a good understanding of how Gradle achieves its functional requirements. The views also detail the main architectural elements responsible for Gradle's flexibility and performance.</p>
 		<p data-sourcepos="11:1-11:163" dir="auto">Finally, since Gradle is an open-source project, we describe Gradle's development environment in our development view to address the concerns of Gradle Developers.</p>
 		<h2 data-sourcepos="13:1-13:8" dir="auto">
 		<a id="user-content-views" class="anchor" href="#views" aria-hidden="true"></a>Views</h2>
@@ -31,19 +31,19 @@
 		</thead>
 		<tbody>
 		<tr data-sourcepos="16:1-16:299">
-		<td data-sourcepos="16:2-16:104"><a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Context%20View.md">Context View</a></td>
+		<td data-sourcepos="16:2-16:104"><a href="Context View.html">Context View</a></td>
 		<td data-sourcepos="16:106-16:299">Details Gradle's scope and highlights the interactions between Gradle, developers and other external systems. Introduces some of Gradle's functional requirements and desired quality properties.</td>
 		</tr>
 		<tr data-sourcepos="17:1-17:266">
-		<td data-sourcepos="17:2-17:110"><a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Functional%20View.md">Functional View</a></td>
+		<td data-sourcepos="17:2-17:110"><a href="Functional View.html">Functional View</a></td>
 		<td data-sourcepos="17:112-17:265">Describes how Gradle's initialization system, configuration system and execution system interact to dictate build behavior as per Gradle's configuration.</td>
 		</tr>
 		<tr data-sourcepos="18:1-18:304">
-		<td data-sourcepos="18:2-18:112"><a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Information%20View.md">Information View</a></td>
+		<td data-sourcepos="18:2-18:112"><a href="Information View.html">Information View</a></td>
 		<td data-sourcepos="18:114-18:303">Describes Gradle's cache and its contribution to Gradle's performance. Addresses flexibility concerns, by describing the role of configuration objects and their relationship to script files.</td>
 		</tr>
 		<tr data-sourcepos="19:1-19:230">
-		<td data-sourcepos="19:2-19:112"><a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Development%20View.md">Development View</a></td>
+		<td data-sourcepos="19:2-19:112"><a href="Development View.html">Development View</a></td>
 		<td data-sourcepos="19:114-19:229">Shows how Gradle's development environment is arranged to facilitate contributions from the open-source community.</td>
 		</tr>
 		</tbody>
@@ -51,7 +51,7 @@
 		<h4 data-sourcepos="21:1-21:47" dir="auto">
 		<a id="user-content-why-is-the-concurrency-viewpoint-excluded" class="anchor" href="#why-is-the-concurrency-viewpoint-excluded" aria-hidden="true"></a>Why is the Concurrency Viewpoint excluded?</h4>
 		<p data-sourcepos="23:1-23:207" dir="auto">Since Gradle needs to be performant, parallelism is crucial. One of the viewpoints that was deemed somewhat important, yet not necessary for a concise architectural description is the Concurrency Viewpoint.</p>
-		<p data-sourcepos="25:1-25:401" dir="auto">Gradle currently only parallelizes tasks belonging to different projects. Therefore, once the <a href="https://gitlab.cs.mcgill.ca/jdrole11/c529w22-gradle-t8/-/blob/main/m4/Functional%20View.md#execution-system">task dependency tree is built</a>, concurrency becomes architecturally insignificant and can be summarized to "execute tasks in parallel that belong to different projects as per the dependency tree".</p>
+		<p data-sourcepos="25:1-25:401" dir="auto">Gradle currently only parallelizes tasks belonging to different projects. Therefore, once the <a href="Functional View.html#execution-system">task dependency tree is built</a>, concurrency becomes architecturally insignificant and can be summarized to "execute tasks in parallel that belong to different projects as per the dependency tree".</p>
 		<p data-sourcepos="27:1-27:127" dir="auto">This is evidenced by the Gradle <a href="https://docs.gradle.org/current/userguide/performance.html#parallel_execution" rel="nofollow noreferrer noopener" target="_blank">documentation</a>.</p>
 		</div>
 	</body>

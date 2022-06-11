@@ -33,6 +33,14 @@ hr {
 	border: none;
 }
 
+.projectImages img{
+	width: 33%;
+}
+
+.projectImages figure{
+	text-align: center;
+}
+
 /* Add a black background color to the top navigation */
 .navigationBar {
   background-color: #333;

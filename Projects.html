@@ -24,6 +24,23 @@
 				<h1>Jack Drolet's Projects</h1>
 				<hr>
 				
+				
+				<h2> Fall 2021 - Various Game projects using Unity</h2>
+				<p>
+					In Comp 521 at McGill (<i>Modern Computer Games</i>) I created several projects in Unity focused on a variety of game-related algorithms and concepts.
+				</p>
+				<br>
+				<p>
+					<u>Projects created were:</u>
+					<ul>
+						<li>
+							Game with dynamically created trees that can be destroyed by firing projectiles. A maze is automatically generated on each run using Eller's algorithm.
+						</li>
+						<iframe mozallowfullscreen="true" allow="autoplay; fullscreen; geolocation; microphone; camera; midi" src="Resources/Games/index.html" msallowfullscreen="true" scrolling="no" allowfullscreen="true" webkitallowfullscreen="true" id="game_drop" allowtransparency="true" frameborder="0"></iframe>
+					</ul>
+				</p>
+				<hr>
+				
 				<h2>Summer 2021 - Hole in the wall game using OpenGL and C++</h2>
 				<p>
 					In 2021, I took Comp 371 (<i>Computer Graphics</i>). Our team of 3 were tasked with using C++ and OpenGL to create a playable game in which a series of geometric shapes must be rotated to fit through a wall.
@@ -49,52 +66,123 @@
 						</li>
 					</ul>
 				</p>
-				
 				<br>
 				<iframe width="560" height="315" src="https://www.youtube.com/embed/K0YXd-PNucM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				<!-- <video src="Resources/OpenGL project.mp4" width="700" controls></video> -->
 				<hr>
 				
 				
-				
-				
-				<!--
-				<p>Here is a <a href="https://www.google.com" target="_blank">link</a></p>
-				<img width="500"  src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg" alt="A beautiful sunset">
+				<h2>Fall 2020 - Modeling chemical engineering problems using MATLAB</h2>
+				<p>
+					In CHEE 390 (<i>Computational Methods in Chemical Engineering</i>) at McGill, I implemented chemical engineering related computations using MATLAB. 
+				</p>
 				<br>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/pQN-pnXPaVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				-->
-				
-				
-				<input type="password" >
-				<input type="text" value="text">
-				<input type="date">
-				<input type="file">
-				<br>
-				<textarea rows="10" cols="20">Enter a paragraph</textarea>
-				
-				<br>
-				<!--
-				<iframe src="https://learnopengl.com/" width="1000" height="1000">Sorry</iframe>
-				-->
-				
-				<ol>
-					<li>Apples</li>
-					<li>Oranges</li>
-					<li>Bananas</li>
-				</ol>
+				<p>
+					<u>Projects computed includes:</u>
+					<ul>
+						<li>
+							Implementation of the Newton-Raphson Algorithm for finding the roots of a spatial concentration equation.
+						</li>
+						<div class="projectImages">
+							<figure>
+								<img src="Resources/390_A2_img1.png" alt="Diagram of how the concentration in a membrane changes with changes with time">
+								<img src="Resources/390_A2_img2.png" alt="More detailed diagram on how concentration in a membrane varies through time">
+							</figure>
+						</div>
+						<li>
+							Implementation of Gauss-Jordan elimination in order to solve a system of nonlinear equations in the context of chemical reaction equilibria.
+						</li>
+						<div class="projectImages">
+							<figure>
+								<img src="Resources/390_A3_img1.png" alt="Bar graph showing the calculation of equilibrium concentrations versus each species initial concentrations">
+							</figure>
+						</div>
+						<li>
+							Implementation of Romberg integration in the context of calculating the time spent by a rocket in the air.
+						</li>
+						<li>
+							An ODE equation solver implementing Implicit Euler, the Trapezoidal rule and Butcher's methods. This was used to calculate how the concentrations of species in a reaction changes over time using the rate constants.
+						</li>
+						<div class="projectImages">
+							<figure>
+								<img src="Resources/390_A5_img1.png" alt="Graph showing how the concentrations of a reaction varies with time">
+							</figure>
+						</div>
+					</ul>
+				</p>
+			<hr>
 			
-				<article>
-					<section>
-						<h2>Section 1</h2>
-						<aside>
-							HIIIII
-						</aside>
-					</section>
-					<section>
-						<h2>Section 2</h2>
-					</section>
-				</article>
+			
+			<h2>Summer 2020 - Multistep calculator in Java</h2>
+			<p>
+				During the summer of 2020, I implemented a calculator in Java that would support several mathematical operator like parenthesis, factorials, and boolean expressions while respecting the order of operations
+			</p>
+			<p>
+				<u>An example of some equations that were able to be solved:</u>
+				<br>
+				<textarea readonly cols="35" rows="10">
+((5+3)*6)!+(6+9)!
+Version 1: 1.2413915592536073E61
+Version 2: 1.2413915592536073E61
+21/5+6
+Version 1: 10.2
+Version 2: 10.2
+21/(5+6)
+Version 1: 1.9090909090909092
+Version 2: 1.9090909090909092
+2^3*2^2
+Version 1: 32.0
+Version 2: 32.0
+2^3<2^2
+Version 1: false
+Version 2: false
+((6*3)+6)==6*3+6
+Version 1: true
+Version 2: true
+((6+3)*6)==6+3*6
+Version 1: false
+Version 2: false
+-96+-25*2^2
+Version 1: -196.0
+Version 2: -196.0
+3*3^2
+Version 1: 27.0
+Version 2: 27.0
+5*(5*6-29)!=5
+Version 1: false
+Version 2: false
+11669*3
+Version 1: 35007.0
+Version 2: 35007.0
+1*2*3*4*5*6*7*8*9*10==10!
+Version 1: true
+Version 2: true
+8!^3
+Version 1: 6.5548320768E13
+Version 2: 6.5548320768E13
+(11*9)/9
+Version 1: 11.0
+Version 2: 11.0
+121^0!
+Version 1: 121.0
+Version 2: 121.0
+1134^((((56+3)*6)+26)*0)
+Version 1: 1.0
+Version 2: 1.0
+(68*.57)>=(68*.56)
+Version 1: true
+Version 2: true
+52--62
+Version 1: 114.0
+Version 2: 114.0
+52+-62
+Version 1: -10.0
+Version 2: -10.0
+-5^(2+(69^(0*-2)))
+Version 1: -125.0
+Version 2: -125.0
+				</textarea>
+			</p>
 				
 		</main>
 		

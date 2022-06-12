@@ -34,6 +34,11 @@ hr {
 	border: none;
 }
 
+.footerLinks img{
+	width: 50px;
+	background-color: white;
+}
+
 .projectImages img{
 	width: 33%;
 }

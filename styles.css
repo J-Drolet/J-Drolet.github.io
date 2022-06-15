@@ -126,7 +126,8 @@
     }
 
     .navbar__menu.active {
-        background: #131313;
+        background: var(--navbar__bg);
+        background-image: linear-gradient(to top, var(--bg__blk), var(--navbar__bg) 90%);
         top: 100%;
         opacity: 1;
         transition: all 0.5s ease;
@@ -144,7 +145,7 @@
         height: 3px;
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
-        background: #fff;
+        background: var(--bg__blk);
     }
 
     .navbar__item {

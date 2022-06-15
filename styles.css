@@ -818,6 +818,11 @@
     font-size: 24px;
 }
 
+.social__icon--link i {
+    color: var(--navbar__text);
+    font-size: 24px;
+}
+
 .social__media {
     max-width: 1000px;
     width: 100%;
@@ -866,6 +871,13 @@
 
     .social__media--wrap {
         flex-direction: column;
+    }
+
+    .social__icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 240px;
     }
 }
 

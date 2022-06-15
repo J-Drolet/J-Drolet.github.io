@@ -27,22 +27,44 @@ const highlightMenu = () => {
 
 
     // adds 'highlight' class to my menu items
-    if(window.innerWidth > minWidth && scrollPos < 600) {// make sure it only happens when on desktop version
+    if(window.innerWidth > minWidth && scrollPos < 650) {// make sure it only happens when on desktop version
         homeMenu.classList.add("highlight");
-        aboutMenu.classList.remove("highlight");
         projectsMenu.classList.remove("highlight");
+        aboutMenu.classList.remove("highlight");
+        skillsMenu.classList.remove("highlight");
+        resumeMenu.classList.remove("highlight");
         return;
     }
     else if(window.innerWidth > minWidth && scrollPos < 2100) {
+        projectsMenu.classList.add("highlight");
+        homeMenu.classList.remove("highlight");
+        aboutMenu.classList.remove("highlight");
+        skillsMenu.classList.remove("highlight");
+        resumeMenu.classList.remove("highlight");
+        return;
+    }
+    else if(window.innerWidth > minWidth && scrollPos < 3000) {
         aboutMenu.classList.add("highlight");
         homeMenu.classList.remove("highlight");
         projectsMenu.classList.remove("highlight");
+        skillsMenu.classList.remove("highlight");
+        resumeMenu.classList.remove("highlight");
         return;
     }
-    else if(window.innerWidth > minWidth && scrollPos < 3400) {
-        projectsMenu.classList.add("highlight");
-        aboutMenu.classList.remove("highlight");
+    else if(window.innerWidth > minWidth && scrollPos < 3700) {
+        skillsMenu.classList.add("highlight");
         homeMenu.classList.remove("highlight");
+        projectsMenu.classList.remove("highlight");
+        aboutMenu.classList.remove("highlight");
+        resumeMenu.classList.remove("highlight");
+        return;
+    }
+    else if(window.innerWidth > minWidth && scrollPos < 5000) {
+        resumeMenu.classList.add("highlight");
+        homeMenu.classList.remove("highlight");
+        projectsMenu.classList.remove("highlight");
+        aboutMenu.classList.remove("highlight");
+        skillsMenu.classList.remove("highlight");
         return;
     }
 

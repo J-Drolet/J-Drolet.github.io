@@ -20,14 +20,18 @@ const highlightMenu = () => {
     const skillsMenu = document.querySelector("#skills-page");
     const resumeMenu = document.querySelector("#resume-page");
     let scrollPos = window.scrollY;
-    console.log(scrollPos);
 
+    const projectSection = document.querySelector("#projects");
+    const aboutSection = document.querySelector("#about");
+    const skillsSection = document.querySelector("#skills");
+    const resumeSection = document.querySelector("#resume");
     const minWidth = 1080;
 
-
+    var bodyRect = document.body.getBoundingClientRect();
+    var offset = 75;
 
     // adds 'highlight' class to my menu items
-    if(window.innerWidth > minWidth && scrollPos < 650) {// make sure it only happens when on desktop version
+    if(window.innerWidth > minWidth && scrollPos < (projectSection.getBoundingClientRect().top - bodyRect.top) - offset) {// make sure it only happens when on desktop version
         homeMenu.classList.add("highlight");
         projectsMenu.classList.remove("highlight");
         aboutMenu.classList.remove("highlight");
@@ -35,7 +39,7 @@ const highlightMenu = () => {
         resumeMenu.classList.remove("highlight");
         return;
     }
-    else if(window.innerWidth > minWidth && scrollPos < 2100) {
+    else if(window.innerWidth > minWidth && scrollPos < (aboutSection.getBoundingClientRect().top - bodyRect.top) - offset) {
         projectsMenu.classList.add("highlight");
         homeMenu.classList.remove("highlight");
         aboutMenu.classList.remove("highlight");
@@ -43,7 +47,7 @@ const highlightMenu = () => {
         resumeMenu.classList.remove("highlight");
         return;
     }
-    else if(window.innerWidth > minWidth && scrollPos < 3000) {
+    else if(window.innerWidth > minWidth && scrollPos < (skillsSection.getBoundingClientRect().top - bodyRect.top) - offset) {
         aboutMenu.classList.add("highlight");
         homeMenu.classList.remove("highlight");
         projectsMenu.classList.remove("highlight");
@@ -51,7 +55,7 @@ const highlightMenu = () => {
         resumeMenu.classList.remove("highlight");
         return;
     }
-    else if(window.innerWidth > minWidth && scrollPos < 3700) {
+    else if(window.innerWidth > minWidth && scrollPos < (resumeSection.getBoundingClientRect().top - bodyRect.top) - offset) {
         skillsMenu.classList.add("highlight");
         homeMenu.classList.remove("highlight");
         projectsMenu.classList.remove("highlight");
@@ -59,7 +63,7 @@ const highlightMenu = () => {
         resumeMenu.classList.remove("highlight");
         return;
     }
-    else if(window.innerWidth > minWidth && scrollPos < 5000) {
+    else if(window.innerWidth > minWidth && scrollPos < 50000) {
         resumeMenu.classList.add("highlight");
         homeMenu.classList.remove("highlight");
         projectsMenu.classList.remove("highlight");
@@ -97,8 +101,7 @@ const chemProject = document.querySelector("#project_chemical-engineering");
 
 const showWebsite = () => {
     if(!websiteProject.classList.contains("active")) {
-        location.href='#begin__project--info';
-        
+        location.href='#begin__project--info';      
     }
     websiteProject.classList.toggle("active");
     elfenroadsProject.classList.remove("active");

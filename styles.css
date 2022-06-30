@@ -5,8 +5,9 @@
     font-family: "Kumbh Sans", sans-serif;
     scroll-behavior: smooth;
     --main__sand: #C2B280;
-    --main__light-grn: #38ef7d;
-    --main__dark-grn: #11998e;
+    --main__dark-sand: #857543;
+    --main__light-grn: #38ef7d; /* rgb(56, 239, 125) */
+    --main__dark-grn: #11998e; /* rgb(17, 153, 142) */
     --bg__blk: #1e1e1e;
     --navbar__bg: #fff;
     --navbar__text: #000000;
@@ -367,7 +368,12 @@
     left: 0;
     width: 0;
     height: 100%;
-    background: var(--main__sand);
+    background: var(--main__sand);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, var(--main__sand), var(--main__dark-sand));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--main__sand), var(--main__dark-sand)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    background: var();
     transition: all 0.35s;
     border-radius: 4px;
 }

@@ -531,6 +531,19 @@
     grid-template-columns: 1fr 1fr 1fr ;
 }
 
+.projects__promoted {
+    margin: 10px;
+    height: 300px;
+    width: 940px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    background-image: linear-gradient(225deg, rgb(186, 228, 170) 0%, #1d1d1d 100%);
+    transition: 0.3s ease-in;
+}
+
 .projects__card {
     margin: 10px;
     height: 425px;
@@ -575,13 +588,23 @@
     font-size: 20px;
 }
 
+.projects__promoted h2 {
+    text-align: center;
+}
+
+.projects__promoted p {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 20px;
+}
+
 .projects__btn {
     display: flex;
     justify-content: center;
     margin-top: 16px;
 }
 
-.projects__card button{
+.projects__btn button{
     color: #fff;
     padding: 14px 24px;
     border: none;
@@ -591,12 +614,17 @@
     font-size: 1rem;
 }
 
-.projects__card button:hover {
+.projects__btn button:hover {
     cursor: pointer;
 }
 
 .projects__card:hover {
     transform: scale(1.075);
+    transition: 0.3s ease-in;
+}
+
+.projects__promoted:hover {
+    transform: scale(1.025);
     transition: 0.3s ease-in;
 }
 
@@ -675,57 +703,12 @@
     }
 }
 
-#project_website {
+.project__info {
     animation: hide 0.25s linear;
     animation-fill-mode: forwards;
 }
 
-#project_website.active {
-    animation: fade_in 0.5s;
-}
-
-#project_elfenroads {
-    animation: hide 0.25s linear;
-    animation-fill-mode: forwards;
-}
-
-#project_elfenroads.active {
-    animation: fade_in 0.5s;
-}
-
-#project_gradle {
-    animation: hide 0.25s linear;
-    animation-fill-mode: forwards;
-}
-
-#project_gradle.active {
-    animation: fade_in 0.5s;
-}
-
-#project_games {
-    animation: hide 0.25s linear;
-    animation-fill-mode: forwards;
-}
-
-#project_games.active {
-    animation: fade_in 0.5s;
-}
-
-#project_hole-in-the-wall {
-    animation: hide 0.25s linear;
-    animation-fill-mode: forwards;
-}
-
-#project_hole-in-the-wall.active {
-    animation: fade_in 0.5s;
-}
-
-#project_chemical-engineering {
-    animation: hide 0.25s linear;
-    animation-fill-mode: forwards;
-}
-
-#project_chemical-engineering.active {
+.project__info.active {
     animation: fade_in 0.5s;
 }
 
@@ -736,6 +719,14 @@
 
     .project__info {
         width: 627px;
+    }
+
+    .projects__promoted {
+        width: 620px;
+    }
+
+    .projects__promoted:hover {
+        transform: scale(1.055);
     }
 }
 
@@ -759,6 +750,15 @@
         border-width: 2px;
         border-style: solid;
         border-radius: 4px;
+    }
+
+    .projects__promoted {
+        width: 300px;
+        height: 425px;
+    }
+
+    .projects__promoted:hover {
+        transform: scale(1.075);
     }
 }
 

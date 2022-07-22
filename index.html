@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Jack Drolet - Portfolio</title>
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/x-icon" href="/Resources/Logo.ico">
         <script src="https://kit.fontawesome.com/83bd2eb88c.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -52,6 +53,11 @@
         <!-- Projects Secton -->
         <div class="projects" id="projects">
             <h1>My Projects</h1>
+            <div class="projects__promoted">
+                <h2>Web Dog Adoption App</h2>
+                <p>Spring Boot game where users raise a kennel of dogs</p>
+                <div class="projects__btn"><button onclick="showDogSpring()">View Details</button></div>
+            </div>
             <div class="projects__wrapper">
                 <div class="projects__card">
                     <h2>Online Unity Board Game</h2>
@@ -86,7 +92,21 @@
                 </div>    
             </div>
             
-            
+            <div class="project__info" id="project_dogspring">
+                <h1>DogSpring (2022)</h1>
+                <p>
+                    Inspired by beloved childhood games, like Neopets and Webkinz, I developed a Spring Boot project in which users "adopt" dogs and add them to a virtual kennel. These dogs have needs that the user has to tend to.
+                    The game is created with Spring Boot and follows the principles of RESTful API development. I chose this project to be extendable so that I can easily add more sophisticated functionality in the future like a proper database or user authentication.
+                    <br>
+                    <a href="https://github.com/J-Drolet/dog-spring" target="_blank">View the project source code</a>
+                </p>
+                <br>
+                <img src="Resources/DogSpring_1.PNG" alt="Image of the DogSpring main screen">
+				<br>
+                <img src="Resources/DogSpring_2.PNG" alt="Image of the DogSpring user screen">
+				<br>
+                <img src="Resources/DogSpring_3.PNG" alt="Image of the DogSpring dog screen">
+            </div>
             <div class="project__info" id="project_website">
                 <h1>This portfolio website (2022)</h1>
                 <p>
@@ -112,10 +132,6 @@
                 <p>
                     Within a group of 4, I analyzed the architecture of the professionally-used build tool, <a href="https://gradle.org/" target="blank">Gradle</a>. An AD (architectural description) of the software was realized. We focused on the functional, information, and development views for our description. 
 					Read the AD <a href="Resources/AD/README.html" target="blank">here</a>.
-                </p>
-                <br>
-                <p>
-
                 </p>
             </div>
             <div class="project__info" id="project_games">

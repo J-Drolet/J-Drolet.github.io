@@ -92,12 +92,26 @@ const hideMobileMenu = () => {
 menuLinks.addEventListener("click", hideMobileMenu);
 navLogo.addEventListener("click", hideMobileMenu);
 
+const dogSpringProject = document.querySelector("#project_dogspring");
 const websiteProject = document.querySelector("#project_website");
 const elfenroadsProject = document.querySelector("#project_elfenroads");
 const gradleProject = document.querySelector("#project_gradle")
 const gamesProject = document.querySelector("#project_games");
 const holeProject = document.querySelector("#project_hole-in-the-wall");
 const chemProject = document.querySelector("#project_chemical-engineering");
+
+const showDogSpring = () => {
+    if(!dogSpringProject.classList.contains("active")) {
+        location.href='#begin__project--info';      
+    }
+    websiteProject.classList.remove("active");
+    elfenroadsProject.classList.remove("active");
+    gradleProject.classList.remove("active");
+    gamesProject.classList.remove("active");
+    holeProject.classList.remove("active");
+    chemProject.classList.remove("active");
+    dogSpringProject.classList.toggle("active");
+}
 
 const showWebsite = () => {
     if(!websiteProject.classList.contains("active")) {
@@ -109,6 +123,7 @@ const showWebsite = () => {
     gamesProject.classList.remove("active");
     holeProject.classList.remove("active");
     chemProject.classList.remove("active");
+    dogSpringProject.classList.remove("active");
 }
 
 const showElfenroads = () => {
@@ -121,6 +136,7 @@ const showElfenroads = () => {
     gamesProject.classList.remove("active");
     holeProject.classList.remove("active");
     chemProject.classList.remove("active");
+    dogSpringProject.classList.remove("active");
 }
 
 const showGradle = () => {
@@ -133,6 +149,7 @@ const showGradle = () => {
     gamesProject.classList.remove("active");
     holeProject.classList.remove("active");
     chemProject.classList.remove("active");
+    dogSpringProject.classList.remove("active");
 }
 
 const showGames = () => {
@@ -145,6 +162,7 @@ const showGames = () => {
     elfenroadsProject.classList.remove("active");
     holeProject.classList.remove("active");
     chemProject.classList.remove("active");
+    dogSpringProject.classList.remove("active");
 }
 
 const showWall = () => {
@@ -157,6 +175,7 @@ const showWall = () => {
     gamesProject.classList.remove("active");
     elfenroadsProject.classList.remove("active");
     chemProject.classList.remove("active");
+    dogSpringProject.classList.remove("active");
 }
 
 const showChem = () => {
@@ -169,4 +188,5 @@ const showChem = () => {
     gamesProject.classList.remove("active");
     holeProject.classList.remove("active");
     elfenroadsProject.classList.remove("active");
+    dogSpringProject.classList.remove("active");
 }
